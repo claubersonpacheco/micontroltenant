@@ -30,6 +30,11 @@ Route::get('/check', function () {
         // Painel admin protegido
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
+            // category
+            Route::get('/category/create', App\Livewire\Admin\Category\Create::class)->name('category.create');
+            Route::get('/category/{id}/edit', App\Livewire\Admin\Category\Edit::class)->name('category.edit');
+            Route::get('/categories', App\Livewire\Admin\Category\Index::class)->name('category.index');
+
             // setting
             Route::get('/setting/create', App\Livewire\Admin\Setting\Create::class)->name('setting.create');
             Route::get('/setting/{id}/edit', App\Livewire\Admin\Setting\Edit::class)->name('setting.edit');
