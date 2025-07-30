@@ -30,7 +30,10 @@ Route::get('/check', function () {
         // Painel admin protegido
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-
+            // setting
+            Route::get('/setting/create', App\Livewire\Admin\Setting\Create::class)->name('setting.create');
+            Route::get('/setting/{id}/edit', App\Livewire\Admin\Setting\Edit::class)->name('setting.edit');
+            Route::get('/setting', App\Livewire\Admin\Setting\Index::class)->name('setting.index');
 
             // tenant
             Route::get('/tenant/create', App\Livewire\Admin\Tenant\Create::class)->name('tenant.create');

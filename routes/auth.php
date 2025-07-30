@@ -18,7 +18,6 @@ use App\Livewire\Admin\Auth\Verify;
 // Login e registro do admin (públicos)
 Route::middleware('guest:admin')->group(function () {
     Route::get('admin/login', Login::class)->name('login');
-    Route::get('register', Register::class)->name('register');
 });
 
 // Rotas de recuperação/verificação de senha para admin

@@ -10,7 +10,6 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 
 #[Title('Create Users')]
-#[Layout('layouts.admin.admin')]
 class Create extends Component
 {
 
