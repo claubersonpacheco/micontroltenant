@@ -3,9 +3,6 @@
 namespace App\Livewire\Admin\Category;
 
 use App\Models\Category;
-use App\Models\Setting;
-use Illuminate\Validation\Rule;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;

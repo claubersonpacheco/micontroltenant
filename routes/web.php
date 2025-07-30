@@ -30,6 +30,11 @@ Route::get('/check', function () {
         // Painel admin protegido
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
+            // product
+            Route::get('/service/create', App\Livewire\Admin\Product\Create::class)->name('product.create');
+            Route::get('/service/{id}/edit', App\Livewire\Admin\Product\Edit::class)->name('product.edit');
+            Route::get('/services', App\Livewire\Admin\Product\Index::class)->name('product.index');
+
             // category
             Route::get('/category/create', App\Livewire\Admin\Category\Create::class)->name('category.create');
             Route::get('/category/{id}/edit', App\Livewire\Admin\Category\Edit::class)->name('category.edit');
