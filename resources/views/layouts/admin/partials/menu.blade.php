@@ -55,6 +55,24 @@
     </a>
 </li>
 
+<li>
+    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
+                            {{ request()->routeIs('customer.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
+       href="{{ route('customer.index') }}">
+
+        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+        {{ __('Customers') }}
+    </a>
+</li>
+
+
+
+
+
+
 <div class="py-3 flex items-center text-sm text-gray-800 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-white dark:after:border-neutral-600">
     {{ __('Configurations') }}</div>
 

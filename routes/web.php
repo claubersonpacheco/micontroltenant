@@ -31,6 +31,11 @@ Route::get('/check', function () {
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
             // product
+            Route::get('/customer/create', App\Livewire\Admin\Customer\Create::class)->name('customer.create');
+            Route::get('/customer/{id}/edit', App\Livewire\Admin\Customer\Edit::class)->name('customer.edit');
+            Route::get('/customers', App\Livewire\Admin\Customer\Index::class)->name('customer.index');
+
+            // product
             Route::get('/service/create', App\Livewire\Admin\Product\Create::class)->name('product.create');
             Route::get('/service/{id}/edit', App\Livewire\Admin\Product\Edit::class)->name('product.edit');
             Route::get('/services', App\Livewire\Admin\Product\Index::class)->name('product.index');
