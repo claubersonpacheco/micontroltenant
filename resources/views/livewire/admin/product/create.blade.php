@@ -6,14 +6,14 @@
         <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
             <div class="mb-8">
                 <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                    {{ __('Edit Product') }}
+                    {{ __('Create Product') }}
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    {{ __('Update your product.') }}
+                    {{ __('Create your product.') }}
                 </p>
             </div>
 
-            <form wire:submit.prevent="update">
+            <form wire:submit.prevent="store">
                 <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
 
                     <!-- Code -->
@@ -108,7 +108,7 @@
                     </a>
                     <button type="submit"
                             class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                        {{ __('Update Product') }}
+                        {{ __('Create') }}
                     </button>
                 </div>
             </form>

@@ -30,6 +30,11 @@ Route::get('/check', function () {
         // Painel admin protegido
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
+            // budget
+            Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');
+            Route::get('/budget/{id}/edit', App\Livewire\Admin\Budget\Edit::class)->name('budget.edit');
+            Route::get('/budgets', App\Livewire\Admin\Budget\Index::class)->name('budget.index');
+
             // product
             Route::get('/customer/create', App\Livewire\Admin\Customer\Create::class)->name('customer.create');
             Route::get('/customer/{id}/edit', App\Livewire\Admin\Customer\Edit::class)->name('customer.edit');

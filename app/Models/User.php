@@ -28,10 +28,6 @@ class User extends Authenticatable
     ];
 
 
-    protected function getTenantId()
-    {
-        return tenancy()->tenant->id ?? 'default';
-    }
 
     /**
      * The attributes that should be hidden for serialization.

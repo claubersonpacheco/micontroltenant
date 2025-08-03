@@ -32,12 +32,6 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Tenancy: retorna ID do tenant atual ou 'default' se não existir
-    protected function getTenantId()
-    {
-        return tenancy()->tenant->id ?? 'default'; // ou tenant()?->id ?? 'default'
-    }
-
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%")
