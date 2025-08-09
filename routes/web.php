@@ -2,17 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Admin\Auth\EmailVerificationController;
-use App\Http\Controllers\Admin\Auth\LogoutController;
-use App\Livewire\Admin\Auth\Login;
-use App\Livewire\Admin\Auth\Passwords\Confirm;
-use App\Livewire\Admin\Auth\Passwords\Email;
-use App\Livewire\Admin\Auth\Passwords\Reset;
-use App\Livewire\Admin\Auth\Register;
-use App\Livewire\Admin\Auth\Verify;
 use Illuminate\Support\Facades\Route;
-use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 // routes/web.php ou routes/central.php
 
@@ -31,6 +21,8 @@ Route::get('/check', function () {
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
             // budget
+            Route::get('/budget/{id}/add-item', \App\Livewire\Admin\Budget\AddItem::class)->name('budget.additem');
+            Route::get('/budget/{id}/item', App\Livewire\Admin\Budget\Item::class)->name('budget.items');
             Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');
             Route::get('/budget/{id}/edit', App\Livewire\Admin\Budget\Edit::class)->name('budget.edit');
             Route::get('/budgets', App\Livewire\Admin\Budget\Index::class)->name('budget.index');

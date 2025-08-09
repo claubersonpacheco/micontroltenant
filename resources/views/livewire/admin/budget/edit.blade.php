@@ -63,7 +63,7 @@
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <textarea wire:model="description" id="description" 
+                    <textarea wire:model="description" id="description"
                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                         focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"></textarea>
                     @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -73,7 +73,7 @@
 
             <!-- Buttons -->
             <div class="mt-5 flex justify-end gap-x-2">
-                <a href="{{ route('customer.index') }}"
+                <a href="{{ route('budget.index') }}"
                    class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                     {{ __('Cancel') }}
                 </a>
