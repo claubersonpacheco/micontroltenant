@@ -1,7 +1,5 @@
-<!-- Card Section -->
-<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
     <!-- Card Section -->
-    <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
+    <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
             <div class="mb-8">
@@ -9,7 +7,7 @@
                     {{ __('Setting') }}
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    Manage your settings.
+                    {{ __('Edit your setting.') }}
                 </p>
             </div>
 

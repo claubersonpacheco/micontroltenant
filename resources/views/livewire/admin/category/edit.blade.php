@@ -4,10 +4,10 @@
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
             <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                {{ __('Edit Category') }}
+                {{ __('Category') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Update your category details.
+                {{ __('Edit your category.') }}
             </p>
         </div>
 

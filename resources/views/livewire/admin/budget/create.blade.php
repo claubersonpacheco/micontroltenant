@@ -1,5 +1,5 @@
 <!-- Card Section -->
-<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
+<div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
     <!-- Card -->
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
@@ -7,7 +7,7 @@
                 {{ __('Budget') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Create your budget.
+                {{ __('Create your budget.') }}
             </p>
         </div>
 
@@ -36,7 +36,7 @@
                 <div class="sm:col-span-9">
                     <select wire:model="customer" id="customer" class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        <option selected="">Open this select menu</option>
+                        <option selected="">{{ __('Select the customer') }}</option>
                         @foreach($customers as $customer)
 
                             <option value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -58,7 +58,7 @@
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <input wire:model="name" id="name" type="text" placeholder="Full name"
+                    <input wire:model="name" id="name" type="text" placeholder="{{ __('Name your budget') }}"
                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                     @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -71,7 +71,7 @@
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <textarea wire:model="description" id="description" placeholder="Product description"
+                    <textarea wire:model="description" id="description" placeholder="Budget description"
                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                         focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"></textarea>
                     @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror

@@ -1,13 +1,13 @@
 <!-- Card Section -->
-<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
+<div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
     <!-- Card -->
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
             <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                Tenant
+                {{ __('Tenant') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Manage your tenant, password, and account settings.
+                {{ __('Manage your tenant.') }}
             </p>
         </div>
 

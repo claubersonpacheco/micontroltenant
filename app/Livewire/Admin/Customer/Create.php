@@ -3,18 +3,21 @@
 namespace App\Livewire\Admin\Customer;
 
 use App\Models\Customer;
+use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
 #[Title('Create Customer')]
 class Create extends Component
 {
-    public $code = '';
-    public $name = '';
-    public $email = '';
-    public $phone = '';
-    public $document = '';
-    public $address = '';
+    use GenerateAutomaticCode;
+
+    public $code;
+    public $name;
+    public $email;
+    public $phone;
+    public $document;
+    public $address;
 
     public function store()
     {
@@ -42,6 +45,8 @@ class Create extends Component
 
     public function render()
     {
+        $this->code =  $this->generateCode(Customer::class);
+
         return view('livewire.admin.customer.create');
     }
 }

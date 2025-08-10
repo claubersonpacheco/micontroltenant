@@ -3,18 +3,22 @@ namespace App\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
+use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-#[Title('Create Product')]
+#[Title('Create Service')]
 class Create extends Component
 {
-    public $code = '';
-    public $name = '';
-    public $description = '';
-    public $product_type = '';
-    public $price = '';
-    public $category_id = '';
+    use GenerateAutomaticCode;
+
+    public ?string $code = null;
+    public ?string $name = null;
+    public ?string $description = null;
+    public ?string $product_type = null;
+    public ?int $price = null;
+    public ?int $category_id = null;
 
     public function store()
     {
@@ -42,6 +46,8 @@ class Create extends Component
 
     public function render()
     {
+        $this->code = $this->generateCode(Product::class);
+
         return view('livewire.admin.product.create', [
             'categories' => Category::all(),
         ]);

@@ -7,7 +7,7 @@
                 {{ __('Budget') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Create your budget.
+                {{ __('Edit your budget.') }}
             </p>
         </div>
 

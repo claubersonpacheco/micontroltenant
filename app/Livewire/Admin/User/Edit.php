@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 #[Layout('layouts.admin.admin')]
 class Edit extends Component
 {
+    public $code;
     public $user; // Objeto do usuário a ser editado
     public $userId; // ID do usuário
     public $name; // Nome do usuário
@@ -24,6 +25,7 @@ class Edit extends Component
     public function mount($id)
     {
         $this->user = User::findOrFail($id);
+        $this->code = $this->user->code;
         $this->userId = $this->user->id;
         $this->name = $this->user->name;
         $this->email = $this->user->email;
