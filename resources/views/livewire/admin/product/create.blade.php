@@ -15,7 +15,7 @@
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
 
                 <!-- Code -->
-                <div class="sm:col-span-3">
+                <div class="sm:col-span-2">
                     <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                         {{ __('Code') }}
                     </label>
@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- Category -->
-                <div class="sm:col-span-3">
+                <div class="sm:col-span-2">
                     <label for="category_id" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                         {{ __('Category') }}
                     </label>
@@ -47,19 +47,30 @@
                 </div>
 
                 <!-- Name -->
-                <div class="sm:col-span-3">
+                <div class="sm:col-span-2">
                     <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                         {{ __('Name') }}
                     </label>
                 </div>
-                <div class="sm:col-span-9">
+                <div class="sm:col-span-10">
                     <input wire:model="name" id="name" type="text" placeholder="{{ __('Service name') }}"
                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                     @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
 
-
+                <!-- Price -->
+                <div class="sm:col-span-2">
+                    <label for="price" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        {{ __('Price') }}
+                    </label>
+                </div>
+                <div class="sm:col-span-3">
+                    <input wire:model="price" id="price" type="number" step="0.01" placeholder="{{ __('Service price') }}"
+                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                    @error('price') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
 
                 <!-- Product Type -->
                 <div class="sm:col-span-3">
@@ -67,7 +78,7 @@
                         {{ __('Product Type') }}
                     </label>
                 </div>
-                <div class="sm:col-span-9">
+                <div class="sm:col-span-4">
                     <select wire:model="product_type" id="product_type"
                             class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
         focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
@@ -83,26 +94,15 @@
                     @error('product_type') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
 
-                <!-- Price -->
-                <div class="sm:col-span-3">
-                    <label for="price" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        {{ __('Price') }}
-                    </label>
-                </div>
-                <div class="sm:col-span-9">
-                    <input wire:model="price" id="price" type="number" step="0.01" placeholder="{{ __('Service price') }}"
-                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                    @error('price') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                </div>
+
 
                 <!-- Description -->
-                <div class="sm:col-span-3">
+                <div class="sm:col-span-2">
                     <label for="description" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                         {{ __('Description') }}
                     </label>
                 </div>
-                <div class="sm:col-span-9">
+                <div class="sm:col-span-10">
                 <textarea wire:model="description" id="description" placeholder="{{ __('Service description') }}"
                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"></textarea>

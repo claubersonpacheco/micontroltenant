@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget;
+namespace App\Livewire\Admin\Budget\Items;
 
 use App\Models\Budget;
 use App\Models\BudgetItem;
@@ -11,21 +11,22 @@ class AddItem extends Component
 {
 
     public $budget_id;
-    public $product_id;
     public $products;
-    public $productSelected = null;
+
+    public $product_id;
     public $price = 0;
     public $description = '';
     public $tax = '0';
     public $taxValue = 0;
     public $quantity = 0;
     public $total = 0;
-    public $total_tax = 0;
+    public $subtotal = 0;
 
-    public function mount(Budget $budget)
+    public function mount($budgetId)
     {
 
-       $this->budget_id = $budget->id;
+       $this->budget_id = $budgetId;
+
         $this->products = Product::all(); // ou o nome correto do seu modelo
 
     }
@@ -33,13 +34,12 @@ class AddItem extends Component
     public function updatingProductId($value)
     {
 
-        $product = Product::find($value);
+        $product = Product::findOrFail($value);
 
         if ($product) {
             $this->quantity = "1";
             $this->price = $product->price;
             $this->description = $product->description;
-            $this->tax = $product->tax; // se o produto tiver taxa
             $this->calculateTotals();
         }
 
@@ -54,11 +54,13 @@ class AddItem extends Component
         $tax = (float) $this->tax;
 
         $subtotal = $price * $quantity;
-        $this->total =  $subtotal;
+        $this->subtotal =  $subtotal;
 
         $calculoTax = $subtotal * ($tax / 100) ;
         $this->taxValue = $calculoTax;
-        $this->total_tax = $subtotal + $calculoTax;
+
+        $this->total = $subtotal + $calculoTax;
+
 
     }
 
@@ -97,8 +99,9 @@ class AddItem extends Component
             'description',
             'tax',
             'price',
+            'subtotal',
+            'taxValue',
             'total',
-            'total_tax',
         ]);
     }
 
@@ -110,33 +113,54 @@ class AddItem extends Component
             'price' => 'required|numeric',
             'tax' => 'nullable|numeric',
             'total' => 'required|numeric',
-            'total_tax' => 'required|numeric',
+            'subtotal' => 'required|numeric',
+            'taxValue' => 'required|numeric',
         ]);
+
 
         BudgetItem::create([
             'product_id' => $this->product_id,
             'description' => $this->description,
             'quantity' => $this->quantity,
             'price' => $this->price,
-            'tax' => ($this->tax ?? null)? '0' : $this->tax,
+            'tax' => $this->tax === null ? 0 : $this->tax,
             'total' => $this->total,
-            'total_tax' => $this->total_tax,
+            'subtotal' => $this->subtotal,
+            'tax_value' => $this->taxValue,
             'budget_id' => $this->budget_id,
         ]);
 
-        $this->reset(['product_id', 'description', 'quantity', 'price', 'tax', 'total', 'total_tax']);
+        $this->resetForm();
 
-        toastr()->success('Criado com sucesso no moodle!');
+        $this->updateBudgetTotal();
 
+        // Fecha o modal no front
+        $this->dispatch('close-add-modal');
         $this->dispatch('listItems');
-        $this->dispatch('close-modal');
 
+        toastr()->success('Adcionado com sucesso!');
+    }
+
+    public function updateBudgetTotal()
+    {
+        $budget = Budget::findOrFail($this->budget_id);
+
+        if ($budget) {
+
+            $budgetSubTotal = $budget->items()->sum('subtotal'); // Sumando los totales de los itens
+            $budgetTotal = $budget->items()->sum('total');
+            $budgetTax = $budgetTotal - $budgetSubTotal;
+
+            $budget->update([
+                'subtotal' => $budgetSubTotal,
+                'total' => $budgetTotal,
+                'tax_value' => $budgetTax,
+            ]);
+        }
     }
 
     public function render()
     {
-        $this->productSelected = $this->product_id;
-
-        return view('livewire.admin.budget.add-item');
+        return view('livewire.admin.budget.items.add-item');
     }
 }

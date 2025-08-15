@@ -9,10 +9,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Budget extends Model
 {
     protected $guarded = [];
+
 //    public function statusHistories()
 //    {
 //        return $this->hasMany(StatusHistory::class);
 //    }
+
+    protected $casts = [
+        'date' => 'date',
+        'expirate' => 'date',
+    ];
 
     public function user():BelongsTo
     {
@@ -29,11 +35,11 @@ class Budget extends Model
         return $this->hasMany(Product::class);
     }
 
-//    public function items(): HasMany
-//    {
-//        return $this->hasMany(BudgetItem::class);
-//    }
-//
+    public function items(): HasMany
+    {
+        return $this->hasMany(BudgetItem::class);
+    }
+
 //    public function budgetsendemail():HasMany
 //    {
 //        return $this->hasMany(BudgetEmailSend::class);

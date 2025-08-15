@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('description')->nullable();
 
             $table->decimal('total', 10, 2)->default(0);
-            $table->decimal('total_tax', 10, 2)->default(0);
-            $table->decimal('tax', 10, 2)->default(0);
+            $table->decimal('subtotal', 10, 2)->default(0);
+
+            $table->decimal('tax_value', 10, 2)->default(0);
 
             $table->boolean('show_service')->default(true);
             $table->boolean('show_description')->default(true);
@@ -28,7 +29,13 @@ return new class extends Migration
             $table->boolean('show_price')->default(true);
             $table->boolean('show_tax')->default(true);
             $table->boolean('show_total')->default(true);
-            $table->boolean('show_total_tax')->default(true);
+            $table->boolean('show_tax_value')->default(true);
+            $table->boolean('show_sub_total')->default(true);
+
+            $table->date('date')->nullable();
+            $table->date('expirate')->nullable();
+            $table->integer('total_expirate')->default(0);
+
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

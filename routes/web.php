@@ -21,8 +21,8 @@ Route::get('/check', function () {
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
             // budget
-            Route::get('/budget/{id}/add-item', \App\Livewire\Admin\Budget\AddItem::class)->name('budget.additem');
-            Route::get('/budget/{id}/item', App\Livewire\Admin\Budget\Item::class)->name('budget.items');
+
+            Route::get('/budget/{id}/item', \App\Livewire\Admin\Budget\Items\ItemsList::class)->name('budget.item');
             Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');
             Route::get('/budget/{id}/edit', App\Livewire\Admin\Budget\Edit::class)->name('budget.edit');
             Route::get('/budgets', App\Livewire\Admin\Budget\Index::class)->name('budget.index');

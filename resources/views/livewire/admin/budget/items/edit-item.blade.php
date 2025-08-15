@@ -1,40 +1,31 @@
-<div x-data="{ open: false }">
-    <!-- Botão para abrir -->
-    <button
-        type="button"
-        @click="open = true"
-        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-            <path d="M5 12h14"/>
-            <path d="M12 5v14"/>
-        </svg>
-        Adicionar
-    </button>
-
+<div>
 <!--modal-->
     <div
+        x-data="{ open: false }"
+        x-on:open-modal.window="if($event.detail.name === 'edit-item') open = true"
+        x-on:close-modal.window="if($event.detail.name === 'edit-item') open = false"
         x-show="open"
-        x-transition
-        @keydown.escape.window="open = false"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        x-cloak
+        class="fixed inset-0 z-[99] flex items-center justify-center bg-gray-500 bg-opacity-10"
+        style="background-color: rgba(107, 114, 128, 0.5);"
     >
    <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
             <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
                 <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
                     <h3 id="hs-basic-modal-label" class="font-bold text-gray-800 dark:text-white">
-                        Modal title
+                        {{ __('Edit Item') }}
                     </h3>
                     <button @click="open = false" type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#hs-basic-modal">
-                        <span class="sr-only">Close</span>
+                        <span class="sr-only">{{ __('Close') }}</span>
                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"></path>
                             <path d="m6 6 12 12"></path>
                         </svg>
                     </button>
                 </div>
-                <form id="customer-create" wire:submit.prevent="insert">
-                <div class="p-4 overflow-y-auto">
-                    <!--table servicios -->
+                <form id="customer-create" wire:submit.prevent="updateItem">
+                    <div class="p-4 overflow-y-auto">
+                        <!--table servicios -->
 
 
                         <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
@@ -47,7 +38,7 @@
                             </div>
                             <div class="sm:col-span-9">
                                 <select wire:model.live="product_id"
-{{--                                        wire:change="selectProduct($event.target.value)"--}}
+                                        {{--                                        wire:change="selectProduct($event.target.value)"--}}
                                         id="product_id"
                                         class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                                     <option value="">Selecione um produto</option>
@@ -111,6 +102,33 @@
                                 @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
 
+
+                            <!-- Price -->
+                            <div class="sm:col-span-3">
+                                <label for="price" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('Price') }}
+                                </label>
+                            </div>
+                            <div class="sm:col-span-9">
+                                <input wire:model.live="price" id="price" type="text"
+                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                @error('price') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Total not iva -->
+                            <div class="sm:col-span-3">
+                                <label for="subtotal" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('Sub Total') }}
+                                </label>
+                            </div>
+                            <div class="sm:col-span-9">
+                                <input wire:model="subtotal" id="subtotal" type="text" readonly
+                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                @error('subTotal') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                            </div>
+
                             <!-- Tax % -->
                             <div class="sm:col-span-3">
                                 <label for="tax" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -129,53 +147,28 @@
                                 @error('tax') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- Price -->
+
+                            <!-- tax -->
                             <div class="sm:col-span-3">
-                                <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('Price') }}
+                                <label for="taxValue" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('Value Tax') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-9">
-                                <input wire:model.live="price" id="price" type="text"
+                                <input wire:model="taxValue" id="valueTax" type="text" readonly
                                        class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                                @error('price') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                                @error('valueTax') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- Total not iva -->
+                            <!-- Total iva -->
                             <div class="sm:col-span-3">
                                 <label for="total" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                     {{ __('Total') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-9">
-                                <input wire:model="total" id="total" type="text" readonly
-                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                                @error('total') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                            </div>
-
-                            <!-- tax -->
-                            <div class="sm:col-span-3">
-                                <label for="taxValue" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('Tax') }}
-                                </label>
-                            </div>
-                            <div class="sm:col-span-9">
-                                <input wire:model="taxValue" id="tax_value" type="text" readonly
-                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                                @error('taxValue') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                            </div>
-
-                            <!-- Total iva -->
-                            <div class="sm:col-span-3">
-                                <label for="total_tax" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('Total Tax') }}
-                                </label>
-                            </div>
-                            <div class="sm:col-span-9">
-                                <input wire:model="total_tax" id="total_tax" type="text" readonly
+                                <input wire:model="total" id="total_tax" type="text" readonly
                                        class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                                 @error('total_tax') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -186,16 +179,16 @@
                         </div>
 
 
-                </div>
+                    </div>
                     <!--buttons-->
-                <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
-                    <button type="button" @click="open = false" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#hs-basic-modal">
-                        Close
-                    </button>
-                    <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                        Save
-                    </button>
-                </div>
+                    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+                        <button type="button" @click="open = false" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#hs-basic-modal">
+                            {{ __('Close') }}
+                        </button>
+                        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                            {{ __('Save') }}
+                        </button>
+                    </div>
                     <!-- end buttons-->
 
                 </form>

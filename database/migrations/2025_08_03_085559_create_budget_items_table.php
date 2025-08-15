@@ -20,8 +20,9 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('tax')->nullable()->default(0);
             $table->decimal('price', 10, 2)->default(0);
+            $table->decimal('tax_value', 10, 2)->default(0);
+            $table->decimal('subtotal', 10, 2)->default(0);
             $table->decimal('total', 10, 2)->default(0);
-            $table->decimal('total_tax', 10, 2)->default(0);
             $table->timestamps();
         });
     }
