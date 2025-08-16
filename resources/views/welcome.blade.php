@@ -17,7 +17,6 @@
                 @endauth
             </div>
         @endif
-
         <div class="p-6 mx-auto max-w-7xl lg:p-8">
             <div class="flex justify-center">
                 <svg class="w-auto h-16 text-indigo-600 bg-gray-100 dark:bg-gray-900" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -13,8 +13,6 @@ Route::get('/check', function () {
     ]);
 });
 
-
-
         Route::view('/', 'welcome')->name('home');
 
         // Painel admin protegido
