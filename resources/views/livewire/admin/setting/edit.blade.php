@@ -11,6 +11,10 @@
                 </p>
             </div>
 
+            <div class="mb-8">
+                <livewire:admin.setting.image :id="$setting?->id"  />
+            </div>
+
             <form wire:submit.prevent="update">
                 <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
 
@@ -126,13 +130,13 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <button type="button"
+                    <a href="{{ route('setting.index') }}" type="button"
                             class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
-                        Cancel
-                    </button>
+                        {{ __('Cancel') }}
+                    </a>
                     <button type="submit"
                             class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                        Save changes
+                        {{ __('Save') }}
                     </button>
                 </div>
             </form>

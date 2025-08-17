@@ -10,10 +10,13 @@ class Edit extends Component
 {
     public Setting $setting;  // Declare a propriedade para o model
     public array $settings = []; // Array para os campos editáveis
+    public $settingId;
 
     public function mount($id): void
     {
         $this->setting = Setting::findOrFail($id);
+        $this->settingId = $id;
+
         $this->settings = $this->setting->toArray();
     }
 

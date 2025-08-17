@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('logo')->nullable();
             $table->string('logo_impress')->nullable();
+            $table->string('favicon')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('postal_code')->nullable();
-            $table->string('favicon')->nullable();
             $table->string('send_email')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('prefix', 10)->nullable();

@@ -10,13 +10,20 @@
 
         @if (Route::has('login'))
             <div class="p-6 text-right sm:fixed sm:top-0 sm:right-0">
-                @auth
-                    <a href="{{ route('admin') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Home</a>
+                @auth('admin')
+                    <a href="{{ route('admin') }}"
+                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">
+                        {{ __('Admin') }}
+                    </a>
                 @else
-                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log in</a>
+                    <a href="{{ route('login') }}"
+                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">
+                        {{ __('Log In') }}
+                    </a>
                 @endauth
             </div>
         @endif
+
         <div class="p-6 mx-auto max-w-7xl lg:p-8">
             <div class="flex justify-center">
                 <svg class="w-auto h-16 text-indigo-600 bg-gray-100 dark:bg-gray-900" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,10 +110,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="ml-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) & Livewire
-                    {{ \Composer\InstalledVersions::getPrettyVersion('livewire/livewire') }}
-                </div>
+
             </div>
         </div>
     </div>

@@ -246,6 +246,10 @@
                                                 <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax') }}</span>
                                             </label>
                                             <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
+                                                <input wire:model.live="taxValue" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax') }}</span>
+                                            </label>
+                                            <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
                                                 <input wire:model.live="showSubTotal" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
                                                 <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('SubTotal') }}</span>
                                             </label>
