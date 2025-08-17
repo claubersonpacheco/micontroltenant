@@ -37,6 +37,7 @@
             "app\\Helper\\Helpers.php"
         ]
     },
+
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
