@@ -217,8 +217,6 @@
                                                 <img class="inline-block w-[46px] h-[46px] rounded-full object-cover"
                                                      src="{{ Auth::user()->photoUrl }}"
                                                      alt="{{ Auth::user()->name }}">
-
-
                                                     <div class="grow">
                                                         <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->name }}</span>
                                                         <span class="block text-sm text-gray-500 dark:text-neutral-500">{{ $data->email }}</span>
