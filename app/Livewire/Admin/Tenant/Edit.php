@@ -66,7 +66,7 @@ class Edit extends Component
 
         $this->reset('password');
 
-        toastr()->success('Tenant atualizado com sucesso!');
+        toastr()->success('Atualizado com sucesso!');
         return redirect()->route('tenant.index');
     }
 

@@ -156,7 +156,7 @@
                                 </th>
 
                                 <th scope="col" class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
+                                    <div class="flex items-center gap-x-2 ml-3">
                         <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                           Name
                         </span>
@@ -213,9 +213,8 @@
                                     </td>
                                     <td class="size-px whitespace-nowrap">
                                         <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                            <div class="flex items-center gap-x-3">
-                                                <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
-                                                <div class="grow">
+                                            <div class="flex items-center gap-x-3 ml-3">
+                                                 <div class="grow">
                                                     <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->name }}</span>
                                                     <span class="block text-sm text-gray-500 dark:text-neutral-500">{{ $data->email }}</span>
                                                 </div>

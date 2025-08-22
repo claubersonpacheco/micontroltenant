@@ -17,7 +17,7 @@
                 <!-- Full Name -->
                 <div class="sm:col-span-3">
                     <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Full Name
+                        {{ __('Name') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -33,7 +33,7 @@
                 <!-- Email -->
                 <div class="sm:col-span-3">
                     <label for="email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Email
+                        {{ __('Email') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -49,7 +49,7 @@
                 <!-- Password -->
                 <div class="sm:col-span-3">
                     <label for="password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Password
+                        {{ __('Password') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -67,7 +67,7 @@
                 <!-- Domain -->
                 <div class="sm:col-span-3">
                     <label for="domain" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Domain
+                        {{ __('Domain') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -85,11 +85,11 @@
             <div class="mt-5 flex justify-end gap-x-2">
                 <button type="button"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
-                    Cancel
+                    {{ __('Cancel') }}
                 </button>
                 <button type="submit"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                    Save Changes
+                    {{ __('Save') }}
                 </button>
             </div>
         </form>

@@ -44,11 +44,11 @@
             <div class="mt-5 flex justify-end gap-x-2">
                 <a href="{{ route('category.index') }}"
                    class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
-                    Cancel
+                    {{ __('Cancel') }}
                 </a>
                 <button type="submit"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                    Save changes
+                    {{ __('Save') }}
                 </button>
             </div>
         </form>

@@ -18,7 +18,7 @@ class Create extends Component
     public $name;
     public $email;
     public $password;
-    public $domain;
+    public $subdomain;
     public $tenants = [];
 
 
@@ -34,7 +34,7 @@ class Create extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:tenants,email',
             'password' => 'required|min:6',
-            'domain' => 'required|string|unique:domains,domain',
+            'subdomain' => 'required|string|unique:domains,domain',
         ]);
 
         // Cria tenant no banco central (sem criar usuário aqui)
@@ -42,13 +42,14 @@ class Create extends Component
             'id' => (string) Str::uuid(),
             'name' => $this->name,
             'email' => $this->email,
-            //'password' => Hash::make($this->password), // ou remova esse campo se não for usado no central
+            'password' => Hash::make($this->password), // ou remova esse campo se não for usado no central
             'data' => [],
         ]);
 
+        $subdomainComplete =  $this->subdomain.'.'.env('CENTRAL_DOMAIN');
         // Cria domínio do tenant
         $tenant->domains()->create([
-            'domain' => $this->domain,
+            'domain' => $subdomainComplete,
         ]);
 
         // Troca para o banco do tenant
@@ -64,10 +65,10 @@ class Create extends Component
         // Volta ao contexto do banco central
         tenancy()->end();
 
-        $this->reset(['name', 'email', 'password', 'domain']);
+        $this->reset(['name', 'email', 'password', 'subdomain']);
         $this->tenants = Tenant::all();
 
-        toastr()->success('Tenant criado com sucesso!');
+        toastr()->success('Criado com sucesso!');
         return redirect()->route('tenant.index');
     }
 

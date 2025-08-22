@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\Print\BudgetController;
 use Illuminate\Support\Facades\Route;
 
 // routes/web.php ou routes/central.php
@@ -19,6 +20,9 @@ Route::get('/check', function () {
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
             // budget
+
+            Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
+            Route::get('/budget/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('budget.pdf');
 
             Route::get('/budget/{id}/item', \App\Livewire\Admin\Budget\Items\ItemsList::class)->name('budget.item');
             Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');

@@ -56,6 +56,20 @@ class ItemsList extends Component
         $this->showTotal      = (bool) $this->budget->show_total;
     }
 
+    public function countFiltered(): int
+    {
+        return count(array_filter([
+            $this->showService,
+            $this->showDescription,
+            $this->showQtd,
+            $this->showPrice,
+            $this->showTaxValue,
+            $this->showTax,
+            $this->showSubTotal,
+            $this->showTotal,
+        ]));
+    }
+
     #[Computed]
     public function rows(): LengthAwarePaginator
     {

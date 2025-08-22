@@ -17,7 +17,7 @@
                 <!-- Full Name -->
                 <div class="sm:col-span-3">
                     <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Full name
+                        {{ __('Name') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -33,7 +33,7 @@
                 <!-- Email -->
                 <div class="sm:col-span-3">
                     <label for="email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Email
+                        {{ __('Email') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -49,7 +49,7 @@
                 <!-- Password -->
                 <div class="sm:col-span-3">
                     <label for="password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Password
+                        {{ __('Passord') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
@@ -65,14 +65,20 @@
                 <!-- Domain -->
                 <div class="sm:col-span-3">
                     <label for="domain" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        Domain
+                        {{ __('Subdomain') }}
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <input wire:model="domain" id="domain" type="text"
-                           class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"
-                           placeholder="example.tenant.com">
-                    @error('domain')
+                    <div class="flex">
+                        <input wire:model="subdomain" id="subdomain" type="text"
+                               class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-l-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"
+                               placeholder="subdomain">
+                        <span
+                            class="inline-flex items-center px-3 text-gray-500 border border-l-0 border-gray-200 rounded-r-lg bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                            .micontrol.test
+                        </span>
+                    </div>
+                    @error('subdomain')
                     <span class="text-sm text-red-600">{{ $message }}</span>
                     @enderror
                 </div>
@@ -83,11 +89,11 @@
             <div class="mt-5 flex justify-end gap-x-2">
                 <button type="button"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
-                    Cancel
+                    {{ __('Cancel') }}
                 </button>
                 <button type="submit"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                    Save changes
+                    {{ __('Save') }}
                 </button>
             </div>
         </form>

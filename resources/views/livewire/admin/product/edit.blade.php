@@ -110,7 +110,7 @@
                 </a>
                 <button type="submit"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                    {{ __('Update Product') }}
+                    {{ __('Save') }}
                 </button>
             </div>
         </form>
