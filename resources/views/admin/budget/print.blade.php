@@ -153,8 +153,6 @@
         @endforeach
         </tbody>
     </table>
-
-
     <!-- Aqui começam as 3 caixas -->
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
         <div class="bg-gray-200 col-span-2 p-4 border-collapse ">
