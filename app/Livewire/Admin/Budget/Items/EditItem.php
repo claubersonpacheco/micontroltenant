@@ -56,7 +56,6 @@ class EditItem extends Component
         }
     }
 
-
     public function updatedProductId($value)
     {
 

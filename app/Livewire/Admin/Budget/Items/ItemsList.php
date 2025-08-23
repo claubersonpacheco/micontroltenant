@@ -114,8 +114,6 @@ class ItemsList extends Component
             ->withQueryString();
     }
 
-
-
     #[On('listItems')]
     public function refreshList()
     {

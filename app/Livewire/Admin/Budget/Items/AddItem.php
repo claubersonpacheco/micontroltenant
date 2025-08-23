@@ -46,7 +46,6 @@ class AddItem extends Component
 
     }
 
-
     public function calculateTotals()
     {
 
