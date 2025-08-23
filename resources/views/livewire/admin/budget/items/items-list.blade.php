@@ -491,9 +491,6 @@
 
                                             <!-- End Icon -->
                                         </a>
-
-
-
                                         <a title="Excluir"
                                            class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                                            wire:click="deleteItem({{ $item->id }})"
