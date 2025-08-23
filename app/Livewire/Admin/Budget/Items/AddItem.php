@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Budget\Items;
 use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\Product;
+use App\Services\BudgetService;
 use Livewire\Component;
 
 class AddItem extends Component
@@ -79,6 +80,11 @@ class AddItem extends Component
         $this->calculateTotals();
     }
 
+    public function updatedPrice($value)
+    {
+        $this->price = $value;
+        $this->calculateTotals();
+    }
     public function updatingTax($value)
     {
         $this->tax = $value;
@@ -132,31 +138,12 @@ class AddItem extends Component
 
         $this->resetForm();
 
-        $this->updateBudgetTotal();
+        BudgetService::updateTotals($this->budget_id);
 
-        // Fecha o modal no front
         $this->dispatch('close-add-modal');
         $this->dispatch('listItems');
 
         toastr()->success('Adcionado com sucesso!');
-    }
-
-    public function updateBudgetTotal()
-    {
-        $budget = Budget::findOrFail($this->budget_id);
-
-        if ($budget) {
-
-            $budgetSubTotal = $budget->items()->sum('subtotal'); // Sumando los totales de los itens
-            $budgetTotal = $budget->items()->sum('total');
-            $budgetTax = $budgetTotal - $budgetSubTotal;
-
-            $budget->update([
-                'subtotal' => $budgetSubTotal,
-                'total' => $budgetTotal,
-                'tax_value' => $budgetTax,
-            ]);
-        }
     }
 
     public function render()

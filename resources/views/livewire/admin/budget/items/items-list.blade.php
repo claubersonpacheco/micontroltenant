@@ -138,8 +138,11 @@
 
                         <div>
                             <div class="inline-flex gap-x-2">
-                                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                                   href="#">
+                                @if(!empty($selectedItems))
+                                <button  wire:click="deleteSelected"
+                                         onclick="confirm('Tem certeza que deseja excluir os itens selecionados?') || event.stopImmediatePropagation()"
+                                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                                   >
                                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -149,9 +152,9 @@
                                         <line x1="10" x2="10" y1="11" y2="17"/>
                                         <line x1="14" x2="14" y1="11" y2="17"/>
                                     </svg>
-                                    Delete (2)
-                                </a>
-
+                                    {{ __('Delete Selected') }} ({{ count($selectedItems) }})
+                                </button>
+                                @endif
                                 <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                                    href="{{ route('budget.print', $budget->id ) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -280,6 +283,8 @@
                             <th scope="col" class="ps-6 py-3 text-start">
                                 <label for="hs-at-with-checkboxes-main" class="flex">
                                     <input type="checkbox"
+                                           wire:click="toggleSelectAll"
+                                           @if(count($this->rows) > 0 && count($selectedItems) === count($this->rows)) checked @endif
                                            class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                                            id="hs-at-with-checkboxes-main">
                                     <span class="sr-only">Checkbox</span>
@@ -381,11 +386,13 @@
                         <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
 
                         @forelse($this->rows as $item)
-                            <tr wire:key="item-{{ $item->id }}">
-                            <td class="size-px whitespace-nowrap">
-                                <div class="ps-6 py-2">
+                            <tr wire:key="item-{{ $item->id }}" >
+                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                                <div class="ps-6 py-2 ">
                                     <label for="hs-at-with-checkboxes-1" class="flex">
                                         <input type="checkbox"
+                                               value="{{ $item->id }}"
+                                               wire:model.live="selectedItems"
                                                class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                                                id="hs-at-with-checkboxes-1" checked>
                                         <span class="sr-only">Checkbox</span>
@@ -394,7 +401,7 @@
                             </td>
 
                                 @if($showService)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2">
                                             <div class="flex items-center gap-x-2">
                                                 <div class="grow">
@@ -408,62 +415,62 @@
                                 @endif
 
                                 @if($showDescription)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ $item->description }}</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{  $item->description }}</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showQtd)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ $item->quantity }}</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': $item->quantity }}</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showPrice)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ number_format($item->price, 2, ',', '.') }} €</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->price, 2, ',', '.'). '€' }}</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showTax)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2 flex gap-x-1">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ $item->tax }}%</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': $item->tax }}%</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showSubTotal)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2 flex gap-x-1">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ number_format($item->subtotal, 2, ',', '.') }} €</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->subtotal, 2, ',', '.'). '€' }}</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showTaxValue)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2 flex gap-x-1">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ number_format($item->tax_value, 2, ',', '.') }} €</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->tax_value, 2, ',', '.'). '€' }}</span>
                                         </div>
                                     </td>
                                 @endif
 
                                 @if($showTotal)
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                         <div class="px-6 py-2 flex gap-x-1">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ number_format($item->total, 2, ',', '.') }} €</span>
+                                            <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->total, 2, ',', '.'). '€' }} </span>
                                         </div>
                                     </td>
                                 @endif
 
-                                <td class="size-px whitespace-nowrap">
+                                <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                     <div class="px-6 py-2 flex gap-x-1 justify-center items-center gap-x-3">
 
                                         <a title="Editar"
@@ -535,50 +542,6 @@
                             <div class="mt-4">
                                 {{ $rows->links() }}
                             </div>
-
-
-{{--                            <p class="text-sm text-gray-600 dark:text-neutral-400">--}}
-{{--                                Showing:--}}
-{{--                            </p>--}}
-{{--                            <div class="max-w-sm space-y-3">--}}
-{{--                                <select--}}
-{{--                                    class="py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">--}}
-{{--                                    <option>1</option>--}}
-{{--                                    <option>2</option>--}}
-{{--                                    <option>3</option>--}}
-{{--                                    <option>4</option>--}}
-{{--                                    <option selected>9</option>--}}
-{{--                                    <option>20</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <p class="text-sm text-gray-600 dark:text-neutral-400">--}}
-{{--                                of 20--}}
-{{--                            </p>--}}
-                        </div>
-
-{{--                        <div>--}}
-{{--                            <div class="inline-flex gap-x-2">--}}
-{{--                                <button type="button"--}}
-{{--                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">--}}
-{{--                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"--}}
-{{--                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
-{{--                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
-{{--                                        <path d="m15 18-6-6 6-6"/>--}}
-{{--                                    </svg>--}}
-{{--                                    Prev--}}
-{{--                                </button>--}}
-
-{{--                                <button type="button"--}}
-{{--                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">--}}
-{{--                                    Next--}}
-{{--                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"--}}
-{{--                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
-{{--                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
-{{--                                        <path d="m9 18 6-6-6-6"/>--}}
-{{--                                    </svg>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
                     <!-- End Footer -->
                 </div>
@@ -588,55 +551,48 @@
     <!-- End Card -->
     <!-- End Table Section -->
 
-
-    <!-- Dados do budget totais -->
-    <div class="mt-8 flex sm:justify-end">
-        <div class="w-full max-w-2xl sm:text-end space-y-2">
-            <!-- Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
-                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
-                    <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }} €</dd>
-                </dl>
-
-
-
-                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
-                    <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }} €</dd>
-                </dl>
-                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
-                    <dd class="col-span-2 font-boldtext-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }} €</dd>
-                </dl>
+        <!-- Aqui começam as 3 caixas -->
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div class="bg-gray-200 col-span-2 p-4 rounded-md">
+                <h3 class="font-semibold ">Observación</h3>
+                <p class="text-gray-700">{!!$budget->description !!}</p>
 
             </div>
-            <!-- End Grid -->
-        </div>
-    </div>
-    <!-- End Flex -->
+            <div class="bg-gray-200 p-4 rounded-md">
+                <!-- Flex -->
+                <div class="flex sm:justify-end">
+                    <div class="w-full max-w-2xl sm:text-end space-y-2">
+                        <!-- Grid -->
+                        <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+                            @if($showSubTotal)
+                                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
+                                    <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }} €</dd>
+                                </dl>
+                            @endif
 
-    <!-- Aqui começam as 3 caixas -->
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="bg-gray-200 p-4">
-            <h3 class="font-semibold ">Observacion</h3>
-            <p class="text-gray-700">{!!$budget->description !!}</p>
+                            @if($showTaxValue)
+                                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
+                                    <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }} €</dd>
+                                </dl>
+                            @endif
+
+                            @if($showTotal)
+                                <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                    <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
+                                    <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }} €</dd>
+                                </dl>
+                            @endif
+
+                        </div>
+                        <!-- End Grid -->
+                    </div>
+                </div>
+                <!-- End Flex -->
+
+            </div>
         </div>
-        <div class="bg-gray-200 p-4">
-            @if($budget->show_tax == true)
-                <h3 class="font-semibold text-lg ">Iva</h3>
-                <p class="text-gray-700 text-end">{{ $budget->tax }}</p>
-            @endif
-        </div>
-        <div class="bg-gray-200 p-4">
-            <h3 class="font-semibold text-lg">Total</h3>
-            @if($budget->showTotal == true)
-                <h3 class="font-semibold text-gray-700 text-end">€ {{ $budget->total }}</h3>
-            @endif
-            @if($budget->show_total_tax == true)
-                <h3 class="font-semibold text-gray-700 text-end">€ {{ $budget->total_tax }}</h3>
-            @endif
-        </div>
-    </div>
 </div>
-<!-- End Invoice -->
+</div>
+<!-- End Invoice -->¡

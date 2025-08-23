@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Admin\Budget\Items;
 
+use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\Product;
+use App\Services\BudgetService;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -111,6 +113,7 @@ class EditItem extends Component
 
     public function updatingPrice($value)
     {
+        $this->price = $value;
         $this->calculateTotals();
     }
 
@@ -160,8 +163,11 @@ class EditItem extends Component
 
         $this->resetForm();
 
+        BudgetService::updateTotals($this->budget_id);
+
         $this->dispatch('close-modal', name: 'edit-item');
         $this->dispatch('listItems');
+
         toastr()->success('Edit with success!');
 
     }

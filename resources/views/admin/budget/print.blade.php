@@ -78,66 +78,75 @@
 
     <table class="min-w-full mt-8 border-collapse">
         <thead>
-        <tr class="bg-gray-200">
-            @if($budget->show_service == true)
-                <th class="py-2 px-4 text-left">Servício</th>
-            @endif
-            @if($budget->show_description == true)
-                <th class="py-2 px-4 text-left max-w-[420px] ">Descripción</th>
-            @endif
-            @if($budget->show_qtd == true)
-                <th class="py-2 px-4 text-left">Cant</th>
-            @endif
-            @if($budget->show_price == true)
-                <th class="py-2 px-4 text-left">Unit Precio</th>
-            @endif
-            @if($budget->show_tax == true)
-                <th class="py-2 px-4 text-left">Iva</th>
-            @endif
-            @if($budget->show_total_tax == true)
-                <th class="py-2 px-4 text-left">Total Iva</th>
-            @endif
-            @if($budget->show_total == true)
-                <th class="py-2 px-4 text-left">Total S/Iva</th>
-            @endif
-        </tr>
+            <tr class="bg-gray-200">
+                @if($budget->show_service)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Service') }}</th>
+                @endif
+                @if($budget->show_description)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 max-w-[420px] ">{{ __('Description') }}</th>
+                @endif
+                @if($budget->show_qtd)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Quantity') }}</th>
+                @endif
+                @if($budget->show_price)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Unit Price') }}</th>
+                @endif
+                @if($budget->show_tax)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax') }}</th>
+                @endif
+                @if($budget->show_sub_total)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Sub Total') }}</th>
+                @endif
+                @if($budget->show_tax_value)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax Value') }}</th>
+                @endif
+                @if($budget->show_total)
+                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Total') }}</th>
+                @endif
+            </tr>
         </thead>
         <tbody>
         @foreach($budget->items as $item)
             <tr class="border-t">
-                @if($budget->show_service == true)
-                    <td class="py-2 px-4 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                @if($budget->show_service)
+                    <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {!! ($item->total == 0)? '<b>'.$item->product->name.'</b>':$item->product->name !!}
                     </td>
                 @endif
-                @if($budget->show_description == true)
-                    <td class="py-2 px-4 max-w-[420px]  {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                @if($budget->show_description)
+                    <td class="py-2 px-2 max-w-[420px]  {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {!! $item->description !!}
                     </td>
                 @endif
-                @if($budget->show_qtd == true)
-                    <td class="py-2 px-4 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                @if($budget->show_qtd)
+                    <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': $item->quantity }}
                     </td>
                 @endif
-                @if($budget->show_price == true)
-                    <td class="py-2 px-4 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                        {{ ($item->total == 0)? '': $item->price }}
+                @if($budget->show_price)
+                    <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                        {{ ($item->total == 0)? '': number_format($item->price, 2, ',', '.') }}
                     </td>
                 @endif
-                @if($budget->show_tax == true)
-                    <td class="py-2 px-4 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                        {{ ($item->total == 0)? '': $item->tax }}
+                @if($budget->show_tax)
+                    <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                        {{ ($item->total == 0)? '': $item->tax .' %' }}
                     </td>
                 @endif
-                @if($budget->show_total_tax == true)
-                    <td class="py-2 px-4 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                        {{ ($item->total == 0)? '': '€ '.$item->total_tax }}
+                @if($budget->show_sub_total)
+                    <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                        {{ ($item->total == 0)? '':  number_format($item->subtotal, 2, ',', '.').' €' }}
                     </td>
                 @endif
-                @if($budget->show_total == true)
-                    <td class="py-2 px-4 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                        {{ ($item->total == 0)? '': '€ '.$item->total }}
+
+                @if($budget->show_tax_value)
+                    <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                        {{ ($item->total == 0)? '': number_format($item->tax_value, 2, ',', '.').' €' }}
+                    </td>
+                @endif
+                @if($budget->show_total)
+                    <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                        {{ ($item->total == 0)? '': number_format($item->total, 2, ',', '.').' €' }}
                     </td>
                 @endif
             </tr>
@@ -146,29 +155,50 @@
     </table>
 
 
-
     <!-- Aqui começam as 3 caixas -->
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="bg-gray-200 p-4">
+        <div class="bg-gray-200 col-span-2 p-4 border-collapse ">
             <h3 class="font-semibold ">Observacion</h3>
             <p class="text-gray-700">{!!$budget->description !!}</p>
+
         </div>
-        <div class="bg-gray-200 p-4">
-            @if($budget->show_tax == true)
-                <h3 class="font-semibold text-lg ">Iva</h3>
-                <p class="text-gray-700 text-end">{{ $budget->tax }}</p>
-            @endif
-        </div>
-        <div class="bg-gray-200 p-4">
-            <h3 class="font-semibold text-lg">Total</h3>
-            @if($budget->show_total == true)
-                <h3 class="font-semibold text-gray-700 text-end">€ {{ $budget->total }}</h3>
-            @endif
-            @if($budget->show_total_tax == true)
-                <h3 class="font-semibold text-gray-700 text-end">€ {{ $budget->total_tax }}</h3>
-            @endif
+        <div class="bg-gray-200 p-4 border-collapse ">
+            <!-- Flex -->
+            <div class="flex sm:justify-end">
+                <div class="w-full max-w-2xl sm:text-end space-y-2">
+                    <!-- Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+                        @if($budget->show_sub_total)
+                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
+                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }} €</dd>
+                        </dl>
+                        @endif
+
+                        @if($budget->show_tax_value)
+                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
+                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }} €</dd>
+                        </dl>
+                        @endif
+
+                        @if($budget->show_total)
+                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
+                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }} €</dd>
+                        </dl>
+                        @endif
+
+                    </div>
+                    <!-- End Grid -->
+                </div>
+            </div>
+            <!-- End Flex -->
+
         </div>
     </div>
+
+
 
 
 </div>

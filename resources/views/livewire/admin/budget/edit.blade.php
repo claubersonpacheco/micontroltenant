@@ -11,7 +11,7 @@
             </p>
         </div>
 
-        <form id="customer-create" wire:submit.prevent="store">
+        <form id="customer-create" wire:submit.prevent="update">
 
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
 
@@ -71,19 +71,14 @@
 
                 <!-- Customer -->
                 <div class="sm:col-span-2">
-                    <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                    <label for="customer" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                         {{ __('Customer') }}
                     </label>
                 </div>
                 <div class="sm:col-span-10">
-                    <select wire:model="customer" id="customer" class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                    <input wire:model="customer" id="customer" readonly type="text"
+                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        <option selected="">{{ __('Select the customer') }}</option>
-                        @foreach($customers as $customer)
-                            <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('customer') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
 
                 <!-- Name -->

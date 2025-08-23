@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Budget\Items;
 
 use App\Models\Budget;
 use App\Models\BudgetItem;
+use App\Services\BudgetService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -31,6 +32,8 @@ class ItemsList extends Component
     public bool $showSubTotal = false;
     public bool $showTotal = false;
 
+    public $selectedItems = [];
+
     public array $sort = [
         'column'    => 'created_at',
         'direction' => 'desc',
@@ -54,6 +57,34 @@ class ItemsList extends Component
         $this->showTax        = (bool) $this->budget->tax;
         $this->showSubTotal   = (bool) $this->budget->show_sub_total;
         $this->showTotal      = (bool) $this->budget->show_total;
+    }
+
+    public function deleteSelected()
+    {
+        if (!empty($this->selectedItems)) {
+
+
+            $items = $this->selectedItems;
+
+
+           $delete =  BudgetItem::whereIn('id', $items);
+           $delete->delete();
+
+            // Atualiza total do orçamento
+            $this->updateBudgetTotal();
+
+            // Emite evento para atualizar qualquer parte da UI que dependa da lista
+            $this->dispatch('listItems');
+        }
+    }
+
+    public function toggleSelectAll()
+    {
+        if (count($this->selectedItems) === count($this->rows)) {
+            $this->selectedItems = [];
+        } else {
+            $this->selectedItems = $this->rows->pluck('id')->toArray();
+        }
     }
 
     public function countFiltered(): int
@@ -93,29 +124,23 @@ class ItemsList extends Component
 
     public function deleteItem(int $idItem): void
     {
-        BudgetItem::findOrFail($idItem)->delete();
+        // Busca segura para evitar 404
+        $item = BudgetItem::where('id', $idItem)
+            ->where('budget_id',  $this->budget->id) // garante que pertence ao orçamento atual
+            ->first();
 
-        $this->dispatch('listItems');
-
-        $this->updateBudgetTotal();
-    }
-
-    public function updateBudgetTotal()
-    {
-        $budget = Budget::findOrFail($this->budget);
-
-        if ($budget) {
-
-            $budgetSubTotal = $budget->items()->sum('subtotal'); // Sumando los totales de los itens
-            $budgetTotal = $budget->items()->sum('total');
-            $budgetTax = $budgetSubTotal - $budgetTotal;
-
-            $budget->update([
-                'subtotal' => $budgetTotal,
-                'total' => $budgetTotal,
-                'tax_value' => $budgetTax,
-            ]);
+        if (!$item) {
+            return; // Evita erro se não encontrar
         }
+
+        $item->delete();
+
+        BudgetService::updateTotals($this->budget->id);
+
+        // Atualiza lista no front-end
+        $this->dispatch('listItems'); // Certifique-se que existe JS ouvindo isso
+
+
     }
 
     public function atualizationColumns(): void

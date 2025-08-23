@@ -29,33 +29,34 @@ class Create extends Component
         $this->date = Carbon::now()->format('Y-m-d');
         $this->expirate = Carbon::now()->addDays(30)->format('Y-m-d');
 
-        // Criar objetos Carbon para calcular a diferença
-        $start = Carbon::parse($this->date);
-        $end = Carbon::parse($this->expirate);
-
-        $this->total_expirate = $start->diffInDays($end);
+        $this->calculateTotalExpirate();
     }
 
-    public function updatedExpirate($value)
+    public function updatedDate()
     {
-        $this->calculateDays();
+        $this->calculateTotalExpirate();
     }
 
-    public function updatedDate($value)
+    public function updatedExpirate()
     {
-        $this->calculateDays();
+        $this->calculateTotalExpirate();
     }
 
-    public function calculateDays()
+    public function calculateTotalExpirate()
     {
-
         if ($this->date && $this->expirate) {
             $start = Carbon::parse($this->date);
             $end = Carbon::parse($this->expirate);
 
+            // Se a data de expiração for menor que a inicial, corrige
+            if ($end->lessThanOrEqualTo($start)) {
+                $end = $start->copy()->addDay();
+                $this->expirate = $end->format('Y-m-d');
+            }
+
             $this->total_expirate = $start->diffInDays($end);
         } else {
-            $this->total_expirate = 'nulo';
+            $this->total_expirate = null;
         }
     }
 
