@@ -32,6 +32,9 @@ class Edit extends Component
             'settings.whatsapp' => ['required', 'string', 'max:255'],
             'settings.prefix' => ['required', 'string', 'max:255'],
             'settings.document' => ['required', 'string', 'max:255'],
+            'settings.description' => ['nullable', 'string', 'max:255'],
+            'settings.keywords' => ['nullable', 'string', 'max:255'],
+            'settings.author' => ['nullable', 'string', 'max:255'],
         ];
     }
 

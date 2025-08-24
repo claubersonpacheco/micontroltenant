@@ -3,10 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-            <title>{{ $tenantSettings->title ?? 'Tenant'   }} - {{ $title ?? 'Admin' }}</title>
+        <!-- SEO Meta -->
+        <x-seo-meta
+            :title="$tenantSettings->title ?? 'Tenant' . ' - ' . ($title ?? 'Admin')"
+            :description="$tenantSettings->description ?? 'Descrição do site ou negócio'"
+            :keywords="$tenantSettings->keywords ?? 'palavra1, palavra2'"
+            :author="$tenantSettings->author ?? 'Empresa'"
+            :image="asset($tenantSettings->logo ?? 'images/og-default.jpg')"
+        />
 
 
         <!-- Favicon -->

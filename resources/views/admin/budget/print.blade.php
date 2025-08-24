@@ -23,6 +23,8 @@
         }
 
     </style>
+
+
 </head>
 <body>
 
@@ -34,12 +36,11 @@
         </div>
         <div class="text-right">
 
-            @if($setting->logo_impress != '')
+            @if(!empty($setting->logo_impress) && file_exists(storage_path('app/public/'.$setting->logo_impress)))
                 @php
                     $imagePath = storage_path('app/public/'.$setting->logo_impress);
                     $imageBase64 = 'data:image/png;base64,'.base64_encode(file_get_contents($imagePath));
                 @endphp
-
 
                 <img class="w-[300px] h-auto ms-auto" src="{{ $imageBase64 }}" alt="{{ $setting->title }}">
             @else

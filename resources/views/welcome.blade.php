@@ -36,7 +36,7 @@
         <div class="p-6 mx-auto max-w-7xl lg:p-8 ">
             <!-- Logo centralizado -->
             <div class="flex justify-center">
-                <img src="{{  Storage::url($tenantSettings->logo) }}" />
+                <x-logo width="200" height="40" />
             </div>
 
             <div class="mt-16 flex justify-center">

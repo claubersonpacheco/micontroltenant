@@ -121,6 +121,45 @@
                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                     @error('prefix') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                 </div>
+
+                <!-- description -->
+                <div class="sm:col-span-3">
+                    <label for="description" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        {{ __('Description') }}
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <textarea wire:model="description" id="description" type="text"
+                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                    </textarea>
+                    @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- keywords -->
+                <div class="sm:col-span-3">
+                    <label for="keywords" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        {{ __('Keywords') }}
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input wire:model="keywords" id="keywords" type="text" placeholder="Keywords"
+                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                    @error('keywords') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- author -->
+                <div class="sm:col-span-3">
+                    <label for="author" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        {{ __('Author') }}
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input wire:model="author" id="author" type="text" placeholder="Author"
+                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                    @error('author') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                </div>
+
+
             </div>
 
             <!-- Buttons -->

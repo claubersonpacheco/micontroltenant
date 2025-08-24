@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "preline": "^3.1.0",
-        "puppeteer": "^24.16.2"
+        "puppeteer": "^24.16.2",
+        "sortablejs": "^1.15.6"
     }
 }

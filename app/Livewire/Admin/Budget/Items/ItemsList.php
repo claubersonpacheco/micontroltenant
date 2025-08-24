@@ -109,9 +109,19 @@ class ItemsList extends Component
             ->when($this->search, fn ($query) =>
             $query->whereAny(['description'], 'like', '%' . trim($this->search) . '%')
             )
-            ->orderBy(...array_values($this->sort))
+            ->orderBy('position')
             ->paginate($this->quantity)
             ->withQueryString();
+    }
+
+    public function updateItemOrder($ids)
+    {
+        foreach ($ids as $index => $id) {
+            BudgetItem::where('id', $id)->update(['position' => $index + 1]);
+        }
+
+        // Atualiza a lista na tela (opcional)
+        $this->items = BudgetItem::orderBy('position')->get();
     }
 
     #[On('listItems')]

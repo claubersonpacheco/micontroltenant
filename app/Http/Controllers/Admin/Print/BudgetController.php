@@ -112,6 +112,12 @@ class BudgetController extends Controller
 
         $setting = Setting::first();
 
+        if(!$setting){
+
+            return redirect()->route('setting.index');
+
+        }
+
 
         return view('admin.budget.print', compact('budget', 'setting'))->render();
 

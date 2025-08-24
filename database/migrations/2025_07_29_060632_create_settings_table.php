@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('prefix', 10)->nullable();
             $table->string('document')->nullable();
+            $table->string('description')->nullable();
+            $table->string('keywords')->nullable();
+            $table->string('author')->nullable();
 
             $table->timestamps();
         });

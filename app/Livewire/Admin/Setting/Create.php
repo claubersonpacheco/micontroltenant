@@ -21,6 +21,9 @@ class Create extends Component
     public ?string $whatsapp = null;
     public ?string $prefix = null;
     public ?string $document = null;
+    public ?string $description = null;
+    public ?string $keywords = null;
+    public ?string $author = null;
 
     public function rules(): array
     {
@@ -34,6 +37,11 @@ class Create extends Component
             'whatsapp' => ['required', 'string', 'max:255'],
             'prefix' => ['required', 'string', 'max:255'],
             'document' => ['required', 'string', 'max:255'],
+
+            'description' => ['nullable', 'string', 'max:255'],
+            'keywords' => ['nullable', 'string', 'max:255'],
+            'author' => ['nullable', 'string', 'max:255'],
+
         ];
     }
 
