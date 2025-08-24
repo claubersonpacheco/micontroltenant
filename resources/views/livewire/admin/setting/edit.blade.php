@@ -165,6 +165,7 @@
 
                 </div>
 
+
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
                     <a href="{{ route('setting.index') }}" type="button"
