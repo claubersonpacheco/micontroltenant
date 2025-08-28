@@ -19,6 +19,12 @@ Route::get('/check', function () {
         // Painel admin protegido
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
+            //serviceproviders
+            Route::get('/providers/create', App\Livewire\Admin\ServiceProvider\Create::class)->name('provider.create');
+            Route::get('/providers/{id}/edit', App\Livewire\Admin\ServiceProvider\Edit::class)->name('provider.edit');
+            Route::get('/providers', App\Livewire\Admin\ServiceProvider\Index::class)->name('provider.index');
+
+
             // budget
 
             Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
