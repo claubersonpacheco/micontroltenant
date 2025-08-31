@@ -66,6 +66,9 @@ Route::get('/check', function () {
             Route::get('/tenants', App\Livewire\Admin\Tenant\Index::class)->name('tenant.index');
 
 
+            // profile
+            Route::get('profile', App\Livewire\Admin\Profile\Index::class)->name('profile.index');
+
             // user
             Route::get('/user/create', App\Livewire\Admin\User\Create::class)->name('user.create');
             Route::get('/user/{id}/edit', App\Livewire\Admin\User\Edit::class)->name('user.edit');
