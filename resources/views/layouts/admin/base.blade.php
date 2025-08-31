@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- SEO Meta -->
         <x-seo-meta
-            :title="$tenantSettings->title ?? 'Tenant' . ' - ' . ($title ?? 'Admin')"
+            :title="$tenantSettings->title ?? 'MiControl' . ' - ' . ($title ?? 'Admin')"
             :description="$tenantSettings->description ?? 'Descrição do site ou negócio'"
             :keywords="$tenantSettings->keywords ?? 'palavra1, palavra2'"
             :author="$tenantSettings->author ?? 'Empresa'"

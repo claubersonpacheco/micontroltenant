@@ -20,9 +20,14 @@ Route::get('/check', function () {
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
             //serviceproviders
-            Route::get('/providers/create', App\Livewire\Admin\ServiceProvider\Create::class)->name('provider.create');
-            Route::get('/providers/{id}/edit', App\Livewire\Admin\ServiceProvider\Edit::class)->name('provider.edit');
-            Route::get('/providers', App\Livewire\Admin\ServiceProvider\Index::class)->name('provider.index');
+            Route::get('/supplier/create', App\Livewire\Admin\ProductSupplier\Create::class)->name('supplier.create');
+            Route::get('/supplier/{id}/edit', App\Livewire\Admin\ProductSupplier\Edit::class)->name('supplier.edit');
+            Route::get('/supplier', App\Livewire\Admin\ProductSupplier\Index::class)->name('supplier.index');
+
+            //serviceproviders
+            Route::get('/provider/create', App\Livewire\Admin\ServiceProvider\Create::class)->name('provider.create');
+            Route::get('/provider/{id}/edit', App\Livewire\Admin\ServiceProvider\Edit::class)->name('provider.edit');
+            Route::get('/provider', App\Livewire\Admin\ServiceProvider\Index::class)->name('provider.index');
 
 
             // budget
