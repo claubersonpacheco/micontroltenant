@@ -4,7 +4,7 @@
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
             <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                {{ __('Profile') }}
+                {{ __('User') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
                 {{ __('Manage your name, password and account settings.') }}
@@ -14,18 +14,7 @@
         <form wire:submit.prevent="store">
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                <!-- Code -->
-                <div class="sm:col-span-3">
-                    <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        {{ __('Code') }}
-                    </label>
-                </div>
-                <div class="sm:col-span-9">
-                    <input wire:model="code" id="code" type="text" placeholder="Customer code"
-                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                    @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                </div>
+
                 <!-- Full Name -->
                 <div class="sm:col-span-3">
                     <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">

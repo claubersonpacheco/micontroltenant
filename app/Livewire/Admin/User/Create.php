@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Hash;
 #[Title('Create Users')]
 class Create extends Component
 {
-    use GenerateAutomaticCode;
-
-    public ?string $code = null;
     public ?string $name = null;
     public ?string $email = null;
     public ?string $password = null;
@@ -31,7 +28,6 @@ class Create extends Component
         ]);
 
         User::create([
-            'code'  => $this->code,
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
@@ -44,10 +40,7 @@ class Create extends Component
 
     public function render()
     {
-        $this->code = $this->generateCode(User::class);
 
-        return view('livewire.admin.user.create',[
-            'code' => $this->code,
-        ]);
+        return view('livewire.admin.user.create');
     }
 }

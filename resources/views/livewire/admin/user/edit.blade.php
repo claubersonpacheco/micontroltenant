@@ -10,26 +10,11 @@
                 {{ __('Edit your user.') }}
             </p>
         </div>
-        <div class="sm:col-span-3 mb-10">
-            <livewire:admin.partials.photo-upload :userId="$user->id" />
-        </div>
-
 
 
         <form wire:submit.prevent="update">
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                <!-- Code -->
-                <div class="sm:col-span-3">
-                    <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        {{ __('Code') }}
-                    </label>
-                </div>
-                <div class="sm:col-span-9">
-                    <input wire:model="code" type="text"  readonly
-                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                </div>
 
                 <!-- Full Name -->
                 <div class="sm:col-span-3">

@@ -25,7 +25,7 @@
 
                     <div class="mt-1 flex items-center gap-x-2">
                         <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            72,540
+                            {{ $count }}
                         </h3>
                         <span class="flex items-center gap-x-1 text-green-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -137,7 +137,7 @@
                                             <path d="M5 12h14" />
                                             <path d="M12 5v14" />
                                         </svg>
-                                        {{ __('Add') }}
+                                        {{ __('New') }}
                                     </a>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
 
                             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
 
-                            @forelse($datas as $data)
+                            @forelse($this->rows as $data)
                                 <tr>
                                     <td class="size-px whitespace-nowrap">
                                         <div class="ps-6 py-3">
@@ -316,33 +316,16 @@
                         </table>
                         <!-- End Table -->
 
-                        <!-- Footer -->
-                        <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
-                            <div>
-                                <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">12</span> results
-                                </p>
+                        <!-- Rodapé da Tabela -->
+                        <div class="px-6 py-4 flex justify-between items-center border-t border-gray-200 dark:border-neutral-700">
+                            <div class="text-sm text-gray-600 dark:text-neutral-400">
+                                Mostrando {{ $this->rows->count() }} de {{ $this->rows->total() }} resultados
                             </div>
-
                             <div>
-                                <div class="inline-flex gap-x-2">
-                                    <button type="button" class="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m15 18-6-6 6-6" />
-                                        </svg>
-                                        Prev
-                                    </button>
-
-                                    <button type="button" class="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                        Next
-                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m9 18 6-6-6-6" />
-                                        </svg>
-                                    </button>
-                                </div>
+                                {{ $this->rows->onEachSide(1)->links() }}
                             </div>
                         </div>
-                        <!-- End Footer -->
+                        <!-- Fim Rodapé -->
                     </div>
                 </div>
             </div>

@@ -12,26 +12,33 @@ use Illuminate\Validation\Rules;
 class Index extends Component
 {
     public $user;
-
-    public $userId;
-
+    public $name;
+    public $email;
     public ?string $password = null;
-
     public ?string $password_confirmation = null;
 
     public function mount(): void
     {
         $this->user = Auth::user();
 
+        $this->name = $this->user->name;
+        $this->email = $this->user->email;
     }
 
     public function rules(): array
     {
         return [
-            'user.name' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255'
+            ],
+            'email' => [
+                'required',
+                'email',
+                'string',
+                'max:255',
+                'unique:users,email,' . $this->user->id
             ],
             'password' => [
                 'nullable',
@@ -42,12 +49,17 @@ class Index extends Component
         ];
     }
 
-
     public function save()
     {
         $this->validate();
 
-        $this->user->password = when($this->password !== null, Hash::make($this->password), $this->user->password);
+        $this->user->name = $this->name;
+        $this->user->email = $this->email;
+
+        if ($this->password) {
+            $this->user->password = Hash::make($this->password);
+        }
+
         $this->user->save();
 
         toastr()->success('Usuário atualizado com sucesso!');

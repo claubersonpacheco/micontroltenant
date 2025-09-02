@@ -3,22 +3,28 @@
 namespace App\Livewire\Admin\User;
 
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use Illuminate\Database\Eloquent\Builder;
 #[Title('List Users')]
-#[Layout('layouts.admin.admin')]
 class Index extends Component
 {
     use WithPagination;
 
-    public $perPage = 25;
+    public ?int $quantity = 5;
 
-    public $search = '';
+    public ?string $search = null;
 
+    public array $sort = [
+        'column'    => 'created_at',
+        'direction' => 'desc',
+    ];
     public $sortField = 'name';
     public $sortDirection = 'asc';
     public $sortBy = 'name';
@@ -44,18 +50,21 @@ class Index extends Component
 
     }
 
-    #[On('searchData')]
-    public function search($searchTerm)
+    #[Computed]
+    public function rows(): LengthAwarePaginator
     {
-        $this->search = $searchTerm;
+        return User::query()
+            ->whereNotIn('id', [Auth::id()])
+            ->when($this->search !== null, fn (Builder $query) => $query->whereAny(['name', 'email'], 'like', '%'.trim($this->search).'%'))
+            ->orderBy(...array_values($this->sort))
+            ->paginate($this->quantity)
+            ->withQueryString();
     }
 
     public function render()
     {
         $this->count = User::count();
 
-        return view('livewire.admin.user.index', [
-            'datas' => User::search($this->search)->latest()->paginate($this->perPage)
-        ]);
+        return view('livewire.admin.user.index');
     }
 }

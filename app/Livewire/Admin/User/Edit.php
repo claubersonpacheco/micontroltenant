@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Admin\User;
 
+use Illuminate\Contracts\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 
 #[Title('Edit Users')]
-#[Layout('layouts.admin.admin')]
 class Edit extends Component
 {
     public $code;
@@ -41,10 +41,16 @@ class Edit extends Component
             'email' => [
                 'required',
                 'email',
+                'string',
                 'max:255',
-                Rule::unique('users')->ignore($user->id),
+                'unique:users,email,' . $this->user->id
             ],
-            'password' => 'nullable|min:8|same:password_confirmation',
+            'password' => [
+                'nullable',
+                'string',
+                'confirmed',
+                Rules\Password::defaults()
+            ]
         ]);
 
         $user->name = $this->name;

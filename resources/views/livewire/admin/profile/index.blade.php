@@ -4,10 +4,10 @@
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
             <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                {{ __('User') }}
+                {{ __('Profile') }}
             </h2>
             <p class="text-sm text-gray-600 dark:text-neutral-400">
-                {{ __('Edit your user.') }}
+                {{ __('Edit your profile.') }}
             </p>
         </div>
         <div class="sm:col-span-3 mb-10">
@@ -16,20 +16,10 @@
 
 
 
-        <form wire:submit.prevent="update">
+        <form wire:submit.prevent="save">
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                <!-- Code -->
-                <div class="sm:col-span-3">
-                    <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                        {{ __('Code') }}
-                    </label>
-                </div>
-                <div class="sm:col-span-9">
-                    <input wire:model="code" type="text"  readonly
-                           class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                  focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                </div>
+
 
                 <!-- Full Name -->
                 <div class="sm:col-span-3">
@@ -98,7 +88,7 @@
             <!-- End Grid -->
 
             <div class="mt-5 flex justify-end gap-x-2">
-                <a href="{{ route('user.index') }}"
+                <a href="{{ route('admin') }}"
                    class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                     {{ __('Cancel') }}
                 </a>

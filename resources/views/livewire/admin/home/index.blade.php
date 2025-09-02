@@ -106,66 +106,68 @@
         </div>
         <!-- End Grid -->
 
-        <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
-            <!-- Card -->
-            <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <!-- Header -->
-                <div class="flex flex-wrap justify-between items-center gap-2">
-                    <div>
-                        <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                            Income
-                        </h2>
-                        <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            $126,238.49
-                        </p>
-                    </div>
+{{--        <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">--}}
+{{--            <!-- Card -->--}}
+{{--            <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">--}}
+{{--                <!-- Header -->--}}
+{{--                <div class="flex flex-wrap justify-between items-center gap-2">--}}
+{{--                    <div>--}}
+{{--                        <h2 class="text-sm text-gray-500 dark:text-neutral-500">--}}
+{{--                            Income--}}
+{{--                        </h2>--}}
+{{--                        <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">--}}
+{{--                            $126,238.49--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
 
-                    <div>
-              <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">
-                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 5v14" />
-                  <path d="m19 12-7 7-7-7" />
-                </svg>
-                25%
-              </span>
-                    </div>
-                </div>
-                <!-- End Header -->
+{{--                    <div>--}}
+{{--              <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">--}}
+{{--                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
+{{--                  <path d="M12 5v14" />--}}
+{{--                  <path d="m19 12-7 7-7-7" />--}}
+{{--                </svg>--}}
+{{--                25%--}}
+{{--              </span>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <!-- End Header -->--}}
 
-                <div id="hs-multiple-bar-charts"></div>
-            </div>
-            <!-- End Card -->
+{{--                <div id="hs-multiple-bar-charts"></div>--}}
+{{--            </div>--}}
+{{--            <!-- End Card -->--}}
 
-            <!-- Card -->
-            <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <!-- Header -->
-                <div class="flex flex-wrap justify-between items-center gap-2">
-                    <div>
-                        <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                            Visitors
-                        </h2>
-                        <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            80.3k
-                        </p>
-                    </div>
+{{--            <!-- Card -->--}}
+{{--            <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">--}}
+{{--                <!-- Header -->--}}
+{{--                <div class="flex flex-wrap justify-between items-center gap-2">--}}
+{{--                    <div>--}}
+{{--                        <h2 class="text-sm text-gray-500 dark:text-neutral-500">--}}
+{{--                            Visitors--}}
+{{--                        </h2>--}}
+{{--                        <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">--}}
+{{--                            80.3k--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
 
-                    <div>
-              <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-red-100 text-red-800 dark:bg-red-500/10 dark:text-red-500">
-                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 5v14" />
-                  <path d="m19 12-7 7-7-7" />
-                </svg>
-                2%
-              </span>
-                    </div>
-                </div>
-                <!-- End Header -->
+{{--                    <div>--}}
+{{--              <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-red-100 text-red-800 dark:bg-red-500/10 dark:text-red-500">--}}
+{{--                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
+{{--                  <path d="M12 5v14" />--}}
+{{--                  <path d="m19 12-7 7-7-7" />--}}
+{{--                </svg>--}}
+{{--                2%--}}
+{{--              </span>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <!-- End Header -->--}}
 
-                <div id="hs-single-area-chart"></div>
-            </div>
-            <!-- End Card -->
-        </div>
-
+{{--                <div id="hs-single-area-chart"></div>--}}
+{{--            </div>--}}
+{{--            <!-- End Card -->--}}
+{{--        </div>--}}
+        <p>{{ __('Welcome') }}</p>
+        <p>App locale: {{ app()->getLocale() }}</p>
+        <p>Cookie locale: {{ request()->cookie('locale') }}</p>
         <!-- Card -->
         <div class="flex flex-col">
             <div class="-m-1.5 overflow-x-auto">
@@ -175,10 +177,10 @@
                         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    Users
+                                    {{ __('Customers') }}
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                    Add users, edit and more.
+                                    {{ __('The last customers') }}
                                 </p>
                             </div>
 
