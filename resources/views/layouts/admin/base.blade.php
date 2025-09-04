@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- SEO Meta -->
         <x-seo-meta
-            :title="$tenantSettings->title ?? 'MiControl' . ' - ' . ($title ?? 'Admin')"
-            :description="$tenantSettings->description ?? 'Descrição do site ou negócio'"
-            :keywords="$tenantSettings->keywords ?? 'palavra1, palavra2'"
-            :author="$tenantSettings->author ?? 'Empresa'"
-            :image="asset($tenantSettings->logo ?? 'images/og-default.jpg')"
+            :title="$tenantSettings->title ?? 'MiControl' . ' - ' . ($title ?? 'Bienvenido')"
+            :description="$tenantSettings->description ?? 'MiControl es la herramienta online para profesionales que necesitan crear, enviar y gestionar presupuestos de manera rápida y profesional. Ahorra tiempo y gana más clientes.'"
+            :keywords="$tenantSettings->keywords ?? 'presupuestos online, herramienta para presupuestos, crear presupuestos profesionales, gestión de presupuestos para autónomos, software de presupuestos'"
+            :author="$tenantSettings->author ?? 'Mi Control'"
+            :image="asset($tenantSettings->logo ?? 'images/logo-micontrol.png')"
         />
 
 
