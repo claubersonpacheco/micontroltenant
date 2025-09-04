@@ -1,11 +1,16 @@
 @php use Illuminate\Support\Facades\Session; @endphp
     <!-- Dropdown -->
 @php
+
+$english = __('English');
+$spain = __('Spain');
+$portugues = __('Portuguese');
+
     // Definição das línguas e suas respectivas bandeiras
     $languages = [
-        'en' => ['name' => 'English', 'flag' => 'images/estados-unidos.png'],
-        'es' => ['name' => 'Spain', 'flag' => 'images/spain.png'],
-        'pt_BR' => ['name' => 'Portuguese', 'flag' => 'images/brasil.png'],
+        'en' => ['name' => $english, 'flag' => 'images/estados-unidos.png'],
+        'es' => ['name' => $spain, 'flag' => 'images/spain.png'],
+        'pt_BR' => ['name' => $portugues, 'flag' => 'images/brasil.png'],
     ];
 
     // Obter o idioma atual da sessão
