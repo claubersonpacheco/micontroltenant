@@ -6,15 +6,25 @@ $english = __('English');
 $spain = __('Español');
 $portugues = __('Português');
 
-    // Definição das línguas e suas respectivas bandeiras
-    $languages = [
-        'en' => ['name' => $english, 'flag' => 'images/estados-unidos.png'],
-        'es' => ['name' => $spain, 'flag' => 'images/spain.png'],
-        'pt_BR' => ['name' => $portugues, 'flag' => 'images/brasil.png'],
-    ];
-
-    // Obter o idioma atual da sessão
 @endphp
+
+@if($tenantSettings->locale !== null)
+    @php
+        $languages = [
+            'en' => ['name' => $english, 'flag' => 'images/estados-unidos.png'],
+            'es' => ['name' => $spain, 'flag' => 'images/spain.png'],
+            'pt_BR' => ['name' => $portugues, 'flag' => 'images/brasil.png'],
+        ];
+    @endphp
+@else
+    @php
+        $languages = [
+            'en' => ['name' => $english, 'flag' => 'images/estados-unidos.png'],
+        ];
+    @endphp
+@endif
+
+
 
 <div class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--adaptive:adaptive] [--is-collapse:true] md:[--is-collapse:false]">
     <button id="hs-header-scrollspy-dropdown" type="button" class="hs-dropdown-toggle w-full p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 hs-scrollspy-active:bg-gray-100 dark:hs-scrollspy-active:bg-neutral-700" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
