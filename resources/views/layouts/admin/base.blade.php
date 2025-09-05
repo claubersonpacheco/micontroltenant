@@ -29,5 +29,15 @@
 
     <body>
         @yield('body')
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXD7PCBD5S"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WXD7PCBD5S');
+        </script>
     </body>
 </html>
