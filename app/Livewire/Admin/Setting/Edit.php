@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Setting;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -35,6 +36,7 @@ class Edit extends Component
             'settings.description' => ['nullable', 'string', 'max:255'],
             'settings.keywords' => ['nullable', 'string', 'max:255'],
             'settings.author' => ['nullable', 'string', 'max:255'],
+            'settings.locale' => ['nullable', 'string'],
         ];
     }
 
@@ -43,6 +45,13 @@ class Edit extends Component
         $this->validate();
 
         $this->setting->update($this->settings);
+
+        if (!in_array($this->setting->locale, ['en', 'es', 'pt_BR'])) {
+            abort(400);
+        }
+
+        // salva na sessão
+        Session::put('locale', $this->setting->locale);
 
         toastr()->success('Atualizado com sucesso!');
 

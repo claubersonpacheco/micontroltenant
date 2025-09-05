@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('keywords')->nullable();
             $table->string('author')->nullable();
+            $table->string('locale')->nullable();
 
             $table->timestamps();
         });

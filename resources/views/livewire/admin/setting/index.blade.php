@@ -83,6 +83,7 @@
 
 
                                                 </span>
+                                        </a>
                                             <!-- End Icon -->
                                     </td>
                                 </tr>

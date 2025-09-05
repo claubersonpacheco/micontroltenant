@@ -25,7 +25,7 @@ Route::view('/', 'welcome')->name('home');
 // Painel admin protegido
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-    Route::get('lang', [LanguageController::class, 'change'])->name("change.lang");
+
 
     //serviceproviders
     Route::get('/supplier/create', App\Livewire\Admin\ProductSupplier\Create::class)->name('supplier.create');
@@ -64,6 +64,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/categories', App\Livewire\Admin\Category\Index::class)->name('category.index');
 
     // setting
+    Route::get('/setting/{lang}', [App\Livewire\Admin\Setting\Locale::class, 'change'])->name("change.lang");
     Route::get('/setting/create', App\Livewire\Admin\Setting\Create::class)->name('setting.create');
     Route::get('/setting/{id}/edit', App\Livewire\Admin\Setting\Edit::class)->name('setting.edit');
     Route::get('/setting', App\Livewire\Admin\Setting\Index::class)->name('setting.index');

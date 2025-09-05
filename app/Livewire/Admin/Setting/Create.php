@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Setting;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -25,6 +26,8 @@ class Create extends Component
     public ?string $keywords = null;
     public ?string $author = null;
 
+    public ?string $locale = null;
+
     public function rules(): array
     {
         return [
@@ -41,6 +44,7 @@ class Create extends Component
             'description' => ['nullable', 'string', 'max:255'],
             'keywords' => ['nullable', 'string', 'max:255'],
             'author' => ['nullable', 'string', 'max:255'],
+            'locale' => ['nullable', 'string'],
 
         ];
     }
@@ -50,6 +54,13 @@ class Create extends Component
         $validated = $this->validate();
 
         Setting::create($validated);
+
+        if (!in_array($this->locale, ['en', 'es', 'pt_BR'])) {
+            abort(400);
+        }
+
+        // salva na sessão
+        Session::put('locale', $this->locale);
 
         toastr()->success('Criado com sucesso!');
 
