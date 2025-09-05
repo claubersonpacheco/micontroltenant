@@ -14,7 +14,6 @@ $portugues = __('Português');
     ];
 
     // Obter o idioma atual da sessão
-
 @endphp
 
 <div class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--adaptive:adaptive] [--is-collapse:true] md:[--is-collapse:false]">
