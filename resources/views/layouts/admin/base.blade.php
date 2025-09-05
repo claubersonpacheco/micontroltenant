@@ -25,19 +25,78 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-    </head>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-PFJFT9RF');</script>
+        <!-- End Google Tag Manager -->
 
-    <body>
-        @yield('body')
 
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXD7PCBD5S"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
-            gtag('config', 'G-WXD7PCBD5S');
+            // Configuração inicial (nega tudo por padrão até o usuário escolher)
+            gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'personalization_storage': 'denied',
+                'functionality_storage': 'denied',
+                'security_storage': 'granted' // recomendado manter segurança sempre ativo
+            });
         </script>
+    </head>
+
+    <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFJFT9RF"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+        @yield('body')
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                palette: {
+                    popup: { background: "#000" },
+                    button: { background: "#f1d600" }
+                },
+                type: "opt-in", // só dispara se o usuário aceitar
+                content: {
+                    message: "Usamos cookies para melhorar sua experiência.",
+                    allow: "Aceitar",
+                    deny: "Recusar",
+                    link: "Saiba mais",
+                    href: "/politica-de-privacidade"
+                },
+                onStatusChange: function(status) {
+                    if (this.hasConsented()) {
+                        // Usuário aceitou → atualiza consentimento
+                        gtag('consent', 'update', {
+                            'ad_storage': 'granted',
+                            'analytics_storage': 'granted',
+                            'personalization_storage': 'granted',
+                            'functionality_storage': 'granted'
+                        });
+                    } else {
+                        // Usuário recusou → mantém negado
+                        gtag('consent', 'update', {
+                            'ad_storage': 'denied',
+                            'analytics_storage': 'denied',
+                            'personalization_storage': 'denied',
+                            'functionality_storage': 'denied'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+
     </body>
 </html>
