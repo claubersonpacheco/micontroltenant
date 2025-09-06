@@ -6,15 +6,10 @@ $english = __('English');
 $spain = __('Español');
 $portugues = __('Português');
 
-@endphp
-
-@php
-    $locale = $tenantSettings->locale ?? app()->getLocale();
-
     $languages = [
-        'en' => ['name' => __('English'), 'flag' => 'images/estados-unidos.png'],
-        'es' => ['name' => __('Español'), 'flag' => 'images/spain.png'],
-        'pt_BR' => ['name' => __('Português'), 'flag' => 'images/brasil.png'],
+       'en' => ['name' => $english, 'flag' => 'images/estados-unidos.png'],
+        'es' => ['name' => $spain, 'flag' => 'images/spain.png'],
+        'pt_BR' => ['name' => $portugues, 'flag' => 'images/brasil.png'],
     ];
 @endphp
 

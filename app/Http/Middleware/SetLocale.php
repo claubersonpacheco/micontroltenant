@@ -19,16 +19,19 @@ class SetLocale
      */
     public function handle($request, Closure $next)
     {
-
-
         $settingLocale = optional(Setting::first())->locale;
         $sessionLocale = Session::get('locale');
 
-        app()->setLocale(
-            $sessionLocale
+        $locale = $sessionLocale
             ?? $settingLocale
-            ?? config('app.locale')
-        );
+            ?? config('app.locale');
+
+        app()->setLocale($locale);
+
+        // compartilha com as views
+        view()->share('tenantSettings', (object)[
+            'locale' => $locale,
+        ]);
 
         return $next($request);
     }
