@@ -77,7 +77,7 @@
                                 {{ __('Customer') }}
                             </label>
                         </div>
-                        <div class="sm:col-span-10">
+                        <div class="sm:col-span-10 flex gap-2 items-center">
                             <select wire:model="customer" id="customer" class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                                 <option selected="">{{ __('Select the customer') }}</option>
@@ -86,6 +86,18 @@
                                 @endforeach
                             </select>
                             @error('customer') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+
+                            <!-- Botão do modal -->
+                            <button
+                                type="button"
+                                wire:click="$dispatch('open-category-modal')"
+                                class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                                {{ __("Add") }}
+                            </button>
                         </div>
 
                         <!-- Name -->
@@ -134,4 +146,6 @@
         </div>
         <!-- End Card Section -->
     </div>
+    !-- Componente modal separado do form -->
+    <livewire:admin.budget.partial.create-customer-modal />
 </div>

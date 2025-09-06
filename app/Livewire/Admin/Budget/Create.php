@@ -3,10 +3,13 @@
 namespace App\Livewire\Admin\Budget;
 
 use App\Models\Budget;
+use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Product;
 use App\Traits\GenerateAutomaticCode;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
@@ -14,6 +17,8 @@ use Livewire\Attributes\Title;
 class Create extends Component
 {
     use GenerateAutomaticCode;
+
+    public $customers = [];
 
     public ?string $code = null;
     public ?string $name = null;
@@ -30,7 +35,17 @@ class Create extends Component
         $this->expirate = Carbon::now()->addDays(30)->format('Y-m-d');
 
         $this->calculateTotalExpirate();
+
+        $this->code =  $this->generateCode(Customer::class);
+        $this->loadCustomers();
     }
+
+    #[On('loadCustomers')]
+    public function loadCustomers()
+    {
+        $this->customers = Customer::all();
+    }
+
 
     public function updatedDate()
     {
@@ -90,9 +105,6 @@ class Create extends Component
     {
         $this->code = $this->generateCode(Budget::class);
 
-        return view('livewire.admin.budget.create',[
-            'customers' => Customer::all(),
-            'code'  => $this->code,
-        ]);
+        return view('livewire.admin.budget.create');
     }
 }
