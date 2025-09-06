@@ -1,6 +1,5 @@
 <div class="w-full lg:ps-64">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-
         <!-- Card: Header e Ações -->
         <div class="flex flex-col">
             <div class="-m-1.5 overflow-x-auto">
@@ -11,7 +10,7 @@
                         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    Budget
+                                    {{ __("Budget") }}
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-neutral-400">
                                     Gerencie as configurações da aplicação.
@@ -23,7 +22,7 @@
                                     <svg class="shrink-0 size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path d="M12 5v14M5 12h14" />
                                     </svg>
-                                    Adicionar
+                                    {{ __("Add") }}
                                 </a>
                             </div>
                         </div>
@@ -34,8 +33,11 @@
                             <thead class="bg-gray-50 dark:bg-neutral-800">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">#</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Nome</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Criado</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Name") }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Created") }}
+                                </th>
                                 <th class="px-6 py-3 text-right"></th>
                             </tr>
                             </thead>
@@ -124,7 +126,6 @@
             </div>
         </div>
         <!-- Fim do Card -->
-
     </div>
 </div>
 

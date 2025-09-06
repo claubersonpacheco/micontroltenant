@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admin\ServiceProvider;
+namespace App\Livewire\Admin\Freelancer;
 
-use App\Models\ServiceProvider;
+use App\Models\Freelancer;
 use Livewire\Component;
 
 use Livewire\Attributes\Computed;
@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 
-#[Title('Service Provider')]
+#[Title('Freelancer')]
 class Index extends Component
 {
     use WithPagination;
@@ -26,7 +26,7 @@ class Index extends Component
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
-        return ServiceProvider::query()
+        return Freelancer::query()
             ->when($this->search !== null, fn ($query) =>
             $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
@@ -37,13 +37,13 @@ class Index extends Component
 
     public function delete(int $id): void
     {
-        ServiceProvider::findOrFail($id)->delete();
+        Freelancer::findOrFail($id)->delete();
         $this->resetPage();
     }
 
     public function render()
     {
-        return view('livewire.admin.service-provider.index');
+        return view('livewire.admin.freelancer.index');
     }
 }
 

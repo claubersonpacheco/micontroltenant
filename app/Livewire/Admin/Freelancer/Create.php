@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\ServiceProvider;
+namespace App\Livewire\Admin\Freelancer;
 
-use App\Models\ServiceProvider;
+use App\Models\Freelancer;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-#[Title('Create Service Provider')]
+#[Title('Create Freelancer')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -18,35 +18,39 @@ class Create extends Component
     public $document;
     public $email;
     public $phone;
-    public $service_type;
+    public $role;
     public $address;
     public $city;
     public $state;
     public $zip;
     public $account_bank;
     public $account_number;
+    public $status = true;
 
 
     public function store()
     {
         $this->validate([
-            'code' => 'required|unique:service_providers,code|min:3',
+            'code' => 'required|unique:freelancers,code|min:3',
             'name' => 'required|min:3',
-            'birth_date' => 'required|min:3',
-            'email' => 'required|email|unique:service_providers,email',
-            'phone' => 'required|min:5',
-            'document' => 'nullable|min:5|unique:service_providers,document',
-            'address' => 'required|min:3',
-            'city' => 'required|min:3',
-            'state' => 'required|min:3',
-            'zip' => 'required|min:3',
-            'account_bank' => 'required|min:3',
-            'account_number' => 'required|min:3',
+            'birth_date' => 'nullable|required|min:3',
+            'email' => 'nullable|email|unique:freelancers,email',
+            'phone' => 'nullable|min:5',
+            'document' => 'nullable|min:5|unique:freelancers,document',
+            'address' => 'nullable|min:3',
+            'city' => 'nullable|min:3',
+            'state' => 'nullable',
+            'zip' => 'nullable|min:3',
+            'account_bank' => 'nullable|min:3',
+            'account_number' => 'nullable|min:3',
+            'role' => 'nullable|min:3',
         ]);
 
-        ServiceProvider::create([
+        Freelancer::create([
             'code' => $this->code,
             'name' => $this->name,
+            'role' => $this->role,
+            'status' => $this->status,
             'birth_date' => $this->birth_date,
             'email' => $this->email,
             'phone' => $this->phone,
@@ -60,13 +64,13 @@ class Create extends Component
         ]);
 
         toastr()->success('Criado com sucesso!');
-        return redirect()->route('provider.index');
+        return redirect()->route('freelancer.index');
     }
 
     public function render()
     {
-        $this->code =  $this->generateCode(ServiceProvider::class);
+        $this->code =  $this->generateCode(Freelancer::class);
 
-        return view('livewire.admin.service-provider.create');
+        return view('livewire.admin.freelancer.create');
     }
 }

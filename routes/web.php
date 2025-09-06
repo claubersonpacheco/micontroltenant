@@ -32,10 +32,10 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/supplier/{id}/edit', App\Livewire\Admin\ProductSupplier\Edit::class)->name('supplier.edit');
     Route::get('/supplier', App\Livewire\Admin\ProductSupplier\Index::class)->name('supplier.index');
 
-    //serviceproviders
-    Route::get('/provider/create', App\Livewire\Admin\ServiceProvider\Create::class)->name('provider.create');
-    Route::get('/provider/{id}/edit', App\Livewire\Admin\ServiceProvider\Edit::class)->name('provider.edit');
-    Route::get('/provider', App\Livewire\Admin\ServiceProvider\Index::class)->name('provider.index');
+    //freelancer
+    Route::get('/freelancer/create', App\Livewire\Admin\Freelancer\Create::class)->name('freelancer.create');
+    Route::get('/freelancer/{id}/edit', App\Livewire\Admin\Freelancer\Edit::class)->name('freelancer.edit');
+    Route::get('/freelancer', App\Livewire\Admin\Freelancer\Index::class)->name('freelancer.index');
 
 
     // budget
@@ -64,7 +64,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/categories', App\Livewire\Admin\Category\Index::class)->name('category.index');
 
     // setting
-    Route::get('/setting/{lang}', [App\Livewire\Admin\Setting\Locale::class, 'change'])->name("change.lang");
+    Route::get('/setting/{lang}/lang', [App\Livewire\Admin\Setting\Locale::class, 'change'])->name("change.lang");
     Route::get('/setting/create', App\Livewire\Admin\Setting\Create::class)->name('setting.create');
     Route::get('/setting/{id}/edit', App\Livewire\Admin\Setting\Edit::class)->name('setting.edit');
     Route::get('/setting', App\Livewire\Admin\Setting\Index::class)->name('setting.index');

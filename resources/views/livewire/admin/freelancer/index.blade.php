@@ -11,7 +11,7 @@
                         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    {{ __('Service Providers') }}
+                                    {{ __('Freelancers') }}
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-neutral-400">
                                     Gerencie as configurações da aplicação.
@@ -19,11 +19,11 @@
                             </div>
 
                             <div class="inline-flex gap-x-2">
-                                <a href="{{ route('provider.create') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <a href="{{ route('freelancer.create') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
                                     <svg class="shrink-0 size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path d="M12 5v14M5 12h14" />
                                     </svg>
-                                    {{ __('New') }}
+                                    {{ __('Add') }}
                                 </a>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                     <td class="px-6 py-3 text-right">
                                         <a title="Editar"
                                            class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                           href="{{ route('provider.edit', $row->id) }}">
+                                           href="{{ route('freelancer.edit', $row->id) }}">
                                             <!-- Icon -->
                                             <span
                                                 class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">

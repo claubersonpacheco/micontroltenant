@@ -3,7 +3,7 @@
     <!-- Grid  -->
     <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200 dark:border-neutral-700">
         <div>
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200">Presupuesto #{{ $budget->code }}</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200">{{ __("Budget") }} #{{ $budget->code }}</h2>
         </div>
         <!-- Col -->
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Admin\ServiceProvider\Index;
+use App\Livewire\Admin\Freelancer\Index;
 use Livewire\Livewire;
 
 it('renders successfully', function () {

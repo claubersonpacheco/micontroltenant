@@ -82,6 +82,7 @@
 
                                                 </span>
                                             <!-- End Icon -->
+                                        </a>
                                     </td>
                                 </tr>
                             @empty

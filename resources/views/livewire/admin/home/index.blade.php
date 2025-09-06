@@ -166,7 +166,9 @@
 {{--            <!-- End Card -->--}}
 {{--        </div>--}}
         <p>{{ __('Welcome') }}</p>
-        <p>App locale: {{ app()->getLocale() }}</p>
+        <p>App locale: {{ app()->getLocale() }} - <pre>
+    {{ var_dump($tenantSettings) }}
+</pre></p>
         <p>Cookie locale: {{ request()->cookie('locale') }}</p>
         <!-- Card -->
         <div class="flex flex-col">

@@ -24,15 +24,17 @@ class SetLocale
 
         $locale = $sessionLocale
             ?? $settingLocale
-            ?? config('app.locale');
+            ?? config('app.locale'); // <- valor padrão do config/app.php
 
         app()->setLocale($locale);
 
-        // compartilha com as views
-        view()->share('tenantSettings', (object)[
+        $settings = (object)[
             'locale' => $locale,
-        ]);
+        ];
+
+        view()->share('tenantSettings', $settings);
 
         return $next($request);
     }
+
 }
