@@ -24,7 +24,7 @@
                             </label>
                         </div>
                         <div class="sm:col-span-3">
-                            <input wire:model="code" id="code" type="text" placeholder="Customer code"
+                            <input wire:model="code" id="code" type="text" readonly
                                    class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                             @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
