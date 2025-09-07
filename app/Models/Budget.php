@@ -44,31 +44,27 @@ class Budget extends Model
 //    {
 //        return $this->hasMany(BudgetEmailSend::class);
 //    }
-//
-//    protected static function booted()
-//    {
-//        static::created(function ($budget) {
-//            \App\Models\StatusHistory::create([
-//                'budget_id' => $budget->id,
-//                'status' => \App\Models\StatusHistory::STATUS_OPEN, // Aberto
-//                'changed_by' => auth()->id(),
-//            ]);
-//        });
-//    }
-//
-//    public function latestStatus()
-//    {
-//        return $this->hasOne(StatusHistory::class)->latestOfMany();
-//    }
-//
-//    public function serviceProviders()
-//    {
-//        return $this->hasMany(ServiceProvider::class);
-//    }
-//
-//    public function productSuppliers()
-//    {
-//        return $this->hasMany(ProductSupplier::class);
-//    }
+
+    protected static function booted()
+    {
+        static::created(function ($budget) {
+            \App\Models\BudgetStatus::create([
+                'budget_id' => $budget->id,
+                'status' => \App\Models\BudgetStatus::STATUS_OPEN, // Aberto
+                'changed_by' => auth()->id(),
+            ]);
+        });
+    }
+
+
+    public function status()
+    {
+        return $this->hasMany(BudgetStatus::class);
+    }
+
+        public function latestStatus()
+    {
+        return $this->hasOne(BudgetStatus::class)->latestOfMany();
+    }
 
 }

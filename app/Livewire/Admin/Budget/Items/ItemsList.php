@@ -19,6 +19,8 @@ class ItemsList extends Component
 
     public $budget;
 
+    public $status;
+
     public int $quantity = 20;
 
     public ?string $search = null;
@@ -44,6 +46,8 @@ class ItemsList extends Component
     {
 
         $this->budget = Budget::findOrFail($id);
+
+
 
         if (!$this->budget) {
             abort(404);
