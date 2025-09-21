@@ -48,9 +48,13 @@
 @yield('body')
 
 <script>
-    // Exemplo de uso no sistema interno
-    // Quando criar orçamento, chamar:
-    // trackEvent('budget_created', { budget_id: 123 });
+    window.addEventListener('livewire:load', () => {
+        Livewire.on('track-event', (data) => {
+            if (typeof trackEvent === 'function') {
+                trackEvent(data.name, data.params);
+            }
+        });
+    });
 </script>
 
 </body>

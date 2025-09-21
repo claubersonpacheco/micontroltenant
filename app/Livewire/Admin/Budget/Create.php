@@ -97,7 +97,7 @@ class Create extends Component
             'customer_id' => $this->customer,
         ]);
 
-        $this->dispatchBrowserEvent('track-event', [
+        $this->dispatch('track-event', [
             'name' => 'budget_created',
             'params' => ['budget_id' => $budget->id],
         ]);
