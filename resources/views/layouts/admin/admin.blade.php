@@ -449,18 +449,19 @@
         });
     </script>
 
-    <!-- JS THIRD PARTY PLUGINS -->
-    <!-- Google Analytics. Global site tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B73TDMXKF5"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'G-B73TDMXKF5');
+        window.addEventListener('livewire:load', () => {
+            Livewire.on('track-event', (data) => {
+                if (window.dataLayer) {
+                    dataLayer.push({
+                        event: data.name,
+                        ...data.params
+                    });
+                    console.log("Evento enviado ao GTM:", data);
+                }
+            });
+        });
     </script>
+
     </body>
 @endsection

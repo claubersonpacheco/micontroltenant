@@ -30,13 +30,20 @@ class Create extends Component
             'address' => 'required|min:3',
         ]);
 
-        Customer::create([
+        $customer = Customer::create([
             'code' => $this->code,
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'document' => $this->document,
             'address' => $this->address,
+        ]);
+
+        $this->dispatch('track-event', [
+            'name' => 'customer_created',
+            'params' => [
+                'customer_id' => $customer->id
+            ],
         ]);
 
         toastr()->success('Cliente criado com sucesso!');

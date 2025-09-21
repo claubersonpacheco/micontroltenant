@@ -33,6 +33,13 @@ class Login extends Component
             return;
         }
 
+        $this->dispatch('track-event', [
+            'name' => 'budget_created',
+            'params' => [
+                'customer_id' => 'logado'
+            ],
+        ]);
+
         session()->regenerate(); // recomendado
 
         return redirect()->intended(route('admin'));

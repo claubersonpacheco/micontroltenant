@@ -99,7 +99,9 @@ class Create extends Component
 
         $this->dispatch('track-event', [
             'name' => 'budget_created',
-            'params' => ['budget_id' => $budget->id],
+            'params' => [
+                'budget_id' => $budget->id
+            ],
         ]);
 
         toastr()->success('Budget criado com sucesso!');
