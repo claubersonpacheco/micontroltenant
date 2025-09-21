@@ -39,11 +39,10 @@ class Create extends Component
             'address' => $this->address,
         ]);
 
-        $this->dispatch('track-event', [
-            'name' => 'customer_created',
-            'params' => [
-                'customer_id' => $customer->id
-            ],
+        $this->dispatch('track-event', name: 'purchase', params: [
+            'value' => 199.90,
+            'currency' => 'BRL',
+            'product_id' => 123,
         ]);
 
         toastr()->success('Cliente criado com sucesso!');

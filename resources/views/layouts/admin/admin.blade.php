@@ -449,19 +449,4 @@
         });
     </script>
 
-    <script>
-        window.addEventListener('livewire:load', () => {
-            Livewire.on('track-event', (data) => {
-                if (window.dataLayer) {
-                    dataLayer.push({
-                        event: data.name,
-                        ...data.params
-                    });
-                    console.log("Evento enviado ao GTM:", data);
-                }
-            });
-        });
-    </script>
-
-    </body>
 @endsection
