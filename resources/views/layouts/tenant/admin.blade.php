@@ -1,4 +1,4 @@
-@extends('layouts.tenant.base')
+@extends('layouts.tenant.home')
 
 @section('body')
 

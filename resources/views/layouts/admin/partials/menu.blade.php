@@ -1,4 +1,10 @@
 @php use Illuminate\Routing\Route; @endphp
+@php
+    $currentRouteName = request()->route() ? request()->route()->getName() : '';
+    // Ou, se quiser verificar a URL:
+    // $currentUrl = url()->current();
+@endphp
+{{--dashboard--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('admin') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -14,7 +20,7 @@
 
 <hr class="border-gray-300 dark:border-neutral-500">
 
-
+{{--tenant--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('tenant.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -27,7 +33,7 @@
         {{ __('Tenants') }}
     </a>
 </li>
-
+{{--budget--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('budget.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -41,12 +47,7 @@
     </a>
 </li>
 
-@php
-    $currentRouteName = request()->route() ? request()->route()->getName() : '';
-    // Ou, se quiser verificar a URL:
-    // $currentUrl = url()->current();
-@endphp
-
+{{--Services--}}
 <li class="hs-accordion" id="projects-accordion">
     <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200" aria-expanded="true" aria-controls="projects-accordion-child">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -75,6 +76,7 @@
                     {{ __('New') }}
                 </a>
             </li>
+{{--            category--}}
             <li class="hs-accordion" id="projects-accordion">
                 <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200" aria-expanded="{{ in_array($currentRouteName, ['product.index', 'product.create', 'category.index', 'category.create']) ? 'true' : 'false' }}" aria-controls="projects-accordion-child">
                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -105,7 +107,9 @@
         </ul>
     </div>
 </li>
+{{--end services--}}
 
+{{--supplier--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('supplier.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -118,7 +122,7 @@
         {{ __('Supplier') }}
     </a>
 </li>
-
+{{--freelancers--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('budget.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -131,6 +135,7 @@
         {{ __('Freelancer') }}
     </a>
 </li>
+{{--customer--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('customer.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -144,6 +149,21 @@
     </a>
 </li>
 
+{{--Invoice--}}
+<li>
+    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
+                            {{ request()->routeIs('invoice.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
+       href="{{ route('invoice.index') }}">
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+        </svg>
+
+        {{ __('Invoices') }}
+    </a>
+</li>
+
+{{--adjustements--}}
 <div class="py-3 flex items-center text-sm text-gray-800 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-white dark:after:border-neutral-600">
     {{ __('Adjustments') }}</div>
 
@@ -155,7 +175,7 @@
         Documentation
     </a>
 </li>
-
+{{--settings--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('setting.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
@@ -169,7 +189,7 @@
         {{ __('Settings') }}
     </a>
 </li>
-
+{{--users--}}
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('user.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"

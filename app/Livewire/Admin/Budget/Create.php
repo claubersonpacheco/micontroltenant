@@ -86,7 +86,7 @@ class Create extends Component
             'expirate' => 'required|date|after_or_equal:date',
         ]);
 
-        Budget::create([
+        $budget = Budget::create([
             'code' => $this->code,
             'name' => $this->name,
             'date' => $this->date,
@@ -95,6 +95,11 @@ class Create extends Component
             'description' => $this->description,
             'user_id' => Auth::user()->id,
             'customer_id' => $this->customer,
+        ]);
+
+        $this->dispatchBrowserEvent('track-event', [
+            'name' => 'budget_created',
+            'params' => ['budget_id' => $budget->id],
         ]);
 
         toastr()->success('Budget criado com sucesso!');

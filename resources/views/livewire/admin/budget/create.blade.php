@@ -148,4 +148,10 @@
     </div>
 
     <livewire:admin.budget.partial.create-customer-modal />
+
+    <script>
+        window.addEventListener('track-event', (event) => {
+            trackEvent(event.detail.name, event.detail.params);
+        });
+    </script>
 </div>

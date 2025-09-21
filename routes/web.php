@@ -6,9 +6,6 @@ use App\Http\Controllers\Admin\Print\BudgetController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Cookie;
-
 // routes/web.php ou routes/central.php
 
 Route::get('/check', function () {
@@ -26,6 +23,9 @@ Route::view('/', 'welcome')->name('home');
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
 
+    //Invoice
+
+    Route::get('/invoice', App\Livewire\Admin\Invoice\Index::class)->name('invoice.index');
 
     //serviceproviders
     Route::get('/supplier/create', App\Livewire\Admin\ProductSupplier\Create::class)->name('supplier.create');
@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     // budget
 
+    Route::get('/budget/{id}/invoice', App\Livewire\Admin\Budget\Invoice::class)->name('budget.invoice');
     Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
     Route::get('/budget/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('budget.pdf');
 
