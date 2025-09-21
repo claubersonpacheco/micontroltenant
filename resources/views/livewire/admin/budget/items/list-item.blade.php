@@ -6,7 +6,7 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Card -->
                 <div class="flex flex-col border border-gray-200 rounded-xl dark:border-neutral-800">
-                    <a href="{{ route('budget.invoice', $budget->id) }}">
+                    <a href="{{ route('invoice.create.customer', $budget->id) }}">
                     <div class="p-4 md:p-5">
                         <div class="flex items-center gap-x-2">
                             <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
@@ -70,20 +70,46 @@
                 </div>
                 <!-- End Card -->
 
-                <!-- Card -->
-                <div class="flex flex-col border border-gray-200 rounded-xl dark:border-neutral-800">
-                    <div class="p-4 md:p-5">
-                        <div class="flex items-center gap-x-2">
-                            <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
-                                {{ __("Status") }}
-                            </p>
-                        </div>
+                <!-- Card status-->
 
-                        <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-                            <span class="font-semibold">{{ $budget->latestStatus?->status_label ?? 'Sin estado' }}</span>
-                        </h3>
+                    <div class="flex flex-col border {{ $budget->latestStatus?->status_classes }} border-gray-200 rounded-xl dark:border-neutral-800">
+                        <a href="javascript:void(0)"
+                           x-data
+                           @click="$dispatch('open-modal-status')">
+
+                            <div class="p-4 md:p-5">
+                                <div class="flex items-center gap-x-2">
+                                    <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
+                                        Status
+                                    </p>
+                                    <div class="hs-tooltip">
+                                        <div class="hs-tooltip-toggle">
+                                            <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                                            <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
+                                                {{ $budget->latestStatus?->comments ?? 'Sin comentarios' }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="flex items-center justify-between">
+                                    <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
+                                        <span class="font-semibold">{{ $budget->latestStatus?->status_label ?? 'Sin estado' }}</span>
+                                    </h3>
+
+                                </div>
+                            </div>
+                        </a>
+
+                        <livewire:admin.budget.partial.edit-status :budgetId="$budget->id" wire:key="edit-status" />
                     </div>
-                </div>
+
+
+                <!--modal -->
+
+                <!-- end modal -->
                 <!-- End Card -->
             </div>
             <!-- End Grid -->
@@ -100,6 +126,15 @@
                 <!-- Col -->
 
                 <div class="inline-flex gap-x-2">
+                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                       href="{{ route('email.send', $budget->id ) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+
+                        {{ __('Send Email') }}
+                    </a>
+
                     <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                        href="{{ route('budget.pdf', $budget->id ) }}">
                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -466,9 +501,9 @@
                                     @if($showTotal)
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
-                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                    {{ __("Total") }}
-                </span>
+                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    {{ __("Total") }}
+                                                </span>
                                             </div>
                                         </th>
                                     @endif

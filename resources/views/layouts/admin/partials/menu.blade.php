@@ -163,6 +163,20 @@
     </a>
 </li>
 
+{{--Email--}}
+<li>
+    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
+                            {{ request()->routeIs('budget.email') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
+       href="{{ route('email.index') }}">
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+        </svg>
+
+        {{ __('Email') }}
+    </a>
+</li>
+
 {{--adjustements--}}
 <div class="py-3 flex items-center text-sm text-gray-800 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-white dark:after:border-neutral-600">
     {{ __('Adjustments') }}</div>

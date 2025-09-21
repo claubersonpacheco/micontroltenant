@@ -24,7 +24,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
 
     //Invoice
-
+    Route::get('/invoice/create/{customer}/customer', App\Livewire\Admin\Invoice\Index::class)->name('invoice.create.customer');
     Route::get('/invoice', App\Livewire\Admin\Invoice\Index::class)->name('invoice.index');
 
     //serviceproviders
@@ -38,13 +38,17 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/freelancer', App\Livewire\Admin\Freelancer\Index::class)->name('freelancer.index');
 
 
-    // budget
+    // email
+    Route::get('/email/{id}/send', App\Livewire\Admin\Email\Send::class)->name('email.send');
+    Route::get('/email/create', App\Livewire\Admin\Email\Create::class)->name('email.create');
+    Route::get('/emails', App\Livewire\Admin\Email\Index::class)->name('email.index');
 
+    // budget
     Route::get('/budget/{id}/invoice', App\Livewire\Admin\Budget\Invoice::class)->name('budget.invoice');
     Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
     Route::get('/budget/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('budget.pdf');
 
-    Route::get('/budget/{id}/item', \App\Livewire\Admin\Budget\Items\ItemsList::class)->name('budget.item');
+    Route::get('/budget/{id}/item', \App\Livewire\Admin\Budget\Items\ListItem::class)->name('budget.item');
     Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');
     Route::get('/budget/{id}/edit', App\Livewire\Admin\Budget\Edit::class)->name('budget.edit');
     Route::get('/budgets', App\Livewire\Admin\Budget\Index::class)->name('budget.index');

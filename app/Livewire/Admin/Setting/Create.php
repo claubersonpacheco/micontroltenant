@@ -54,9 +54,9 @@ class Create extends Component
 
         Setting::create($validated);
 
-        if (!in_array($this->locale, ['en', 'es', 'pt_BR'])) {
-            abort(400);
-        }
+//        if (!in_array($this->locale, ['en', 'es', 'pt_BR'])) {
+//            abort(400);
+//        }
 
         // salva na sessão
         Session::put('locale', $this->locale);

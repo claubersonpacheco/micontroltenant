@@ -13,7 +13,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Title('Budget Items')]
-class ItemsList extends Component
+class ListItem extends Component
 {
     use WithPagination;
 
@@ -36,6 +36,8 @@ class ItemsList extends Component
 
     public $selectedItems = [];
 
+    public $colorStatus;
+
     public array $sort = [
         'column'    => 'created_at',
         'direction' => 'desc',
@@ -46,6 +48,7 @@ class ItemsList extends Component
     {
 
         $this->budget = Budget::findOrFail($id);
+
 
 
 
@@ -61,15 +64,16 @@ class ItemsList extends Component
         $this->showTax        = (bool) $this->budget->tax;
         $this->showSubTotal   = (bool) $this->budget->show_sub_total;
         $this->showTotal      = (bool) $this->budget->show_total;
+
+        $this->colorStatus = $this->getStatusColor($this->budget->latestStatus->status);
+
     }
 
     public function deleteSelected()
     {
         if (!empty($this->selectedItems)) {
 
-
             $items = $this->selectedItems;
-
 
            $delete =  BudgetItem::whereIn('id', $items);
            $delete->delete();
@@ -150,8 +154,7 @@ class ItemsList extends Component
         BudgetService::updateTotals($this->budget->id);
 
         // Atualiza lista no front-end
-        $this->dispatch('listItems'); // Certifique-se que existe JS ouvindo isso
-
+        $this->dispatch('listItems');
 
     }
 
@@ -192,9 +195,33 @@ class ItemsList extends Component
             $this->atualizationColumns();
         }
     }
+
+    private function getStatusColor($status)
+    {
+        // Aqui você define as cores com base no status
+        switch ($status) {
+            case 'status-open':
+                return 'bg-green-100';   // Azul para "Aberto"
+            case 'status-sent':
+                return ''; // Amarelo para "Enviado"
+            case 'status-pending':
+                return ''; // Laranja para "Pendiente"
+            case 'status-rejected':
+                return '';    // Vermelho para "Rechazado"
+            case 'status-approved':
+                return '';  // Verde para "Aprovado"
+            case 'status-in-process':
+                return ''; // Roxo para "Em processo"
+            case 'status-completed':
+                return '';   // Cinza para "Finalizado"
+            default:
+                return 'status-default';   // Cor padrão para status desconhecido
+        }
+    }
+
     public function render()
     {
-        return view('livewire.admin.budget.items.items-list', [
+        return view('livewire.admin.budget.items.list-item', [
             'budget' => $this->budget,
             'rows'   => $this->rows,
         ]);

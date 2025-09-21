@@ -167,20 +167,20 @@
                                 {{ __('Language') }}
                             </label>
                         </div>
-        {{--                <div class="sm:col-span-9">--}}
-        {{--                    <select wire:model="locale" id="locale"--}}
-        {{--                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg--}}
-        {{--                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800--}}
-        {{--                   dark:border-neutral-700 dark:text-neutral-400">--}}
+                        <div class="sm:col-span-9">
+                            <select wire:model="locale" id="locale"
+                                    class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800
+                           dark:border-neutral-700 dark:text-neutral-400">
 
-        {{--                        <option value="en">English</option>--}}
-        {{--                        <option value="es">Español</option>--}}
-        {{--                        <option value="pt_BR">Português (Brasil)</option>--}}
-        {{--                    </select>--}}
-        {{--                    @error('locale')--}}
-        {{--                    <span class="text-sm text-red-600">{{ $message }}</span>--}}
-        {{--                    @enderror--}}
-        {{--                </div>--}}
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                                <option value="pt_BR">Português (Brasil)</option>
+                            </select>
+                            @error('locale')
+                            <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
 
 
 
