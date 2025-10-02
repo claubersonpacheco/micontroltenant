@@ -6,10 +6,7 @@
         x-on:close-modal-status.window="open = false"
         x-show="open"
         x-cloak
-        class="fixed inset-0 z-[99] flex items-center justify-center bg-gray-500/25"
-        style="background-color: rgba(107, 114, 128, 0.5);"
     >
-        <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto" style="background-color: rgba(107, 114, 128, 0.5);">
             <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
                 <!-- Cabeçalho -->
                 <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
