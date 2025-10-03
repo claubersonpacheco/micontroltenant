@@ -50,6 +50,7 @@ class Send extends Component
 
         dd($error);
 
+
         // Registrar email enviado no banco
         Email::create([
             'subject' => $this->subject,
