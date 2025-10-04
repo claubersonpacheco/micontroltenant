@@ -7,6 +7,7 @@ use App\Models\Budget;
 use App\Models\Customer;
 use App\Models\Email;
 use App\Models\Setting;
+use App\Traits\GeneratedPdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -16,6 +17,8 @@ use Spatie\Browsershot\Browsershot;
 
 class Send extends Component
 {
+    use GeneratedPdf;
+
     public $budget;
     public $subject;
     public $customer;
@@ -103,23 +106,7 @@ class Send extends Component
             $template = view('admin.budget.print', compact('budget', 'setting'))->render();
 
             // Gerar PDF com Browsershot
-            Browsershot::html($template)
-                ->setNodeBinary('C:\\Program Files\\nodejs\\node.exe')
-                ->setNpmBinary('C:\\Program Files\\nodejs\\npm.cmd')
-                ->setOption('args', ['--no-sandbox'])
-                ->setOption('executablePath', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe')
-                ->emulateMedia('screen')
-                ->showBackground()
-                ->showBrowserHeaderAndFooter()
-                ->hideHeader()
-                ->footerHtml($this->getFooterHtml($budget))
-                ->setOption('pageRanges', '1-')
-                ->format('A4')
-                ->timeout(120)
-                ->waitUntilNetworkIdle()
-                ->ignoreHttpsErrors()
-                ->savePdf($storagePath);
-
+            $this->PdfWithChrome($storagePath, $template, $budget);
 
             if (!file_exists($storagePath)) {
                 throw new \Exception('PDF não foi gerado.');
