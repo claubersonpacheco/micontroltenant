@@ -51,9 +51,6 @@ class Send extends Component
 
         $error = $this->createEmail($this->budget->id);
 
-        dd($error);
-
-
         // Registrar email enviado no banco
         Email::create([
             'subject' => $this->subject,
@@ -66,7 +63,7 @@ class Send extends Component
         ]);
 
         if ($error) {
-            toastr()->error('Erro ao enviar o email: ' . $error);
+            toastr()->error('Erro ao enviar o email: ');
         } else {
             toastr()->success('Email enviado com sucesso!');
         }
@@ -135,7 +132,6 @@ class Send extends Component
         } catch (\Exception $e) {
             Log::error('Erro ao enviar email: ' . $e->getMessage());
             $this->status = false;
-            dd( "erro = ".$e->getMessage());
         }
 
 
