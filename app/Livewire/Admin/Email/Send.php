@@ -106,7 +106,7 @@ class Send extends Component
             $template = view('admin.budget.print', compact('budget', 'setting'))->render();
 
             // Gerar PDF com Browsershot
-            $this->PdfWithChrome($storagePath, $template, $budget);
+            $this->PdfWithChrome($template, $storagePath, $budget);
 
             if (!file_exists($storagePath)) {
                 throw new \Exception('PDF não foi gerado.');

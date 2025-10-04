@@ -4,7 +4,7 @@ namespace App\Traits;
 use Spatie\Browsershot\Browsershot;
 trait GeneratedPdf
 {
-    public function PdfWithChrome($template, $storagePath, $budget)
+    public function PdfWithChrome(string  $template, string $storagePath, $budget)
     {
         Browsershot::html($template)
             ->setNodeBinary('/usr/bin/node') // 'C:\\Program Files\\nodejs\\node.exe'
