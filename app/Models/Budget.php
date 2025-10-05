@@ -67,4 +67,10 @@ class Budget extends Model
         return $this->hasOne(BudgetStatus::class)->latestOfMany();
     }
 
+    // Um budget pode ter vários gastos
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
 }

@@ -1,5 +1,5 @@
-<!-- Card Section -->
-<div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
+<div class="w-full lg:ps-64">
+    <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
     <!-- Card -->
     <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
         <div class="mb-8">
@@ -75,8 +75,8 @@
                                placeholder="subdomain">
                         <span
                             class="inline-flex items-center px-3 text-gray-500 border border-l-0 border-gray-200 rounded-r-lg bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            .micontrol.test
-                        </span>
+                                .micontrol.test
+                            </span>
                     </div>
                     @error('subdomain')
                     <span class="text-sm text-red-600">{{ $message }}</span>
@@ -99,5 +99,5 @@
         </form>
     </div>
     <!-- End Card -->
+    </div>
 </div>
-<!-- End Card Section -->

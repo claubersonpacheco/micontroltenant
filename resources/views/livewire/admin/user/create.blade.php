@@ -1,7 +1,5 @@
 <div class="w-full lg:ps-64">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-        <!-- Card Section -->
-        <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto">
             <!-- Card -->
             <div class="bg-white rounded-xl shadow-xs p-4 sm:p-7 dark:bg-neutral-800">
                 <div class="mb-8">
@@ -92,7 +90,6 @@
                 </form>
             </div>
             <!-- End Card -->
-        </div>
-        <!-- End Card Section -->
+
     </div>
 </div>

@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSupplier extends Model
 {
     protected $guarded = [];
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
 }
