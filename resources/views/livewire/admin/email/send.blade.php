@@ -9,7 +9,7 @@
                         {{ __('Send Email') }}
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-neutral-400">
-                        {{ __('Send the budget by email.') }}
+                        {{ __('Send the budget by email') }}.
                     </p>
                 </div>
 

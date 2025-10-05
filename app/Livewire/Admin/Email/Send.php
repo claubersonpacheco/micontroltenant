@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Mews\Purifier\Facades\Purifier;
-use Spatie\Browsershot\Browsershot;
 
 class Send extends Component
 {
@@ -23,7 +22,7 @@ class Send extends Component
     public $subject;
     public $customer;
     public $message;
-    public $additional_emails = [];
+    public $additional_emails = ''; // agora é string
     public $recipient_email;
 
     public $status = false;
@@ -41,33 +40,38 @@ class Send extends Component
 
     public function sendEmail()
     {
-        $data = $this->validate([
+        $this->validate([
             'subject' => 'required|min:3',
             'customer' => 'required|min:3',
             'recipient_email' => 'required|email|min:3',
-            'additional_emails.*' => 'nullable|email',
+            'additional_emails' => 'nullable|string',
             'message' => 'nullable',
         ]);
 
-        $error = $this->createEmail($this->budget->id);
+        $resEnvio = $this->createEmail($this->budget->id);
 
-        // Registrar email enviado no banco
+        if (!$resEnvio || !file_exists(public_path($resEnvio))) {
+            toastr()->error('Erro ao enviar o email: PDF não foi gerado.');
+            return false;
+        }
+
+        $this->storagePath = $resEnvio;
+        $this->status = true;
+
+        // Registrar email no banco
         Email::create([
             'subject' => $this->subject,
             'customer_id' => $this->budget->customer->id,
             'recipient_email' => $this->recipient_email,
-            'additional_emails' => json_encode($this->additional_emails),
+            'additional_emails' => $this->additional_emails,
             'message' => $this->message,
             'budget_id' => $this->budget->id,
             'user_id' => Auth::id(),
+            'file' => $this->storagePath,
+            'status' => $this->status,
         ]);
 
-        if ($error) {
-            toastr()->error('Erro ao enviar o email: ');
-        } else {
-            toastr()->success('Email enviado com sucesso!');
-        }
-
+        toastr()->success('Email enviado com sucesso!');
         return redirect()->route('email.index');
     }
 
@@ -85,12 +89,17 @@ class Send extends Component
 
             $setting = Setting::first();
 
+            // Converter emails adicionais em array limpo
+            $additionalEmails = is_array($this->additional_emails)
+                ? $this->additional_emails
+                : array_filter(array_map('trim', explode(',', $this->additional_emails)));
+
             // Dados do e-mail
             $emailData = [
                 'subject' => $this->subject,
                 'message' => Purifier::clean($this->message ?? ''),
                 'recipient_email' => $this->recipient_email,
-                'additional_emails' => $this->additional_emails,
+                'additional_emails' => $additionalEmails,
                 'name' => $this->customer,
                 'code' => $budget->code,
                 'total' => $budget->total,
@@ -100,41 +109,37 @@ class Send extends Component
                 'whatsapp' => $setting->whatsapp,
             ];
 
+            // Gerar PDF
             $template = view('admin.budget.print', compact('budget', 'setting'))->render();
-
-            // Gerar PDF com Browsershot
             $this->PdfWithChrome($template, $storagePath, $budget);
 
             if (!file_exists($storagePath)) {
                 throw new \Exception('PDF não foi gerado.');
             }
 
-
             $pdfContent = file_get_contents($storagePath);
 
             // Enviar e-mail principal
-            $res = Mail::to($emailData['recipient_email'])
+            Mail::to($emailData['recipient_email'])
                 ->send(new SendMail($emailData, $pdfContent, $pdfName));
 
-            // Emails adicionais
-            if (!empty($emailData['additional_emails'])) {
-                foreach ($emailData['additional_emails'] as $email) {
-                    if (!empty($email)) {
-                        Mail::to(trim($email))->send(new SendMail($emailData, $pdfContent, $pdfName));
-                    }
+            // Enviar e-mails adicionais
+            foreach ($additionalEmails as $email) {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    Mail::to($email)->send(new SendMail($emailData, $pdfContent, $pdfName));
                 }
             }
 
-            $this->status = true;
-            return $res; // sem erro
-
+            $relativePath = 'storage/reports/' . $pdfName;
+            return $relativePath;
 
         } catch (\Exception $e) {
-            Log::error('Erro ao enviar email: ' . $e->getMessage());
+            Log::error('Erro ao enviar email [' . $id . ']: ' . $e->getMessage());
+            toastr()->error('Erro ao gerar ou enviar email: ' . $e->getMessage());
             $this->status = false;
         }
 
-
+        return false;
     }
 
     public function render()
@@ -144,7 +149,6 @@ class Send extends Component
 
     private function getFooterHtml($budget)
     {
-        // Aqui você monta o HTML do rodapé do PDF
         return "<div style='text-align:center;font-size:12px;'>Orçamento: {$budget->code}</div>";
     }
 }

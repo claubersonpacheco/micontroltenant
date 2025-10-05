@@ -13,7 +13,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public ?int $quantity = 5;
+    public ?int $quantity = 25;
     public ?string $search = null;
 
     public array $sort = [
@@ -35,7 +35,7 @@ class Index extends Component
 
     public function delete(int $id): void
     {
-        Budget::findOrFail($id)->delete();
+        Email::findOrFail($id)->delete();
         $this->resetPage();
     }
     public function render()

@@ -7,10 +7,10 @@ trait GeneratedPdf
     public function PdfWithChrome(string  $template, string $storagePath, $budget)
     {
         Browsershot::html($template)
-            ->setNodeBinary('/usr/bin/node') // 'C:\\Program Files\\nodejs\\node.exe'
-            ->setNpmBinary('/usr/bin/npm') //'C:\\Program Files\\nodejs\\npm.cmd'
+            ->setNodeBinary('C:\\Program Files\\nodejs\\node.exe') // '' /usr/bin/node
+            ->setNpmBinary('C:\\Program Files\\nodejs\\npm.cmd') //'' /usr/bin/npm
             ->setOption('args', ['--no-sandbox'])
-            ->setOption('executablePath', '/usr/bin/google-chrome' ) //'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+            ->setOption('executablePath', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' ) //'' /usr/bin/google-chrome
             ->emulateMedia('screen')
             ->showBackground()
             ->showBrowserHeaderAndFooter()

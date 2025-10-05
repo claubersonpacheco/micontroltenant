@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     // email
     Route::get('/email/{id}/send', App\Livewire\Admin\Email\Send::class)->name('email.send');
+    Route::get('/email/{id}/view', App\Livewire\Admin\Email\View::class)->name('email.view');
     Route::get('/email/create', App\Livewire\Admin\Email\Create::class)->name('email.create');
     Route::get('/emails', App\Livewire\Admin\Email\Index::class)->name('email.index');
 

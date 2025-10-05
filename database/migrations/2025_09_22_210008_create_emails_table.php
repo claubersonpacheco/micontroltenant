@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('budget_id')->constrained()->onDelete('cascade'); // Relacionado ao orçamento
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relacionado ao cliente
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');

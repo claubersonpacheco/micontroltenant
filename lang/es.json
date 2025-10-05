@@ -246,6 +246,7 @@
     "Service": "Servicio",
     "Providers": "Provedores",
     "Customers": "Clientes",
+    "Customer": "Cliente",
     "Welcome": "Bienvenido",
     "Tenants" : "Inquilinos",
     "Supplier" : "Proveedor",
@@ -270,5 +271,19 @@
     "Email" : "Correo",
     "Freelancer": "Profisional",
     "Freelancers":"Profisional Independiente",
-    "No records found" : "Sin registros"
+    "No records found" : "Sin registros",
+    "Address": "Dirección",
+    "City": "Ciudad",
+    "Postal Code": "Codigo Postal",
+    "Description": "Descripción",
+    "Keywords": "Palabras Clave",
+    "Author": "Autor",
+    "Title": "Titulo",
+    "Document" : "Documento",
+    "Send Email" : "Enviar correo",
+    "Prefix": "Prefijo",
+    "Setting": "Configuración",
+    "Edit your setting": "Editar tu configuración",
+    "Subject": "Asunto"
+
 }

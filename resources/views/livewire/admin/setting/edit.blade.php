@@ -9,7 +9,7 @@
                         {{ __('Setting') }}
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-neutral-400">
-                        {{ __('Edit your setting.') }}
+                        {{ __('Edit your setting') }}.
                     </p>
                 </div>
 
