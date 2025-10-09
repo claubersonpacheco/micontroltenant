@@ -18,16 +18,9 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => 'Admin',
             //'username' => 'administrador',
-            'email' => 'caubinho@gmail.com',
+            'email' => 'xxxxx@xxxxx.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('cau12345'),
-//            'birthday' => '1977-01-18',
-//            'rg' => '6.470.098-7',
-//            'cpf' => '123.456.789-00',
-//            'address' => 'Rua 0001',
-//            'number' => '1000',
-//            'district' => 'Centro',
-//            'city' => 'São Paulo',
+            'password' => Hash::make('xxxxxxxx'),
         ]);
 
 //        $user->assignRole('master');
@@ -36,16 +29,9 @@ class UserSeeder extends Seeder
 //            'name' => 'User',
 //            'username' => 'usuarioteste',
 //            'mcode' => '',
-//            'email' => 'user@gmail.com',
+//            'email' => 'xxxx@gmail.com',
 //            'email_verified_at' => now(),
-//            'password' => Hash::make('password'),
-//            'birth' => '1977-01-18',
-//            'rg' => '6.470.098-7',
-//            'cpf' => '123.456.789-00',
-//            'address' => 'Rua 0001',
-//            'number' => '1000',
-//            'district' => 'Centro',
-//            'city' => 'São Paulo',
+//            'password' => Hash::make('xxxxxxxxx'),
 //        ]);
 //
 //        $user2->assignRole('user');
