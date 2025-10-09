@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
+            $table->string('website');
             $table->string('logo')->nullable();
             $table->string('logo_impress')->nullable();
             $table->string('favicon')->nullable();

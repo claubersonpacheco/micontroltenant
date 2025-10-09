@@ -25,6 +25,7 @@ class Edit extends Component
     {
         return [
             'settings.title' => ['required', 'string', 'max:255'],
+            'settings.website' => ['required', 'string', 'max:255'],
             'settings.email' => ['required', 'email', Rule::unique('settings', 'email')->ignore($this->setting->id)],
             'settings.address' => ['required', 'string', 'max:255'],
             'settings.city' => ['required', 'string', 'max:255'],

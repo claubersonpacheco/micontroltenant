@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class Create extends Component
 {
     public ?string $title = null;
+    public ?string $website = null;
     public ?string $email = null;
     public ?string $address = null;
     public ?string $city = null;
@@ -32,6 +33,7 @@ class Create extends Component
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'website' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('settings', 'email')],
             'address' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],

@@ -106,6 +106,7 @@ class Send extends Component
                 'logo_impress' => $setting->logo_impress,
                 'title' => $setting->title,
                 'email' => $setting->email,
+                'website' => $setting->website,
                 'whatsapp' => $setting->whatsapp,
             ];
 

@@ -40,7 +40,7 @@
 <div class="header">
     @if($data['logo_impress'] != '')
 
-        <img src="https://gestion.ferchecosolutions.com/img/logo-ifjreformas.png" alt="{{ $data['title'] }}" style="max-width: 300px; height: auto;">
+        <img src="{{ $data['logo_impress'] }}" alt="{{ $data['title'] }}" style="max-width: 300px; height: auto;">
     @else
         <h2 style="font-size: 20px; font-weight: bold; margin: 0;">{{ $data['title'] }}</h2>
     @endif
@@ -54,18 +54,16 @@
 </div>
 <div class="footer">
     <div class="">
-        <p class="text-sm text-gray-500">Visite nuestro website: <a href="https://ifjreformas.es">https://ifjreformas.es</a></p>
+        <p class="text-sm text-gray-500">Visite nuestro website: <a target="_blank" href="{{ $data['website'] }}">{{ $data['website'] }}</a></p>
     </div>
     <div class="">
-        <p>Usted recibe esta comunicación desde <b>IFJ Reformas</b>, porque nos ha autorizado a enviarle información por web, correo electrónico, teléfono. Si quiere saber más sobre nosotros, puede ver haciendo clic <a href="https://ifjreformas.es"> aquí.</a></p>
+        <p>Usted recibe esta comunicación desde <b>{{ $data['title'] }}</b>, porque nos ha autorizado a enviarle información por web, correo electrónico, teléfono. Si quiere saber más sobre nosotros, puede ver haciendo clic <a href="{{ $data['website'] }}"> aquí.</a></p>
 
         <br>
-
-        <p>   AVISO LEGAL: Este mensaje y sus archivos adjuntos van dirigidos exclusivamente a su destinatario, pudiendo contener información confidencial sometida a secreto profesional. No está permitida su comunicación, reproducción o distribución sin la autorización expresa de <b>IFJ Reformas</b>, COMPAÑÍA DEL CONOCIMIENTO. Si usted no es el destinatario final, por favor, elimínelo e infórmenos por esta vía.
+        <p>AVISO LEGAL: Este mensaje y sus archivos adjuntos van dirigidos exclusivamente a su destinatario, pudiendo contener información confidencial sometida a secreto profesional. No está permitida su comunicación, reproducción o distribución sin la autorización expresa de <b>{{ $data['title'] }}</b>, COMPAÑÍA DEL CONOCIMIENTO. Si usted no es el destinatario final, por favor, elimínelo e infórmenos por esta vía.
         </p>
         <br>
-        <p>
-            PROTECCIÓN DE DATOS: De conformidad con lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril (GDPR), y la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD), le informamos de que los datos personales y la dirección de correo electrónico del interesado, se tratarán bajo la responsabilidad de <b>IFJ Reformas</b>, COMPAÑÍA DEL CONOCIMIENTO por un interés legítimo y para el envío de comunicaciones sobre nuestros productos y servicios, y se conservarán mientras ninguna de las partes se oponga a ello. Los datos podrán comunicarse a la empresas con el mismo fin antes descrito, cuya identidad podrá consultar en el siguiente enlace https://ifjreformas.es/empresa/. Le informamos de que puede ejercer los derechos de acceso, rectificación, portabilidad y supresión de sus datos y los de limitación y oposición a su tratamiento dirigiéndose ao correio eletronico: contacto@ifjreformas.es. Si considera que el tratamiento no se ajusta a la normativa vigente, podrá presentar una reclamación ante la autoridad de control en www.aepd.es. Datos de contacto del delegado de protección de datos: dpo@rbhglobal.com.
+        <p>PROTECCIÓN DE DATOS: De conformidad con lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril (GDPR), y la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD), le informamos de que los datos personales y la dirección de correo electrónico del interesado, se tratarán bajo la responsabilidad de <b>{{ $data['title'] }}</b>, COMPAÑÍA DEL CONOCIMIENTO por un interés legítimo y para el envío de comunicaciones sobre nuestros productos y servicios, y se conservarán mientras ninguna de las partes se oponga a ello. Los datos podrán comunicarse a la empresas con el mismo fin antes descrito, cuya identidad podrá consultar en el siguiente enlace <a target="_blank" href="{{ $data['website'] }}">{{ $data['website'] }}</a>. Le informamos de que puede ejercer los derechos de acceso, rectificación, portabilidad y supresión de sus datos y los de limitación y oposición a su tratamiento dirigiéndose ao correio eletronico: {{ $data['email'] }}. Si considera que el tratamiento no se ajusta a la normativa vigente, podrá presentar una reclamación ante la autoridad de control en www.aepd.es. Datos de contacto del delegado de protección de datos: dpo@rbhglobal.com.
         </p>
     </div>
 
