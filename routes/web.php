@@ -22,7 +22,12 @@ Route::view('/', 'welcome')->name('home');
 // Painel admin protegido
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-
+    // expense
+    Route::get('/expense/budget/{id}/view', App\Livewire\Admin\Expense\Create::class)->name('expense.view');
+    Route::get('/expense/budget/{id}/edit', App\Livewire\Admin\Expense\Edit::class)->name('expense.edit');
+    Route::get('/expense/budget/{id}/create', App\Livewire\Admin\Expense\Create::class)->name('expense.create');
+    //Route::get('/expense/budget/{id}/list', App\Livewire\Admin\Expense\List::class)->name('expense.budget.list');
+    Route::get('/expense', App\Livewire\Admin\Expense\Index::class)->name('expense.index');
     //Invoice
     Route::get('/invoice/create/{customer}/customer', App\Livewire\Admin\Invoice\Index::class)->name('invoice.create.customer');
     Route::get('/invoice', App\Livewire\Admin\Invoice\Index::class)->name('invoice.index');

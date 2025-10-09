@@ -21,9 +21,14 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('product_suppliers')
                 ->onDelete('set null');
+
+            $table->string('name');
+            $table->string('category_expense')->nullable();
             $table->string('description')->nullable();
             $table->decimal('amount', 12, 2); // valor do gasto
             $table->date('expense_date')->nullable();
+            $table->string('method_pay')->nullable();
+            $table->boolean('factura')->nullable();
             $table->string('factura_path')->nullable();
             $table->timestamps();
         });
