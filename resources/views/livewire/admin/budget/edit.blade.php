@@ -217,7 +217,7 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('customer.index') }}"
+                    <a href="{{ route('budget.index') }}"
                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>

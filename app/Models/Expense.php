@@ -8,6 +8,10 @@ class Expense extends Model
 {
     public $guarded = [];
 
+    protected $casts = [
+        'expense_date' => 'date',
+    ];
+
     // Relacionamento com Budget
     public function budget()
     {
@@ -17,6 +21,6 @@ class Expense extends Model
     // Relacionamento com ProductSupplier
     public function productSupplier()
     {
-        return $this->belongsTo(ProductSupplier::class);
+        return $this->belongsTo(Supplier::class);
     }
 }

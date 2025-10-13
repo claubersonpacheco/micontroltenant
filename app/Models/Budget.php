@@ -10,11 +10,6 @@ class Budget extends Model
 {
     protected $guarded = [];
 
-//    public function statusHistories()
-//    {
-//        return $this->hasMany(StatusHistory::class);
-//    }
-
     protected $casts = [
         'date' => 'date',
         'expirate' => 'date',

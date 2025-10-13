@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admin\ProductSupplier;
+namespace App\Livewire\Admin\Supplier;
 
-use App\Models\ProductSupplier;
+use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
@@ -27,9 +27,9 @@ class Edit extends Component
     public $client;
     public $code_client;
 
-    public function mount($id)
+    public function mount($id):void
     {
-        $this->supplier = ProductSupplier::findOrFail($id);
+        $this->supplier = Supplier::findOrFail($id);
 
         $this->code = $this->supplier->code;
         $this->name = $this->supplier->name;
@@ -45,17 +45,16 @@ class Edit extends Component
         $this->account_number = $this->supplier->account_number;
         $this->client = $this->supplier->client;
         $this->code_client = $this->supplier->code_client;
-        $this->code = $this->supplier->code;
     }
 
     public function update()
     {
         $this->validate([
-            'code' => 'required|min:3|unique:product_suppliers,code,' . $this->supplier->id,
+            'code' => 'required|min:3|unique:suppliers,code,' . $this->supplier->id,
             'name' => 'required|min:3',
-            'email' => 'required|email|unique:product_suppliers,email,' . $this->supplier->id,
+            'email' => 'required|email|unique:suppliers,email,' . $this->supplier->id,
             'phone' => 'required|min:5',
-            'document' => 'nullable|min:5|unique:product_suppliers,document,' . $this->supplier->id,
+            'document' => 'nullable|min:5|unique:suppliers,document,' . $this->supplier->id,
             'service_type' => 'nullable|min:3',
             'address' => 'required|min:3',
             'city' => 'required|min:3',
@@ -84,13 +83,13 @@ class Edit extends Component
             'code_client' => $this->code_client,
         ]);
 
-        toastr()->success('Atualizado com sucesso!');
+        toastr()->success('Updated with success!');
 
         return redirect()->route('supplier.index');
     }
 
     public function render()
     {
-        return view('livewire.admin.product-supplier.edit');
+        return view('livewire.admin.supplier.edit');
     }
 }

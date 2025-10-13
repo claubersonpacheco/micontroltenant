@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_suppliers', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
             $table->string('email')->nullable()->nullable();
             $table->string('phone')->nullable();
-            $table->string('service_type')->nullable(); // Ex.: Consultoria, Suporte Técnico
+            $table->string('service_type')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

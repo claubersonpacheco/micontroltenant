@@ -17,19 +17,26 @@ return new class extends Migration
                 ->constrained('budgets')
                 ->onDelete('cascade');
 
-            $table->foreignId('product_supplier_id')
+            $table->foreignId('supplier_id')
                 ->nullable()
-                ->constrained('product_suppliers')
+                ->constrained('suppliers')
                 ->onDelete('set null');
 
+            $table->foreignId('category_id')
+                ->nullable()
+                ->constrained('categories')
+                ->onDelete('set null');
+
+            $table->string('code');
             $table->string('name');
-            $table->string('category_expense')->nullable();
             $table->string('description')->nullable();
             $table->decimal('amount', 12, 2); // valor do gasto
             $table->date('expense_date')->nullable();
             $table->string('method_pay')->nullable();
-            $table->boolean('factura')->nullable();
-            $table->string('factura_path')->nullable();
+            $table->boolean('invoice')->nullable();
+            $table->string('invoice_number')->nullable();
+            $table->string('filename')->nullable();
+            $table->string('invoice_path')->nullable();
             $table->timestamps();
         });
     }

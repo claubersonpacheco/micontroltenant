@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admin\ProductSupplier;
+namespace App\Livewire\Admin\Supplier;
 
-use App\Models\ProductSupplier;
+use App\Models\Supplier;
 use Livewire\Component;
 
 use Livewire\Attributes\Computed;
@@ -26,7 +26,7 @@ class Index extends Component
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
-        return ProductSupplier::query()
+        return Supplier::query()
             ->when($this->search !== null, fn ($query) =>
             $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
@@ -37,13 +37,13 @@ class Index extends Component
 
     public function delete(int $id): void
     {
-        ProductSupplier::findOrFail($id)->delete();
+        Supplier::findOrFail($id)->delete();
         $this->resetPage();
     }
 
     public function render()
     {
-        return view('livewire.admin.product-supplier.index');
+        return view('livewire.admin.supplier.index');
     }
 }
 

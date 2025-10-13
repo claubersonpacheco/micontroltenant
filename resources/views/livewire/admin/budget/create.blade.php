@@ -31,7 +31,7 @@
                     </div>
                     <!-- Date (atual) -->
                     <div class="sm:col-span-2">
-                        <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="date" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Date') }}
                         </label>
                     </div>
@@ -60,7 +60,7 @@
                     <!--calc date-->
                     <div class="sm:col-span-1">
                         <label for="total_expirate" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Days ') }}
+                            {{ __('Days') }}
                         </label>
                     </div>
                     <div class="sm:col-span-2">
@@ -71,7 +71,7 @@
 
                     <!-- Customer -->
                     <div class="sm:col-span-2">
-                        <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="customer" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Customer') }}
                         </label>
                     </div>
@@ -94,18 +94,18 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            {{ __("Add") }}
+                            {{ __("New") }}
                         </button>
                     </div>
 
                     <!-- Name -->
                     <div class="sm:col-span-2">
                         <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Name') }}
+                            {{ __('Name of Budget') }}
                         </label>
                     </div>
                     <div class="sm:col-span-10">
-                        <input wire:model="name" id="name" type="text" placeholder="{{ __('Name your budget') }}"
+                        <input wire:model="name" id="name" type="text" placeholder="{{ __('Write the name of budget') }}"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -128,13 +128,13 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('customer.index') }}"
+                    <a href="{{ route('budget.index') }}"
                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>
                     <button type="submit" form="customer-create"
                             class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                        {{ __('Save changes') }}
+                        {{ __('Save') }}
                     </button>
                 </div>
             </form>

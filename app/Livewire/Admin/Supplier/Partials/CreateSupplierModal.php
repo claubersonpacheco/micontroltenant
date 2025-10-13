@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Livewire\Admin\ProductSupplier;
+namespace App\Livewire\Admin\Supplier\Partials;
 
-use App\Models\ProductSupplier;
+use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
-use Livewire\Attributes\Title;
 
-#[Title('Create product supplier')]
-class Create extends Component
+class CreateSupplierModal extends Component
 {
     use GenerateAutomaticCode;
 
@@ -28,14 +26,39 @@ class Create extends Component
     public $client;
     public $code_client;
 
+    public $show = false;
+
+
+
+    protected $listeners = [
+        'open-supplier-modal' => 'openModal',
+    ];
+
+    public function openModal()
+    {
+        $this->reset();
+        $this->resetValidation();
+
+        $this->code = $this->generateCode(Supplier::class);
+
+        $this->show = true;
+    }
+
+    public function closeModal()
+    {
+        $this->reset();
+        $this->resetValidation();
+        $this->show = false;
+    }
+
     public function store()
     {
         $this->validate([
-            'code' => 'required|unique:product_suppliers,code|min:3',
+            'code' => 'required|unique:suppliers,code|min:3',
             'name' => 'required|min:3',
-            'email' => 'required|email|unique:product_suppliers,email',
+            'email' => 'required|email|unique:suppliers,email',
             'phone' => 'nullable|min:5',
-            'document' => 'nullable|min:5|unique:product_suppliers,document',
+            'document' => 'nullable|min:5|unique:suppliers,document',
             'service_type' => 'nullable|min:3',
             'address' => 'nullable|min:3',
             'city' => 'nullable|min:3',
@@ -47,7 +70,7 @@ class Create extends Component
             'code_client' => 'nullable|min:3',
         ]);
 
-        ProductSupplier::create([
+        Supplier::create([
             'code' => $this->code,
             'name' => $this->name,
             'email' => $this->email,
@@ -64,15 +87,16 @@ class Create extends Component
             'code_client' => $this->code_client,
         ]);
 
-        toastr()->success('Criado com sucesso!');
-        return redirect()->route('supplier.index');
-    }
+        $this->dispatch('loadSuppliers');
 
+        toastr()->success('Create with success!');
+
+        $this->reset();
+        $this->show = false;
+    }
 
     public function render()
     {
-        $this->code =  $this->generateCode(ProductSupplier::class);
-
-        return view('livewire.admin.product-supplier.create');
+        return view('livewire.admin.supplier.partials.create-supplier-modal');
     }
 }

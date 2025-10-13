@@ -69,6 +69,15 @@ return [
             'visibility' => 'public',
         ],
 
+        'bunny' => [
+            'driver' => 's3',
+            'key' => env('BUNNY_ACCESS_KEY'),
+            'secret' => env('BUNNY_STORAGE_PASSWORD'),
+            'region' => 'auto',
+            'bucket' => env('BUNNY_STORAGE_NAME'),
+            'endpoint' => env('BUNNY_ENDPOINT'),
+            'use_path_style_endpoint' => true,
+        ],
 
 
     ],

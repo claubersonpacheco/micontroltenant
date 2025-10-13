@@ -24,11 +24,7 @@ use Stancl\Tenancy\Middleware\ScopeSessions;
 |
 */
 
-Route::middleware([
-    'web',
-    InitializeTenancyByDomain::class,
-    PreventAccessFromCentralDomains::class,
-])->group(function () {
+Route::middleware(['web', InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class])->group(function () {
 
 //    Route::get('/', function () {
 //
@@ -37,7 +33,7 @@ Route::middleware([
 //    });
 
 
-    Route::prefix('dashboard')->middleware('auth:web')
+    Route::prefix('dashboard')->middleware('auth')
         ->group(function () {
 
             # Users

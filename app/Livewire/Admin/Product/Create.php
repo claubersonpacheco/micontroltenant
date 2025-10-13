@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin\Product;
 
-use App\Models\ProductSupplier;
+use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Attributes\On;
 use Livewire\Component;

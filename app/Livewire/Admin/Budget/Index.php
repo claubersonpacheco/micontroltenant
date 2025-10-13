@@ -15,7 +15,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public ?int $quantity = 5;
+    public ?int $quantity = 25;
     public ?string $search = null;
 
     public array $sort = [
@@ -27,9 +27,16 @@ class Index extends Component
     public function rows(): LengthAwarePaginator
     {
         return Budget::query()
+            ->with([
+                'customer:id,name',
+                'latestStatus'
+            ])
             ->when($this->search !== null, fn ($query) =>
-            $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
+                $query->whereHas('customer', fn ($q) =>
+                    $q->where('name', 'like', '%' . trim($this->search) . '%')
+                )
             )
+            ->select(['id', 'name', 'customer_id', 'total', 'date', 'created_at'])
             ->orderBy(...array_values($this->sort))
             ->paginate($this->quantity)
             ->withQueryString();
