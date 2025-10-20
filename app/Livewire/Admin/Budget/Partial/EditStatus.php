@@ -47,7 +47,8 @@ class EditStatus extends Component
             ]
         );
 
-       $this->closeModal();
+        $this->dispatch('refreshList');
+        $this->closeModal();
     }
 
     public function closeModal()
