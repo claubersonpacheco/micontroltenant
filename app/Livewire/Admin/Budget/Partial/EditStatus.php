@@ -59,4 +59,5 @@ class EditStatus extends Component
     {
         return view('livewire.admin.budget.partial.edit-status');
     }
+
 }
