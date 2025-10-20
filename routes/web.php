@@ -21,6 +21,13 @@ Route::view('/', 'welcome')->name('home');
 // Painel admin protegido
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
+    // entry
+    Route::get('/entry/budget/{id}/view', App\Livewire\Admin\Entry\Create::class)->name('entry.view');
+    Route::get('/entry/budget/{id}/edit', App\Livewire\Admin\Entry\Edit::class)->name('entry.edit');
+    Route::get('/entry/budget/{id}/create', App\Livewire\Admin\Entry\Create::class)->name('entry.create');
+    Route::get('/entry/budget/{id}/list', App\Livewire\Admin\Entry\Listing::class)->name('entry.budget.listing');
+    Route::get('/entry', App\Livewire\Admin\Entry\Index::class)->name('entry.index');
+
     // expense
     Route::get('/expense/budget/{id}/view', App\Livewire\Admin\Expense\Create::class)->name('expense.view');
     Route::get('/expense/budget/{id}/edit', App\Livewire\Admin\Expense\Edit::class)->name('expense.edit');
@@ -53,7 +60,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
     Route::get('/budget/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('budget.pdf');
 
-    Route::get('/budget/{id}/item', \App\Livewire\Admin\Budget\Items\ListItem::class)->name('budget.item');
+    // budget-item
+    Route::get('/budget/{budgetId}/item', App\Livewire\Admin\BudgetItem\Show::class)->name('budget.item.show');
+
+    // budget
     Route::get('/budget/create', App\Livewire\Admin\Budget\Create::class)->name('budget.create');
     Route::get('/budget/{id}/edit', App\Livewire\Admin\Budget\Edit::class)->name('budget.edit');
     Route::get('/budgets', App\Livewire\Admin\Budget\Index::class)->name('budget.index');

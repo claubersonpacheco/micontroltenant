@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('description')->nullable();
 
-            $table->decimal('total', 10, 2)->default(0);
-            $table->decimal('subtotal', 10, 2)->default(0);
+           // $table->decimal('total', 10, 2)->default(0);
+           // $table->decimal('subtotal', 10, 2)->default(0);
 
-            $table->decimal('tax_value', 10, 2)->default(0);
+           // $table->decimal('tax_value', 10, 2)->default(0);
 
             $table->boolean('show_service')->default(true);
             $table->boolean('show_description')->default(true);

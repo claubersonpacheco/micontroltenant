@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Livewire\Admin\Expense;
+namespace App\Livewire\Admin\Entry;
 
 use App\Models\Budget;
 use App\Models\Category;
+use App\Models\Entry;
 use App\Models\Expense;
 use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Carbon\Carbon;
-#[Title('Create Expense')]
+
+#[Title('Create Entry')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -23,21 +24,22 @@ class Create extends Component
 
     public $budget;
 
-    public $suppliers = [];
-    public $supplier;
 
     public $categories = [];
     public $category;
-
-    public $name;
     public $code;
+    public $name;
+
     public $description;
     public $amount;
     public $date;
     public $method;
     public $invoice;
-    public $invoice_number;
+    public $received_by;
+
+    public $receipt;
     public $file_path;
+    public $receipt_number;
     public $fileName;
 
     public function mount($id)
@@ -49,12 +51,12 @@ class Create extends Component
             return redirect()->route('admin.budgets.index');
         }
 
-        $this->code =  $this->generateCode(Expense::class);
+        $this->code =  $this->generateCode(Entry::class);
 
-        $this->date = Carbon::now()->format('Y-m-d');
+        $this->date = Carbon::now()->format('Y-m-d\TH:i');
 
         $this->loadCategories();
-        $this->loadSuppliers();
+
     }
 
     #[On('loadCategories')]
@@ -62,28 +64,22 @@ class Create extends Component
     {
         $this->categories = Category::all();
     }
-    #[On('loadSuppliers')]
-    public function loadSuppliers()
-    {
-        $this->suppliers = Supplier::all();
-    }
 
     public function store()
     {
 
-
-
         $this->validate([
             'category' => 'required',
-            'supplier' => 'required',
             'name' => 'required|string|max:50',
             'code' => 'required|string|max:30|unique:expenses,code',
             'amount' => 'required|numeric',
             'date' => 'required|date',
+            'method' => 'required',
             'description' => 'nullable|string|max:255',
-            'invoice' => 'required|in:0,1',
-            'invoice_number' => 'nullable|string|max:15',
+            'receipt' => 'required|in:0,1',
+            'receipt_number' => 'nullable|string|max:15',
             'file_path' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:1024',
+            'received_by' => 'required|string|max:50',
         ]);
 
         $filePath = null;
@@ -93,23 +89,24 @@ class Create extends Component
                 $filePath = $this->uploadToBunny($this->file_path);
             } catch (\Exception $e) {
                 toastr()->error($e->getMessage());
-                return;
+                return false;
             }
         }
 
-        $res = Expense::create([
+        $res = Entry::create([
             'budget_id' => $this->budget->id,
             'category_id' => $this->category,
-            'supplier_id' => $this->supplier,
             'code' => $this->code,
             'name' => $this->name,
             'amount' => $this->amount,
-            'date' => $this->expense_date,
+            'date' => $this->date,
             'description' => $this->description,
-            'method' => $this->method_pay,
-            'invoice' => $this->invoice,
-            'file_path' => $filePath,
+            'method' => $this->method,
+            'receipt' => $this->invoice,
+            'receipt_number' => $this->receipt_number,
             'filename' => $this->fileName,
+            'file_path' => $filePath,
+            'received_by' => $this->received_by,
 
         ]);
 
@@ -117,7 +114,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('expense.budget.listing', $res->budget_id );
+        return redirect()->route('entry.budget.listing', $res->budget_id );
     }
 
     protected function uploadToBunny($file)
@@ -131,7 +128,7 @@ class Create extends Component
         $this->fileName = $this->code.'-'.$formattedDate.'-'.Str::upper($nameslug).'.'.$file->getClientOriginalExtension();
 
 
-        $path = "micontrol/invoices/{$this->fileName}";
+        $path = "micontrol/receipt/{$this->fileName}";
 
 
 
@@ -156,9 +153,8 @@ class Create extends Component
         // Retorna a URL pública do arquivo
         return "{$urlPublic}/{$path}";
     }
-
     public function render()
     {
-        return view('livewire.admin.expense.create');
+        return view('livewire.admin.entry.create');
     }
 }

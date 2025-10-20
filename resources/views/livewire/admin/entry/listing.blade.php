@@ -1,6 +1,5 @@
 <div class="w-full lg:ps-64">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-
         <!-- Card: Header e Ações -->
         <div class="flex flex-col">
             <div class="-m-1.5 overflow-x-auto">
@@ -11,19 +10,19 @@
                         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    {{ __("Customers") }}
+                                    {{ "#".$budget->code." - ".$budget->name }}
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                    {{ __("Manage your customers") }}
+                                    {{ __("Manage your entries") }}
                                 </p>
                             </div>
 
                             <div class="inline-flex gap-x-2">
-                                <a href="{{ route('customer.create') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                                    <svg class="shrink-0 size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path d="M12 5v14M5 12h14" />
+                                <a href="{{ route('entry.create', $budget->id ) }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
-                                    {{ __("Add") }}
+                                    {{ __("New") }}
                                 </a>
                             </div>
                         </div>
@@ -35,9 +34,18 @@
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">#</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Date") }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                     {{ __("Name") }}</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                    {{ __("Created At") }}</th>
+                                    {{ __("Receipt") }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Amount") }}</th>
+
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Receipt Number") }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Created")}}</th>
                                 <th class="px-6 py-3 text-right"></th>
                             </tr>
                             </thead>
@@ -46,12 +54,31 @@
                             @forelse($this->rows as $row)
                                 <tr>
                                     <td class="px-6 py-3">{{ $row->id }}</td>
+                                    <td class="px-6 py-3">{{ $row->date->format('d/m/Y') }}</td>
                                     <td class="px-6 py-3">{{ $row->name }}</td>
+                                    <td class="px-6 py-3">{{ $row->amount }}</td>
+                                    <td class="px-6 py-3">
+                                        @if($row->receipt === false)
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                                            </svg>
+                                        @else
+                                            <a href="{{ $row->file_path }}" target="_blank">
+                                            <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                                                  <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                  </svg>
+                                                  Ver Fatura
+                                                </span>
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-3">{{ $row->receipt_number }}</td>
                                     <td class="px-6 py-3">{{ $row->created_at->diffForHumans() }}</td>
                                     <td class="px-6 py-3 text-right">
                                         <a title="Editar"
                                            class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                           href="{{ route('customer.edit', $row->id) }}">
+                                           href="{{ route('entry.edit', $row->id) }}">
                                             <!-- Icon -->
                                             <span
                                                 class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
@@ -72,10 +99,16 @@
                                            wire:click="delete('{{ $row->id }}')"
                                            wire:confirm="Are you sure you want to delete this post?">
                                             <!-- Icon -->
-                                                <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+                                            <span
+                                                class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                         class="w-6 h-6">
+                                                      <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
                                                     </svg>
+
+
                                                 </span>
                                             <!-- End Icon -->
                                         </a>
@@ -84,7 +117,7 @@
                             @empty
                                 <tr>
                                     <td colspan="5" class="px-6 py-3 text-center text-sm text-gray-500 dark:text-neutral-400">
-                                        Nenhum registro encontrado.
+                                        {{ __('No records found') }}
                                     </td>
                                 </tr>
                             @endforelse
@@ -108,8 +141,9 @@
             </div>
         </div>
         <!-- Fim do Card -->
-
     </div>
 </div>
+
+
 
 

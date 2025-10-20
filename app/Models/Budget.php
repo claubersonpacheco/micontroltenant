@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\BudgetService;
+use App\Services\BudgetTotalService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,7 +48,7 @@ class Budget extends Model
             \App\Models\BudgetStatus::create([
                 'budget_id' => $budget->id,
                 'status' => \App\Models\BudgetStatus::STATUS_OPEN, // Aberto
-                'changed_by' => auth()->id(),
+                'changed_by' => auth()->id() ?? null,
             ]);
         });
     }
@@ -66,6 +68,24 @@ class Budget extends Model
     public function expenses()
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function summary()
+    {
+        return $this->hasOne(BudgetTotal::class);
+    }
+
+    public function updateSummary()
+    {
+        BudgetTotalService::updateTotals($this->id);
+    }
+
+
+
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
     }
 
 }

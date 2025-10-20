@@ -1,38 +1,59 @@
 <?php
 
-namespace App\Livewire\Admin\Budget\Items;
+namespace App\Livewire\Admin\BudgetItem;
 
-use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\Product;
-use App\Services\BudgetService;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
-class AddItem extends Component
+class Edit extends Component
 {
-
     public $budget_id;
+    public $product;
+
+    public int|string|null $product_id = null;
+
+    public $itemId;
+
     public $products;
+    public $price;
+    public $description;
+    public $tax;
+    public $taxValue;
+    public $quantity;
+    public $total;
+    public $subtotal;
 
-    public $product_id;
-    public $price = 0;
-    public $description = '';
-    public $tax = '0';
-    public $taxValue = 0;
-    public $quantity = 0;
-    public $total = 0;
-    public $subtotal = 0;
-
-    public function mount($budgetId)
+    public function mount()
     {
-
-       $this->budget_id = $budgetId;
-
-        $this->products = Product::all(); // ou o nome correto do seu modelo
-
+        // carga los productos
+        $this->products = Product::all();
     }
 
-    public function updatingProductId($value)
+    #[On('edit-item')]
+    public function loadItem($id)
+    {
+
+        $resItem = BudgetItem::findOrFail($id);
+
+        $this->itemId = $resItem->id;
+        $this->budget_id = $resItem->budget_id;
+
+        if ($resItem) {
+            $this->itemId = $resItem->id;
+            $this->description = $resItem->description;
+            $this->price = $resItem->price;
+            $this->tax = $resItem->tax;
+            $this->taxValue = $resItem->tax_value;
+            $this->quantity = $resItem->quantity;
+            $this->total = $resItem->total;
+            $this->subtotal = $resItem->subtotal;
+            $this->product_id = $resItem->product_id;
+        }
+    }
+
+    public function updatedProductId($value)
     {
 
         $product = Product::findOrFail($value);
@@ -41,10 +62,12 @@ class AddItem extends Component
             $this->quantity = "1";
             $this->price = $product->price;
             $this->description = $product->description;
+
             $this->calculateTotals();
         }
 
     }
+
 
     public function calculateTotals()
     {
@@ -60,7 +83,6 @@ class AddItem extends Component
         $this->taxValue = $calculoTax;
 
         $this->total = $subtotal + $calculoTax;
-
 
     }
 
@@ -79,11 +101,6 @@ class AddItem extends Component
         $this->calculateTotals();
     }
 
-    public function updatedPrice($value)
-    {
-        $this->price = $value;
-        $this->calculateTotals();
-    }
     public function updatingTax($value)
     {
         $this->tax = $value;
@@ -92,6 +109,7 @@ class AddItem extends Component
 
     public function updatingPrice($value)
     {
+        $this->price = $value;
         $this->calculateTotals();
     }
 
@@ -110,43 +128,50 @@ class AddItem extends Component
         ]);
     }
 
-    public function insert()
+    public function updateItem()
     {
         $this->validate([
-            'product_id' => 'required|exists:products,id',
+            'product_id' => 'required|numeric',
             'quantity' => 'required|numeric|min:1',
             'price' => 'required|numeric',
             'tax' => 'nullable|numeric',
+            'description' => 'nullable|string',
             'total' => 'required|numeric',
             'subtotal' => 'required|numeric',
             'taxValue' => 'required|numeric',
         ]);
 
 
-        BudgetItem::create([
+        // Busca o item pelo ID
+        $item = BudgetItem::findOrFail($this->itemId);
+
+        $item->update([
             'product_id' => $this->product_id,
             'description' => $this->description,
             'quantity' => $this->quantity,
             'price' => $this->price,
-            'tax' => $this->tax === null ? 0 : $this->tax,
+            'tax' => $this->tax ?? 0,
             'total' => $this->total,
+            'tax_value' => $this->taxValue ?? 0,
             'subtotal' => $this->subtotal,
-            'tax_value' => $this->taxValue,
             'budget_id' => $this->budget_id,
         ]);
 
+        $this->closeForm();
+        toastr()->success('Edit with success!');
+
+    }
+
+    public function closeForm()
+    {
         $this->resetForm();
+        $this->dispatch('refreshList');
+        $this->dispatch('close-modal', name: 'edit-item');
 
-        BudgetService::updateTotals($this->budget_id);
-
-        $this->dispatch('close-add-modal');
-        $this->dispatch('listItems');
-
-        toastr()->success('Adcionado com sucesso!');
     }
 
     public function render()
     {
-        return view('livewire.admin.budget.items.add-item');
+        return view('livewire.admin.budget-item.edit');
     }
 }

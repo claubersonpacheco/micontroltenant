@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Livewire\Admin\Expense;
+namespace App\Livewire\Admin\Entry;
 
 use App\Models\Budget;
+use App\Models\Entry;
 use App\Models\Expense;
-use App\Models\Product;
-use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Listing Expense')]
+#[Title('List Entry')]
 class Listing extends Component
 {
     use WithPagination;
 
-    public $budgetId;
+    public $budget;
 
     private $id;
 
@@ -32,15 +31,17 @@ class Listing extends Component
 
     public function mount(int $id): void
     {
-        $this->budgetId = Budget::findOrFail($id);
+        $this->budget = Budget::findOrFail($id);
+
     }
+
 
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
-        return Expense::query()
+        return Entry::query()
             ->with('budget')
-            ->where('budget_id', $this->budgetId->id)
+            ->where('budget_id', $this->budget->id)
             ->when($this->search !== null, fn ($query) =>
             $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
@@ -57,17 +58,17 @@ class Listing extends Component
 
         $client = new \Bunny\Storage\Client($apiAccessKey, $storageZone, $storageRegion);
 
-        $file = Expense::findOrFail($id);
+        $file = Entry::findOrFail($id);
 
         try {
             if ($file->invoice !== false) {
                 // Deleta do BunnyCDN
-                $result = $client->delete('micontrol/invoices/' . $file->filename);
+                $result = $client->delete('micontrol/receipt/' . $file->filename);
 
                 // Verifica se houve erro no delete remoto
                 if ($result !== null) {
                     toastr()->error('Fail to delete: ' . $result);
-                    return redirect()->route('expense.budget.listing', $this->budgetId->id);
+                    return redirect()->route('entry.budget.listing', $this->budget->id);
                 }
             }
 
@@ -75,18 +76,17 @@ class Listing extends Component
             $file->delete();
 
             toastr()->success('Deleted successfully!');
-            return redirect()->route('expense.budget.listing', $this->budgetId->id);
+            return redirect()->route('entry.budget.listing', $this->budget->id);
 
         } catch (\Exception $e) {
             // Captura qualquer exceção
             toastr()->error('Error while deleting file: ' . $e->getMessage());
-            return redirect()->route('expense.budget.listing', $this->budgetId->id);
+            return redirect()->route('entry.budget.listing', $this->budget->id);
         }
     }
 
-
     public function render()
     {
-        return view('livewire.admin.expense.listing');
+        return view('livewire.admin.entry.listing');
     }
 }

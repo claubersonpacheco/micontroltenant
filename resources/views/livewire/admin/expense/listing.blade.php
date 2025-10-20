@@ -10,7 +10,7 @@
                         <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    {{__("Expenses")}}
+                                    {{ "#".$budget->code." - ".$budget->name }}
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-neutral-400">
                                     {{ __("Manage your expenses") }}
@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="inline-flex gap-x-2">
-                                <a href="{{ route('expense.create', $budgetId ) }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <a href="{{ route('expense.create', $budget->id ) }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
@@ -54,7 +54,7 @@
                             @forelse($this->rows as $row)
                                 <tr>
                                     <td class="px-6 py-3">{{ $row->id }}</td>
-                                    <td class="px-6 py-3">{{ $row->expense_date->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-3">{{ $row->date->format('d/m/Y') }}</td>
                                     <td class="px-6 py-3">{{ $row->name }}</td>
                                     <td class="px-6 py-3">{{ $row->amount }}</td>
                                     <td class="px-6 py-3">
@@ -63,7 +63,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
                                             </svg>
                                         @else
-                                            <a href="{{ $row->invoice_path }}" target="_blank">
+                                            <a href="{{ $row->file_path }}" target="_blank">
                                             <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
                                                   <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>

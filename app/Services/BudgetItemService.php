@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Budget;
 
-class BudgetService
+class BudgetItemService
 {
     public static function updateTotals(int $budgetId): void
     {

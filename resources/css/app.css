@@ -15,6 +15,8 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+@source '../../vendor/tallstackui/tallstackui/**/*.php';
+
 /* Remove default red box-shadow on invalid form elements */
 input:invalid, textarea:invalid, select:invalid {
     box-shadow: none;

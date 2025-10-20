@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\BudgetItem;
+use App\Models\BudgetTotal;
+use App\Models\Entry;
+use App\Models\Expense;
+use App\Observers\BudgetItemObserver;
+use App\Observers\BudgetTotalObserver;
+use App\Observers\EntryObserver;
+use App\Observers\ExpenseObserver;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,5 +42,10 @@ class AppServiceProvider extends ServiceProvider
 
         // DEBUG
         logger()->info('TenantSettings carregado', (array) $settings);
+
+        BudgetTotal::observe(BudgetTotalObserver::class);
+        BudgetItem::observe(BudgetItemObserver::class);
+        Expense::observe(ExpenseObserver::class);
+        Entry::observe(EntryObserver::class);
     }
 }

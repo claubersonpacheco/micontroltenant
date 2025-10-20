@@ -7,25 +7,25 @@
                 <!-- Card -->
                 <div class="flex flex-col border border-gray-200 rounded-xl dark:border-neutral-800">
                     <a href="{{ route('invoice.create.customer', $budget->id) }}">
-                    <div class="p-4 md:p-5">
-                        <div class="flex items-center gap-x-2">
-                            <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
-                                {{ __('Generate') }}
-                            </p>
-                            <div class="hs-tooltip">
-                                <div class="hs-tooltip-toggle">
-                                    <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-                                    <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
+                        <div class="p-4 md:p-5">
+                            <div class="flex items-center gap-x-2">
+                                <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
+                                    {{ __('Generate') }}
+                                </p>
+                                <div class="hs-tooltip">
+                                    <div class="hs-tooltip-toggle">
+                                        <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                                        <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
                                 The number of domains
                               </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-                            <span class="font-semibold">Invoice</span>
-                        </h3>
-                    </div>
+                            <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
+                                <span class="font-semibold">Invoice</span>
+                            </h3>
+                        </div>
                     </a>
                 </div>
                 <!-- End Card -->
@@ -57,8 +57,8 @@
                                 <div class="hs-tooltip-toggle">
                                     <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
                                     <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
-                The number of requests your Deployments have received.
-              </span>
+                                        The number of requests your Deployments have received.
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -72,39 +72,42 @@
 
                 <!-- Card status-->
 
-                    <div class="flex flex-col border {{ $budget->latestStatus?->status_classes }} border-gray-200 rounded-xl dark:border-neutral-800">
-                        <a href="javascript:void(0)"
-                           x-data
-                           @click="$dispatch('open-modal-status')">
+                <div class="flex flex-col border {{ $budget->latestStatus?->status_classes }} border-gray-200 rounded-xl dark:border-neutral-800">
+                    <a href="javascript:void(0)"
+                       x-data
+                       wire:click="$dispatch('open-modal', { name: 'edit-status' }); $dispatch('edit-status', { id: {{ $budget->id }} })">
 
-                            <div class="p-4 md:p-5">
-                                <div class="flex items-center gap-x-2">
-                                    <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
-                                        Status
-                                    </p>
-                                    <div class="hs-tooltip">
-                                        <div class="hs-tooltip-toggle">
-                                            <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-                                            <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
+                        <div class="p-4 md:p-5">
+                            <div class="flex items-center gap-x-2">
+                                <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
+                                    Status
+                                </p>
+                                <div class="hs-tooltip">
+                                    <div class="hs-tooltip-toggle">
+                                        <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                                        <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
                                                 {{ $budget->latestStatus?->comments ?? 'Sin comentarios' }}
                                             </span>
-                                        </div>
                                     </div>
-
-
                                 </div>
 
-                                <div class="flex items-center justify-between">
-                                    <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-                                        <span class="font-semibold">{{ $budget->latestStatus?->status_label ?? 'Sin estado' }}</span>
-                                    </h3>
 
-                                </div>
                             </div>
-                        </a>
 
-                        <livewire:admin.budget.partial.edit-status :budgetId="$budget->id" wire:key="edit-status" />
-                    </div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
+                                    <span class="font-semibold">{{ $budget->latestStatus?->status_label ?? 'Sin estado' }}</span>
+                                </h3>
+
+                            </div>
+                        </div>
+                    </a>
+
+
+                    <livewire:admin.budget.partial.edit-status :budgetId="$budget->id" wire:key="edit-status" />
+
+
+                </div>
 
 
                 <!--modal -->
@@ -266,21 +269,21 @@
                                 <div>
                                     <div class="inline-flex gap-x-2">
                                         @if(!empty($selectedItems))
-                                        <button  wire:click="deleteSelected"
-                                                 onclick="confirm('Tem certeza que deseja excluir os itens selecionados?') || event.stopImmediatePropagation()"
-                                                 class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                                           >
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M3 6h18"/>
-                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                                                <line x1="10" x2="10" y1="11" y2="17"/>
-                                                <line x1="14" x2="14" y1="11" y2="17"/>
-                                            </svg>
-                                            {{ __('Delete Selected') }} ({{ count($selectedItems) }})
-                                        </button>
+                                            <button  wire:click="deleteSelected"
+                                                     onclick="confirm('Tem certeza que deseja excluir os itens selecionados?') || event.stopImmediatePropagation()"
+                                                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                                            >
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M3 6h18"/>
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                                    <line x1="10" x2="10" y1="11" y2="17"/>
+                                                    <line x1="14" x2="14" y1="11" y2="17"/>
+                                                </svg>
+                                                {{ __('Delete Selected') }} ({{ count($selectedItems) }})
+                                            </button>
                                         @endif
                                         <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-red-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                                            href="{{ route('budget.print', $budget->id ) }}">
@@ -308,7 +311,7 @@
                                                         Copy
                                                     </a>
                                                     <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                                        href="{{ route('budget.print', $budget->id ) }}">
+                                                       href="{{ route('budget.print', $budget->id ) }}">
                                                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
                                                         Print
                                                     </a>
@@ -397,7 +400,23 @@
                                         </div>
                                         <!-- end filter -->
 
-                                        <livewire:admin.budget.items.add-item :budgetId="$budget->id" />
+                                            <div class="inline-flex gap-x-2">
+                                            <!--add item-->
+                                            <a href="javascript:void(0)"
+                                               x-data
+                                               wire:click="$dispatch('open-modal', { name: 'create-item' }); $dispatch('create-item', { id: {{ $budget->id }} })"
+                                               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                            <!-- Icon -->
+                                                {{ __('Add') }}
+                                                <!-- End Icon -->
+                                            </a>
+                                            <!--end add item-->
+                                            </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -548,9 +567,9 @@
                                         </td>
                                         <td class="handle cursor-move size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                                             <div class="ps-6 py-2 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-                                            </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                                                </svg>
                                             </div>
                                         </td>
 
@@ -623,10 +642,10 @@
                                                 </div>
                                             </td>
                                         @endif
-
-                                        <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                            <div class="px-6 py-2 flex gap-x-1 justify-center items-center gap-x-3">
-
+                                        <!--actions-->
+                                        <td class="px-6 py-3 text-right {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+                                            <div class="flex items-center justify-end gap-2">
+                                                <!--edit actions-->
                                                 <a title="Editar"
                                                    wire:click="$dispatch('open-modal', { name: 'edit-item' }); $dispatch('edit-item', { id: {{ $item->id }} })"
                                                    class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -645,27 +664,35 @@
 
                                                     <!-- End Icon -->
                                                 </a>
-                                                <a title="Excluir"
-                                                   class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                                   wire:click="deleteItem({{ $item->id }})"
-                                                   wire:confirm="Are you sure you want to delete this post?">
+                                                <!--end edit actions-->
+
+                                                <!-- Delete -->
+
+                                                <a title="Delete"
+                                                   wire:click="$dispatch('open-modal', { name: 'delete-item' }); $dispatch('delete-item', { id: {{ $item->id }} })"
+                                                   class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                     <!-- Icon -->
-                                                    <span
-                                                        class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                                 class="w-6 h-6">
-                                                              <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
-                                                            </svg>
+                                                    <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                             class="w-6 h-6">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+                                                        </svg>
                                                     </span>
+                                                    <!-- End Icon -->
                                                 </a>
-                                                <!-- End Icon -->
+
+
+
+
+
                                             </div>
                                         </td>
-                                </tr>
+                                        <!--end actions-->
+                                    </tr>
 
-        @empty
+                                @empty
                                     <tr>
                                         <td colspan="8" class="size-px whitespace-now ">
                                             <div class="flex justify-center items-center py-2">
@@ -673,18 +700,13 @@
                                             </div>
                                         </td>
                                     </tr>
-        @endforelse
+                                @endforelse
 
 
 
                                 </tbody>
                             </table>
                             <!-- End Table -->
-
-                            <!--modal -->
-                            <livewire:admin.budget.items.edit-item  wire:key="edit-item-modal" />
-                            <!-- end modal -->
-
                             <!-- Footer -->
                             <div
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
@@ -693,14 +715,14 @@
                                     <div class="mt-4">
                                         {{ $rows->links() }}
                                     </div>
+                                </div>
+                                <!-- End Footer -->
                             </div>
-                            <!-- End Footer -->
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Card -->
-            <!-- End Table Section -->
+                <!-- End Card -->
+                <!-- End Table Section -->
 
                 <!-- Aqui começam as 3 caixas -->
                 <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -718,21 +740,29 @@
                                     @if($showSubTotal)
                                         <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                             <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }} €</dd>
+                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
+
+                                                {{ number_format($budget->summary?->items_subtotal ?? 0, 2, ',', '.') }} €
+
+                                            </dd>
                                         </dl>
                                     @endif
 
                                     @if($showTaxValue)
                                         <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                             <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }} €</dd>
+                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ number_format($budget->summary?->items_tax_total ?? 0, 2, ',', '.') }} €
+                                            </dd>
                                         </dl>
                                     @endif
 
                                     @if($showTotal)
                                         <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                             <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }} €</dd>
+                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ number_format($budget->summary?->gross_total ?? 0, 2, ',', '.') }} €
+                                            </dd>
                                         </dl>
                                     @endif
 
@@ -744,8 +774,9 @@
 
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
         <!-- End Invoice -->
     </div>
 </div>
+

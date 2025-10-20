@@ -20,8 +20,9 @@
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
         @livewireStyles
-        @livewireScripts
+
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -58,6 +59,9 @@
     <!-- End Google Tag Manager (noscript) -->
 
         @yield('body')
+
+
+    <!-- end modal -->
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
@@ -99,7 +103,7 @@
             });
         });
     </script>
-
+    @livewireScripts
 
     </body>
 </html>

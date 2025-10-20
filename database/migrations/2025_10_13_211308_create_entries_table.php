@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('budget_id')
-                ->constrained('budgets')
-                ->onDelete('cascade');
 
-            $table->foreignId('supplier_id')
-                ->nullable()
-                ->constrained('suppliers')
-                ->onDelete('set null');
+            $table->foreignId('budget_id')
+                ->constrained()
+                ->onDelete('cascade'); // se o orçamento for excluído, apaga as entradas
 
             $table->foreignId('category_id')
                 ->nullable()
@@ -29,14 +25,18 @@ return new class extends Migration
 
             $table->string('code');
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->decimal('amount', 12, 2); // valor do gasto
             $table->dateTime('date')->nullable();
-            $table->string('method')->nullable();
-            $table->boolean('invoice')->nullable();
-            $table->string('invoice_number')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->string('method')->nullable(); // transferência, cartão, etc.
+            $table->text('description')->nullable();
+            $table->string('received_by')->nullable();
+            $table->string('reference')->nullable(); // código interno ou recibo
+
+            $table->boolean('receipt')->nullable();
+            $table->string('receipt_number')->nullable();
             $table->string('filename')->nullable();
             $table->string('file_path')->nullable();
+
             $table->timestamps();
         });
     }
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('entries');
     }
 };

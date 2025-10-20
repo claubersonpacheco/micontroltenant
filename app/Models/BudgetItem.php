@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BudgetItem extends Model
 {
-    use HasFactory;
+
+
     protected $guarded = [];
 
     protected $casts = [
@@ -29,9 +30,4 @@ class BudgetItem extends Model
         return $this->belongsTo(Product::class);
     }
 
-
-//    public function printMarks()
-//    {
-//        return $this->hasMany(BudgetItemToPrint::class);
-//    }
 }

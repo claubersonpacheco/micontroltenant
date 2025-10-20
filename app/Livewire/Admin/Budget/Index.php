@@ -31,22 +31,23 @@ class Index extends Component
                 'customer:id,name',
                 'latestStatus'
             ])
+            ->withSum('summary', 'gross_total')
             ->when($this->search !== null, fn ($query) =>
                 $query->whereHas('customer', fn ($q) =>
                     $q->where('name', 'like', '%' . trim($this->search) . '%')
                 )
             )
-            ->select(['id', 'name', 'customer_id', 'total', 'date', 'created_at'])
+            ->select(['id', 'name', 'customer_id', 'date', 'created_at'])
             ->orderBy(...array_values($this->sort))
             ->paginate($this->quantity)
             ->withQueryString();
     }
-
-    public function delete(int $id): void
-    {
-        Budget::findOrFail($id)->delete();
-        $this->resetPage();
-    }
+//
+//    public function delete(int $id): void
+//    {
+//        Budget::findOrFail($id)->delete();
+//        $this->resetPage();
+//    }
 
     public function render()
     {

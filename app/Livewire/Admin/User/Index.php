@@ -47,7 +47,6 @@ class Index extends Component
 
         return redirect()->route('user.index');
 
-
     }
 
     #[Computed]

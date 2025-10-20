@@ -7,7 +7,7 @@
                     {{ "#".$budget->code." - ".$budget->name }}
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    {{ __('Create expense.') }}
+                    {{ __('Create entry.') }}
                 </p>
             </div>
 
@@ -59,38 +59,6 @@
                         </button>
                     </div>
 
-                    <!-- Supplier -->
-                    <div class="sm:col-span-2">
-                        <label for="supplier" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Supplier') }}
-                        </label>
-                    </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
-                        <!-- Select da categoria -->
-                        <select wire:model="supplier" id="supplier"
-                                class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a supplier') }}</option>
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                            @endforeach
-                        </select>
-
-                        @error('supplier') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-
-                        <!-- Botão do modal -->
-                        <button
-                            type="button"
-                            wire:click="$dispatch('open-supplier-modal')"
-                            class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-
-                            {{ __("New") }}
-                        </button>
-                    </div>
-
                     <!-- Name -->
                     <div class="sm:col-span-2">
                         <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -98,7 +66,7 @@
                         </label>
                     </div>
                     <div class="sm:col-span-10">
-                        <input wire:model="name" id="name" type="text" placeholder="{{ __('Expense name') }}"
+                        <input wire:model="name" id="name" type="text" placeholder="{{ __('Entry name') }}"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -119,21 +87,21 @@
 
                     <!-- Date  -->
                     <div class="sm:col-span-3">
-                        <label for="expense_date" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="date" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Date') }}
                         </label>
                     </div>
                     <div class="sm:col-span-4">
-                        <input wire:model="expense_date" id="expense_date" type="date"
+                        <input wire:model="date" id="date" type="datetime-local"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        @error('expense_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        @error('date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Methodo Pay -->
                     <div class="sm:col-span-2">
                         <label for="method" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Method Pay') }}
+                            {{ __('Method Entry') }}
                         </label>
                     </div>
                     <div class="sm:col-span-10 flex gap-2 items-center">
@@ -148,6 +116,7 @@
                             <option value="bizum">{{ __('Bizum') }}</option>
                             <option value="other">{{ __('other') }}</option>
                         </select>
+                        @error('method') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Description -->
@@ -163,15 +132,28 @@
                         @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
+                    <!-- received -->
+                    <div class="sm:col-span-2">
+                        <label for="received_by" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            {{ __('Received By') }}
+                        </label>
+                    </div>
+                    <div class="sm:col-span-10">
+                        <input wire:model="received_by" id="received_by" type="text" placeholder="{{ __('Received by ') }}"
+                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                        @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    </div>
+
                     <!-- Invoice -->
                     <div class="sm:col-span-2">
-                        <label for="invoice" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Invoice') }}
+                        <label for="receipt" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            {{ __('Receipt') }}
                         </label>
                     </div>
                     <div class="sm:col-span-2">
                         <!-- Select da categoria -->
-                        <select wire:model="invoice" id="invoice"
+                        <select wire:model="receipt" id="receipt"
                                 class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                             <option value="">{{ __('Select') }}</option>
@@ -180,36 +162,38 @@
 
                         </select>
 
-                        @error('invoice') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        @error('receipt') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
 
                     </div>
 
                     <div class="sm:col-span-8">
                     </div>
 
-                    <template x-if="$wire.invoice == 1">
-                        <div class="contents">
-                        <!-- Invoice Number -->
-                        <div class="sm:col-span-2">
-                            <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                {{ __('Invoice Number') }}
-                            </label>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <input wire:model="invoice_number" id="name" type="text" placeholder="{{ __('Invoice Number') }}"
-                                   class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            @error('invoice_number') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                        </div>
 
-                        <!-- Invoice Number -->
-                        <div class="sm:col-span-2">
-                            <label for="file_path" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                {{ __('File Invoice') }}
-                            </label>
-                        </div>
-                        <div class="sm:col-span-3">
-                            <input wire:model="file_path" id="invoice_path" type="file" class="block w-full text-sm text-gray-500
+
+                    <template x-if="$wire.receipt == 1">
+                        <div class="contents">
+                            <!-- Invoice Number -->
+                            <div class="sm:col-span-2">
+                                <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('Receipt Number') }}
+                                </label>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <input wire:model="receipt_number" id="name" type="text" placeholder="{{ __('Receipt Number') }}"
+                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                @error('receipt_number') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Invoice Number -->
+                            <div class="sm:col-span-2">
+                                <label for="file_path" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('File Receipt') }}
+                                </label>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <input wire:model="file_path" id="receipt_path" type="file" class="block w-full text-sm text-gray-500
                                 file:me-4 file:py-2 file:px-4
                                 file:rounded-lg file:border-0
                                 file:text-sm file:font-semibold
@@ -220,8 +204,8 @@
                                 dark:file:bg-blue-500
                                 dark:hover:file:bg-blue-400
                               ">
-                            @error('file_path') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                        </div>
+                                @error('file_path') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                            </div>
                         </div>
                     </template>
 
@@ -229,7 +213,7 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('expense.budget.listing', $budgetId) }}"
+                    <a href="{{ route('entry.budget.listing', $budget->id) }}"
                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>

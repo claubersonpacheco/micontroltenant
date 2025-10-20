@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Traits\Alert;
 use App\Traits\GenerateAutomaticCode;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ use Livewire\Attributes\Title;
 class Create extends Component
 {
     use GenerateAutomaticCode;
+    use Alert;
 
     public $customers = [];
 
@@ -104,7 +106,7 @@ class Create extends Component
             ],
         ]);
 
-        toastr()->success('Budget criado com sucesso!');
+        $this->success('Create with success!');
         return redirect()->route('budget.index');
     }
 

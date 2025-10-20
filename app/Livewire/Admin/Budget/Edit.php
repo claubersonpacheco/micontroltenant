@@ -24,8 +24,7 @@ class Edit extends Component
 
     public function mount($id)
     {
-        $this->budget = Budget::findOrFail($id);
-
+        $this->budget = Budget::with(['customer', 'summary'])->findOrFail($id);
 
         $this->code = $this->budget->code;
         $this->name = $this->budget->name;
@@ -86,9 +85,7 @@ class Edit extends Component
 
         ]);
 
-
-
-        toastr()->success('Produto atualizado com sucesso!');
+        toastr()->success('Updated with success!');
         return redirect()->route('budget.index');
     }
 

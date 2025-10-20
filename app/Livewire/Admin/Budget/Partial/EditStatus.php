@@ -47,8 +47,12 @@ class EditStatus extends Component
             ]
         );
 
-        $this->dispatch('listItems');
-        $this->dispatch('close-modal-status');
+       $this->closeModal();
+    }
+
+    public function closeModal()
+    {
+        $this->dispatch('close-modal', name: 'edit-status');
     }
 
     public function render()
