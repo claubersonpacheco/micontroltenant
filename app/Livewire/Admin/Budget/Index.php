@@ -42,12 +42,6 @@ class Index extends Component
             ->paginate($this->quantity)
             ->withQueryString();
     }
-//
-//    public function delete(int $id): void
-//    {
-//        Budget::findOrFail($id)->delete();
-//        $this->resetPage();
-//    }
 
     public function render()
     {

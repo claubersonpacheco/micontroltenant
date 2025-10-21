@@ -103,10 +103,6 @@
                         </div>
                     </a>
 
-
-                    <livewire:admin.budget.partial.edit-status :budgetId="$budget->id" wire:key="edit-status" />
-
-
                 </div>
 
 
@@ -119,140 +115,14 @@
         </div>
         <!-- End Card Section -->
         <!-- Invoice -->
-        <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
+        <div class="px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
 
-            <!-- Grid  -->
-            <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200 dark:border-neutral-700">
-                <div>
-                    <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200">{{ __("Budget") }} #{{ $budget->code }}</h2>
-                </div>
-                <!-- Col -->
+            <!--header-->
+            @include('livewire.admin.budget-item.partial.header')
+            <!-- end header -->
 
-                <div class="inline-flex gap-x-2">
-                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                       href="{{ route('email.send', $budget->id ) }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                        </svg>
-
-                        {{ __('Send Email') }}
-                    </a>
-
-                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                       href="{{ route('budget.pdf', $budget->id ) }}">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" x2="12" y1="15" y2="3"/>
-                        </svg>
-                        {{ __('Budget Pdf') }}
-                    </a>
-                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                       href="{{ route('budget.print', $budget->id ) }}">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <polyline points="6 9 6 2 18 2 18 9"/>
-                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-                            <rect width="12" height="8" x="6" y="14"/>
-                        </svg>
-                        {{ __('Print') }}
-                    </a>
-                </div>
-                <!-- Col -->
-            </div>
-            <!-- End Grid -->
-
-            <!-- Grid datos cliente -->
-            <div class="grid md:grid-cols-2 gap-3">
-                <div>
-                    <div class="grid space-y-3">
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{__('Codigo cliente')}}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                {{ $budget->customer->code }}
-                            </dd>
-                        </dl>
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{ __('Correo Eletronico:') }}
-                            </dt>
-                            <dd class="text-gray-800 dark:text-neutral-200">
-                                <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
-                                   href="#">
-                                    {{ $budget->customer->email }}
-                                </a>
-                            </dd>
-                        </dl>
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{ __('Detalle Cliente') }}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                <span class="block font-semibold">{{ $budget->customer->name }}</span>
-                                <address class="not-italic font-normal">
-                                    {{ $budget->customer->address }}<br>
-                                </address>
-                            </dd>
-                        </dl>
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{__('Documento')}}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                <span class="block font-semibold">{{ $budget->customer->document }}</span>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                <!-- Col -->
-
-                <div>
-                    <div class="grid space-y-3">
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{__('Date Budget')}}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                {{ $budget->date->format('d/m/Y') }}
-                            </dd>
-                        </dl>
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{__('Expirate')}}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                {{ $budget->expirate->format('d/m/Y') }}
-                            </dd>
-                        </dl>
-
-                        <dl class="flex flex-col sm:flex-row gap-x-3 text-sm">
-                            <dt class="min-w-36 max-w-50 text-gray-500 dark:text-neutral-500">
-                                {{ __('Validate') }}:
-                            </dt>
-                            <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                                {{ $budget->total_expirate }} {{ __('Days') }}
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                <!-- Col -->
-            </div>
-            <!-- End Grid -->
-
-
-            <!-- Table Section -->
-            <!-- Card -->
             <div class="flex flex-col mt-6">
+                <!-- Table Section Items-->
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div
@@ -363,38 +233,44 @@
                                             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-20 bg-white shadow-md rounded-lg mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" role="menu" aria-orientation="vertical" aria-labelledby="hs-as-table-table-filter-dropdown">
                                                 <div class="divide-y divide-gray-200 dark:divide-neutral-700">
                                                     <label for="hs-as-filters-dropdown-frequency" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showService" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" >
+                                                        <input wire:model="showService" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Service') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-status" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showDescription" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-status" >
+                                                        <input wire:model="showDescription" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-status">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Description') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-created" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showQtd" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-created">
+                                                        <input wire:model="showQtd" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-created">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Quantity') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-due-date" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showPrice" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-due-date">
+                                                        <input wire:model="showPrice" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-due-date">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Price Unit') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showTax" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                        <input wire:model="showTax" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showTaxValue" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                        <input wire:model="showTaxValue" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax Value') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showSubTotal" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                        <input wire:model="showSubTotal" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('SubTotal') }}</span>
                                                     </label>
+
                                                     <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model.live="showTotal" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                        <input wire:model="showTotal" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Total') }}</span>
                                                     </label>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -721,59 +597,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Card -->
-                <!-- End Table Section -->
+                <!-- end Table Section -->
 
-                <!-- Aqui começam as 3 caixas -->
-                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-                    <div class="bg-gray-200 col-span-2 p-4 rounded-md">
-                        <h3 class="font-semibold ">Observación</h3>
-                        <p class="text-gray-700">{!!$budget->description !!}</p>
-
-                    </div>
-                    <div class="bg-gray-200 p-4 rounded-md">
-                        <!-- Flex -->
-                        <div class="flex sm:justify-end">
-                            <div class="w-full max-w-2xl sm:text-end space-y-2">
-                                <!-- Grid -->
-                                <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
-                                    @if($showSubTotal)
-                                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
-
-                                                {{ number_format($budget->summary?->items_subtotal ?? 0, 2, ',', '.') }} €
-
-                                            </dd>
-                                        </dl>
-                                    @endif
-
-                                    @if($showTaxValue)
-                                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ number_format($budget->summary?->items_tax_total ?? 0, 2, ',', '.') }} €
-                                            </dd>
-                                        </dl>
-                                    @endif
-
-                                    @if($showTotal)
-                                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
-                                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ number_format($budget->summary?->gross_total ?? 0, 2, ',', '.') }} €
-                                            </dd>
-                                        </dl>
-                                    @endif
-
-                                </div>
-                                <!-- End Grid -->
-                            </div>
-                        </div>
-                        <!-- End Flex -->
-
-                    </div>
-                </div>
+                <!-- footer -->
+                @include('livewire.admin.budget-item.partial.footer')
             </div>
         </div>
         <!-- End Invoice -->
