@@ -299,11 +299,12 @@
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                            <!-- Table -->
+                            <!-- Table -->
+                            <table class="min-w-full table-fixed divide-y divide-gray-200 dark:divide-neutral-700">
                                 <thead class="bg-gray-50 dark:bg-neutral-900">
                                 <tr>
-
-                                    <th scope="col" class="ps-6 py-3 text-start">
+                                    <th class="px-6 py-3 text-start w-[40px]">
                                         <label for="hs-at-with-checkboxes-main" class="flex">
                                             <input type="checkbox"
                                                    wire:click="toggleSelectAll"
@@ -313,102 +314,65 @@
                                             <span class="sr-only">Checkbox</span>
                                         </label>
                                     </th>
-                                    <th scope="col" class=" w-2 px-6 text-start">
+
+                                    <th class="px-6 py-3 text-start w-[40px]">
                                         <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __('Ord') }}
-                                                </span>
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                        {{ __('Ord') }}
+                    </span>
                                         </div>
                                     </th>
 
-                                    {{-- Cabeçalho --}}
                                     @if($showService)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __('Service') }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __('Service') }}</span>
                                         </th>
                                     @endif
 
                                     @if($showDescription)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __('Description') }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __('Description') }}</span>
                                         </th>
                                     @endif
 
                                     @if($showQtd)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("Quantity") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Quantity") }}</span>
                                         </th>
                                     @endif
 
                                     @if($showPrice)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("Price Unit") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Price Unit") }}</span>
                                         </th>
                                     @endif
 
                                     @if($showTax)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("Tax") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Tax") }}</span>
                                         </th>
                                     @endif
 
                                     @if($showSubTotal)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("SubTotal") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("SubTotal") }}</span>
                                         </th>
                                     @endif
 
                                     @if($showTaxValue)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("Tax value") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Tax value") }}</span>
                                         </th>
                                     @endif
-
 
                                     @if($showTotal)
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                    {{ __("Total") }}
-                                                </span>
-                                            </div>
+                                        <th class="px-6 py-3 text-start flex-1">
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Total") }}</span>
                                         </th>
                                     @endif
 
-                                    <th  scope="col" class="px-6 py-3 text-center">
-                                        <div class="flex justify-center items-center gap-x-2 ">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                {{ __("Action") }}
-                                            </span>
-                                        </div>
+                                    <th class="px-6 py-3 text-end w-[120px]">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Action") }}</span>
                                     </th>
                                 </tr>
                                 </thead>
@@ -416,172 +380,111 @@
                                 <tbody
                                     x-data
                                     x-init="
-                                        new Sortable($el, {
-                                            handle: '.handle',
-                                            animation: 150,
-                                            onEnd: function () {
-                                                let ids = Array.from($el.querySelectorAll('tr')).map(tr => tr.dataset.id);
-                                                $wire.updateItemOrder(ids);
-                                            }
-                                        })
-                                    "
+            new Sortable($el, {
+                handle: '.handle',
+                animation: 150,
+                onEnd: function () {
+                    let ids = Array.from($el.querySelectorAll('tr')).map(tr => tr.dataset.id);
+                    $wire.updateItemOrder(ids);
+                }
+            })
+        "
                                     class="divide-y divide-gray-200 dark:divide-neutral-700">
 
                                 @forelse($this->rows as $item)
-                                    <tr data-id="{{ $item->id }}" wire:key="item-{{ $item->id }}" >
-                                        <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                            <div class="ps-6 py-2 ">
-                                                <label for="hs-at-with-checkboxes-1" class="flex">
-                                                    <input type="checkbox"
-                                                           value="{{ $item->id }}"
-                                                           wire:model.live="selectedItems"
-                                                           class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                                           id="hs-at-with-checkboxes-1" checked>
-                                                    <span class="sr-only">Checkbox</span>
-                                                </label>
-                                            </div>
+                                    <tr data-id="{{ $item->id }}" wire:key="item-{{ $item->id }}">
+                                        <td class="px-6 py-2">
+                                            <input type="checkbox"
+                                                   value="{{ $item->id }}"
+                                                   wire:model.live="selectedItems"
+                                                   class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                         </td>
-                                        <td class="handle cursor-move size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                            <div class="ps-6 py-2 ">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-                                                </svg>
-                                            </div>
+
+                                        <td class="handle cursor-move px-6 py-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+                                            </svg>
                                         </td>
 
                                         @if($showService)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2">
-                                                    <div class="flex items-center gap-x-2">
-                                                        <div class="grow">
-                                                            <span class="text-sm text-gray-600 dark:text-neutral-400">
-                                                                {{ $item->product->name }}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ $item->product->name }}</td>
                                         @endif
 
                                         @if($showDescription)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{  $item->description }}</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ $item->description }}</td>
                                         @endif
 
                                         @if($showQtd)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': $item->quantity }}</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': $item->quantity }}</td>
                                         @endif
 
                                         @if($showPrice)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->price, 2, ',', '.'). '€' }}</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': number_format($item->price, 2, ',', '.').'€' }}</td>
                                         @endif
 
                                         @if($showTax)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2 flex gap-x-1">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': $item->tax }}%</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': $item->tax }}%</td>
                                         @endif
 
                                         @if($showSubTotal)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2 flex gap-x-1">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->subtotal, 2, ',', '.'). '€' }}</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': number_format($item->subtotal, 2, ',', '.').'€' }}</td>
                                         @endif
 
                                         @if($showTaxValue)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2 flex gap-x-1">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->tax_value, 2, ',', '.'). '€' }}</span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': number_format($item->tax_value, 2, ',', '.').'€' }}</td>
                                         @endif
 
                                         @if($showTotal)
-                                            <td class="size-px whitespace-nowrap {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
-                                                <div class="px-6 py-2 flex gap-x-1">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">{{ ($item->total == 0)? '': number_format($item->total, 2, ',', '.'). '€' }} </span>
-                                                </div>
-                                            </td>
+                                            <td class="px-6 py-2 flex-1">{{ ($item->total == 0)? '': number_format($item->total, 2, ',', '.').'€' }}</td>
                                         @endif
-                                        <!--actions-->
-                                        <td class="px-6 py-3 text-right {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
+
+                                        <td class="px-6 py-2 text-end">
                                             <div class="flex items-center justify-end gap-2">
-                                                <!--edit actions-->
+                                                <!-- Edit -->
                                                 <a title="Editar"
                                                    wire:click="$dispatch('open-modal', { name: 'edit-item' }); $dispatch('edit-item', { id: {{ $item->id }} })"
                                                    class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                    <!-- Icon -->
-                                                    <span
-                                                        class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                             class="w-6 h-6">
-                                                          <path stroke-linecap="round" width="24" height="24"
-                                                                stroke-linejoin="round"
-                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
-                                                        </svg>
-
-                                                    </span>
-
-                                                    <!-- End Icon -->
+                        <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                 class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
+                            </svg>
+                        </span>
                                                 </a>
-                                                <!--end edit actions-->
-
                                                 <!-- Delete -->
-
                                                 <a title="Delete"
                                                    wire:click="$dispatch('open-modal', { name: 'delete-item' }); $dispatch('delete-item', { id: {{ $item->id }} })"
                                                    class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                    <!-- Icon -->
-                                                    <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                             class="w-6 h-6">
-                                                          <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
-                                                        </svg>
-                                                    </span>
-                                                    <!-- End Icon -->
+                        <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                 class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+                            </svg>
+                        </span>
                                                 </a>
-
-
-
-
-
                                             </div>
                                         </td>
-                                        <!--end actions-->
                                     </tr>
 
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="size-px whitespace-now ">
+                                        <td colspan="100%" class="px-6 py-2">
                                             <div class="flex justify-center items-center py-2">
                                                 Not found
                                             </div>
                                         </td>
                                     </tr>
                                 @endforelse
-
-
-
                                 </tbody>
                             </table>
+                            <!-- End Table -->
+
+                            <!-- End Table -->
+
                             <!-- End Table -->
                             <!-- Footer -->
                             <div
