@@ -94,6 +94,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/tenant/{id}/edit', App\Livewire\Admin\Tenant\Edit::class)->name('tenant.edit');
     Route::get('/tenants', App\Livewire\Admin\Tenant\Index::class)->name('tenant.index');
 
+    // Plan
+    Route::get('/plans/create', App\Livewire\Admin\Plan\Create::class)->name('plan.create');
+    Route::get('/plans/{id}/edit', App\Livewire\Admin\Plan\Edit::class)->name('plan.edit');
+    Route::get('/plans', App\Livewire\Admin\Plan\Index::class)->name('plan.index');
+
 
     // profile
     Route::get('/profile', App\Livewire\Admin\Profile\Index::class)->name('profile.index');
