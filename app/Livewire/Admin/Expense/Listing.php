@@ -17,10 +17,8 @@ class Listing extends Component
 {
     use WithPagination;
 
-    public $budgetId;
-
+    public $budget;
     private $id;
-
 
     public ?int $quantity = 5;
     public ?string $search = null;
@@ -32,7 +30,7 @@ class Listing extends Component
 
     public function mount(int $id): void
     {
-        $this->budgetId = Budget::findOrFail($id);
+        $this->budget = Budget::findOrFail($id);
     }
 
     #[Computed]
@@ -40,7 +38,7 @@ class Listing extends Component
     {
         return Expense::query()
             ->with('budget')
-            ->where('budget_id', $this->budgetId->id)
+            ->where('budget_id', $this->budget->id)
             ->when($this->search !== null, fn ($query) =>
             $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
