@@ -29,9 +29,9 @@ class Index extends Component
         return Budget::query()
             ->with([
                 'customer:id,name',
-                'latestStatus'
+                'latestStatus',
+                'summary'
             ])
-            ->withSum('summary', 'gross_total')
             ->when($this->search !== null, fn ($query) =>
                 $query->whereHas('customer', fn ($q) =>
                     $q->where('name', 'like', '%' . trim($this->search) . '%')
