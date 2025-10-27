@@ -119,15 +119,15 @@
 
                     <!-- Date  -->
                     <div class="sm:col-span-3">
-                        <label for="expense_date" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="edate" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Date') }}
                         </label>
                     </div>
                     <div class="sm:col-span-4">
-                        <input wire:model="expense_date" id="expense_date" type="date"
+                        <input wire:model="date" id="date" type="date"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        @error('expense_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        @error('date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Methodo Pay -->
@@ -138,7 +138,7 @@
                     </div>
                     <div class="sm:col-span-10 flex gap-2 items-center">
                         <!-- Select da categoria -->
-                        <select wire:model="method" id="method_pay"
+                        <select wire:model="method" id="method"
                                 class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                             <option value="">{{ __('Select a method') }}</option>
@@ -148,6 +148,7 @@
                             <option value="bizum">{{ __('Bizum') }}</option>
                             <option value="other">{{ __('other') }}</option>
                         </select>
+                        @error('method') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Description -->

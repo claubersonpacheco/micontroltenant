@@ -80,6 +80,7 @@ class Create extends Component
             'code' => 'required|string|max:30|unique:expenses,code',
             'amount' => 'required|numeric',
             'date' => 'required|date',
+            'method' => 'required',
             'description' => 'nullable|string|max:255',
             'invoice' => 'required|in:0,1',
             'invoice_number' => 'nullable|string|max:15',
@@ -104,9 +105,9 @@ class Create extends Component
             'code' => $this->code,
             'name' => $this->name,
             'amount' => $this->amount,
-            'date' => $this->expense_date,
+            'date' => $this->date,
             'description' => $this->description,
-            'method' => $this->method_pay,
+            'method' => $this->method,
             'invoice' => $this->invoice,
             'file_path' => $filePath,
             'filename' => $this->fileName,
@@ -117,7 +118,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('expense.budget.listing', $res->budget_id );
+        return redirect()->route('expense.budget.listing', $this->budget->id );
     }
 
     protected function uploadToBunny($file)

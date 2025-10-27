@@ -9,7 +9,7 @@ class Expense extends Model
     public $guarded = [];
 
     protected $casts = [
-        'expense_date' => 'date',
+        'date' => 'date',
     ];
 
     // Relacionamento com Budget

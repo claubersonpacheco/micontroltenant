@@ -38,12 +38,14 @@
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                     {{ __("Name") }}</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                    {{ __("Invoice") }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                     {{ __("Amount") }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                    {{ __("Invoice") }}</th>
 
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                    {{ __("Invoice Number") }}</th>
+                                    {{ __("Invoice Number") }}
+                                </th>
+
                                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                     {{ __("Created")}}</th>
                                 <th class="px-6 py-3 text-right"></th>
@@ -73,12 +75,20 @@
                                             </a>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-3">{{ $row->invoice_number }}</td>
+                                    <td class="px-6 py-3">
+                                        @if($row->invoice === false)
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                                            </svg>
+                                        @else
+                                            {{ $row->invoice_number }}
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-3">{{ $row->created_at->diffForHumans() }}</td>
                                     <td class="px-6 py-3 text-right">
                                         <a title="Editar"
                                            class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                           href="{{ route('product.edit', $row->id) }}">
+                                           href="{{ route('expense.edit', $row->id) }}">
                                             <!-- Icon -->
                                             <span
                                                 class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
