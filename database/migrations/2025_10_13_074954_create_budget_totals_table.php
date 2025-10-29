@@ -14,27 +14,39 @@ return new class extends Migration
         Schema::create('budget_totals', function (Blueprint $table) {
             $table->id();
 
+            // Relação com o orçamento principal
             $table->unsignedBigInteger('budget_id')->unique();
-            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('budget_id')
+                ->references('id')
+                ->on('budgets')
+                ->onDelete('cascade');
 
-            // Valores detalhados
-            $table->decimal('items_subtotal', 10, 2)->default(0);
-            $table->decimal('items_tax_total', 10, 2)->default(0);
-            $table->decimal('expenses_total', 10, 2)->default(0);
-            $table->decimal('entries_total', 10, 2)->default(0);
+            // 🧾 Valores detalhados dos itens
+            $table->decimal('items_subtotal', 12, 2)->default(0);     // Total sem IVA
+            $table->decimal('items_tax_total', 12, 2)->default(0);    // Valor total do IVA (que vai pra Hacienda)
 
-            // Totais consolidados
-            $table->decimal('gross_total', 10, 2)->default(0);       // Subtotal + Impostos
-            $table->decimal('net_total', 10, 2)->default(0);         // Bruto - Despesas
+            // 💸 Valores de movimentação
+            $table->decimal('expenses_total', 12, 2)->default(0);     // Despesas (custos)
+            $table->decimal('entries_total', 12, 2)->default(0);      // Entradas (pagamentos do cliente)
 
-            // 💡 Valor orçado originalmente (presupuesto)
-            $table->decimal('budget_value', 10, 2)->default(0);      // Previsto no planejamento
+            // 💰 Totais consolidados
+            $table->decimal('gross_total', 12, 2)->default(0);        // Subtotal + IVA (valor total do orçamento)
+            $table->decimal('net_total', 12, 2)->default(0);          // Subtotal - Despesas (lucro potencial antes do IVA)
 
-            // Diferenças
-            $table->decimal('difference_total', 10, 2)->default(0);  // budget_value - net_total
-            $table->decimal('final_balance', 10, 2)->default(0);     // entries_total - net_total
+            // 💡 Valor previsto originalmente no orçamento
+            $table->decimal('budget_value', 12, 2)->default(0);       // Pode guardar o valor acordado inicialmente
+
+            // ⚖️ Diferenças e saldos
+            $table->decimal('difference_total', 12, 2)->default(0);   // Entradas - Valor total do orçamento (saldo com cliente)
+            $table->decimal('final_balance', 12, 2)->default(0);      // Entradas - Despesas - IVA (lucro real)
+
+            // 🧾 Imposto e rentabilidade
+            $table->decimal('iva_to_pay', 12, 2)->default(0);         // Valor de IVA a repassar à Hacienda
+            $table->decimal('profit_margin', 8, 2)->default(0);       // Margem de lucro em %
+
             $table->timestamps();
         });
+
     }
 
     /**

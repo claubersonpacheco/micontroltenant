@@ -24,7 +24,6 @@ class Create extends Component
 
     public $budget;
 
-
     public $categories = [];
     public $category;
     public $code;
@@ -44,7 +43,6 @@ class Create extends Component
 
     public function mount($id)
     {
-
         $this->budget = Budget::findOrFail($id);
 
         if (!$this->budget) {
@@ -52,7 +50,6 @@ class Create extends Component
         }
 
         $this->code =  $this->generateCode(Entry::class);
-
         $this->date = Carbon::now()->format('Y-m-d\TH:i');
 
         $this->loadCategories();
@@ -68,6 +65,7 @@ class Create extends Component
     public function store()
     {
 
+
         $this->validate([
             'category' => 'required',
             'name' => 'required|string|max:50',
@@ -79,7 +77,7 @@ class Create extends Component
             'receipt' => 'required|in:0,1',
             'receipt_number' => 'nullable|string|max:15',
             'file_path' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:1024',
-            'received_by' => 'required|string|max:50',
+            'received_by' => 'nullable|string|max:50',
         ]);
 
         $filePath = null;
@@ -114,7 +112,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('entry.budget.listing', $res->budget_id );
+        return redirect()->route('entry.budget.listing', $this->budget->id );
     }
 
     protected function uploadToBunny($file)

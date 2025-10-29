@@ -1,5 +1,16 @@
 <div class="w-full lg:ps-64">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+
+
+        @if ($totals)
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Each card -->
+                <x-report-card label="{{ __('Total Expenses') }}" :value="$totals->expenses_total" icon="ph:credit-card-duotone" color="yellow" />
+
+            </div>
+        @else
+            <p class="text-gray-500 dark:text-gray-400">No financial data available for this budget yet.</p>
+        @endif
         <!-- Card: Header e Ações -->
         <div class="flex flex-col">
             <div class="-m-1.5 overflow-x-auto">
@@ -104,24 +115,19 @@
                                             <!-- End Icon -->
                                         </a>
 
-                                        <a title="Excluir"
-                                           class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                           wire:click="delete('{{ $row->id }}')"
-                                           wire:confirm="Are you sure you want to delete this post?">
-                                            <!-- Icon -->
-                                            <span
-                                                class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                         class="w-6 h-6">
-                                                      <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
-                                                    </svg>
-
-
-                                                </span>
-                                            <!-- End Icon -->
+                                        <a title="Delete"
+                                           wire:click="openModal({{ $row->id }})"
+                                           class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                    <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                             class="w-6 h-6">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+                                                        </svg>
+                                                    </span>
                                         </a>
+
                                     </td>
                                 </tr>
                             @empty
@@ -152,6 +158,9 @@
         </div>
         <!-- Fim do Card -->
     </div>
+        @if($showModal)
+            @livewire('admin.expense.delete',  ['itemId' => $itemIdToDelete] )
+        @endif
 </div>
 
 

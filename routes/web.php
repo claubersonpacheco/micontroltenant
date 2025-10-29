@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Print\BudgetController;
+use App\Livewire\Admin\Budget\FinancialReport;
 use Illuminate\Support\Facades\Route;
 
 // routes/web.php ou routes/central.php
@@ -48,7 +49,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/freelancer/{id}/edit', App\Livewire\Admin\Freelancer\Edit::class)->name('freelancer.edit');
     Route::get('/freelancer', App\Livewire\Admin\Freelancer\Index::class)->name('freelancer.index');
 
-
     // email
     Route::get('/email/{id}/send', App\Livewire\Admin\Email\Send::class)->name('email.send');
     Route::get('/email/{id}/view', App\Livewire\Admin\Email\View::class)->name('email.view');
@@ -59,6 +59,9 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/budget/{id}/invoice', App\Livewire\Admin\Budget\Invoice::class)->name('budget.invoice');
     Route::get('/budget/{id}/print', [BudgetController::class, 'print'])->name('budget.print');
     Route::get('/budget/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('budget.pdf');
+
+    Route::get('/budgets/{budget}/financial-report', FinancialReport::class)
+        ->name('budgets.financial-report');
 
     // budget-item
     Route::get('/budget/{budgetId}/item', App\Livewire\Admin\BudgetItem\Show::class)->name('budget.item.show');
@@ -98,7 +101,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/plans/create', App\Livewire\Admin\Plan\Create::class)->name('plan.create');
     Route::get('/plans/{id}/edit', App\Livewire\Admin\Plan\Edit::class)->name('plan.edit');
     Route::get('/plans', App\Livewire\Admin\Plan\Index::class)->name('plan.index');
-
 
     // profile
     Route::get('/profile', App\Livewire\Admin\Profile\Index::class)->name('profile.index');

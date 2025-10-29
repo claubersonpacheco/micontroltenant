@@ -142,7 +142,7 @@
                         <input wire:model="received_by" id="received_by" type="text" placeholder="{{ __('Received by ') }}"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        @error('received_by') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Invoice -->
@@ -168,8 +168,6 @@
 
                     <div class="sm:col-span-8">
                     </div>
-
-
 
                     <template x-if="$wire.receipt == 1">
                         <div class="contents">

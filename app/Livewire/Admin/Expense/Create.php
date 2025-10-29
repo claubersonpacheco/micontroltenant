@@ -71,7 +71,7 @@ class Create extends Component
     public function store()
     {
 
-
+        $id = $this->budget->id;
 
         $this->validate([
             'category' => 'required',
@@ -118,7 +118,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('expense.budget.listing', $this->budget->id );
+        return redirect()->route('expense.budget.listing', $id );
     }
 
     protected function uploadToBunny($file)

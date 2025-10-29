@@ -3,11 +3,13 @@
 namespace App\Livewire\Admin\Expense;
 
 use App\Models\Budget;
+use App\Models\BudgetTotal;
 use App\Models\Expense;
 use App\Models\Product;
 use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +20,12 @@ class Listing extends Component
     use WithPagination;
 
     public $budget;
+
+    public ?BudgetTotal $totals = null;
+
+    public $showModal = false;
+    public $itemIdToDelete;
+
     private $id;
 
     public ?int $quantity = 5;
@@ -30,7 +38,9 @@ class Listing extends Component
 
     public function mount(int $id): void
     {
-        $this->budget = Budget::findOrFail($id);
+        $this->budget = Budget::with('summary')->findOrFail($id);
+        $this->totals = $this->budget->summary;
+
     }
 
     #[Computed]
@@ -47,41 +57,18 @@ class Listing extends Component
             ->withQueryString();
     }
 
-    public function delete(int $id)
+    public function openModal(int $id): void
     {
-        $apiAccessKey = env('BUNNY_API_KEY_PASSWORD');
-        $storageZone = env('BUNNY_STORAGE_ZONE');
-        $storageRegion = env('BUNNY_STORAGE_REGION');
+        $this->itemIdToDelete = $id;
+        $this->showModal = true;
 
-        $client = new \Bunny\Storage\Client($apiAccessKey, $storageZone, $storageRegion);
-
-        $file = Expense::findOrFail($id);
-
-        try {
-            if ($file->invoice !== false) {
-                // Deleta do BunnyCDN
-                $result = $client->delete('micontrol/invoices/' . $file->filename);
-
-                // Verifica se houve erro no delete remoto
-                if ($result !== null) {
-                    toastr()->error('Fail to delete: ' . $result);
-                    return redirect()->route('expense.budget.listing', $this->budgetId->id);
-                }
-            }
-
-            // Deleta do banco (sempre que o registro existir)
-            $file->delete();
-
-            toastr()->success('Deleted successfully!');
-            return redirect()->route('expense.budget.listing', $this->budgetId->id);
-
-        } catch (\Exception $e) {
-            // Captura qualquer exceção
-            toastr()->error('Error while deleting file: ' . $e->getMessage());
-            return redirect()->route('expense.budget.listing', $this->budgetId->id);
-        }
     }
 
+    #[On('closeModal')]
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
     public function render()
     {
