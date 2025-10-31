@@ -40,7 +40,7 @@ class Listing extends Component
 
     private $id;
 
-    public ?int $quantity = 5;
+    public ?int $quantity = 50;
     public ?string $search = null;
 
     public array $sort = [
