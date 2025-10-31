@@ -299,8 +299,6 @@
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <!-- Table -->
-                            <!-- Table -->
                             <table class="min-w-full table-fixed divide-y divide-gray-200 dark:divide-neutral-700">
                                 <thead class="bg-gray-50 dark:bg-neutral-900">
                                 <tr>
@@ -317,9 +315,9 @@
 
                                     <th class="px-6 py-3 text-start w-[40px]">
                                         <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                        {{ __('Ord') }}
-                    </span>
+                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                {{ __('Ord') }}
+                                            </span>
                                         </div>
                                     </th>
 
@@ -371,7 +369,7 @@
                                         </th>
                                     @endif
 
-                                    <th class="px-6 py-3 text-end w-[120px]">
+                                    <th class="px-6 py-3 text-center w-[120px]">
                                         <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{ __("Action") }}</span>
                                     </th>
                                 </tr>
@@ -380,15 +378,15 @@
                                 <tbody
                                     x-data
                                     x-init="
-            new Sortable($el, {
-                handle: '.handle',
-                animation: 150,
-                onEnd: function () {
-                    let ids = Array.from($el.querySelectorAll('tr')).map(tr => tr.dataset.id);
-                    $wire.updateItemOrder(ids);
-                }
-            })
-        "
+                                            new Sortable($el, {
+                                                handle: '.handle',
+                                                animation: 150,
+                                                onEnd: function () {
+                                                    let ids = Array.from($el.querySelectorAll('tr')).map(tr => tr.dataset.id);
+                                                    $wire.updateItemOrder(ids);
+                                                }
+                                            })
+                                        "
                                     class="divide-y divide-gray-200 dark:divide-neutral-700">
 
                                 @forelse($this->rows as $item)
@@ -444,14 +442,14 @@
                                                 <a title="Editar"
                                                    wire:click="$dispatch('open-modal', { name: 'edit-item' }); $dispatch('edit-item', { id: {{ $item->id }} })"
                                                    class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                        <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                 class="w-6 h-6">
-                              <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
-                            </svg>
-                        </span>
+                                                    <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                             class="w-6 h-6">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
+                                                        </svg>
+                                                    </span>
                                                 </a>
                                                 <!-- Delete -->
                                                 <a title="Delete"
@@ -481,10 +479,6 @@
                                 @endforelse
                                 </tbody>
                             </table>
-                            <!-- End Table -->
-
-                            <!-- End Table -->
-
                             <!-- End Table -->
                             <!-- Footer -->
                             <div

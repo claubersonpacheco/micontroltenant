@@ -25,14 +25,14 @@ class Index extends Component
     public array $selectedItems = [];
 
     // Controle de colunas
-    public bool $showService = false;
-    public bool $showDescription = false;
-    public bool $showQtd = false;
-    public bool $showPrice = false;
-    public bool $showTax = false;
-    public bool $showTaxValue = false;
-    public bool $showSubTotal = false;
-    public bool $showTotal = false;
+    public bool $showService;
+    public bool $showDescription;
+    public bool $showQtd;
+    public bool $showPrice;
+    public bool $showTax;
+    public bool $showTaxValue;
+    public bool $showSubTotal;
+    public bool $showTotal;
 
     public ?int $itemDelete = null;
 
@@ -46,17 +46,22 @@ class Index extends Component
 
     public function mount($budgetId): void
     {
-        $this->budget = Budget::with('summary', 'latestStatus')->findOrFail($budgetId);
+        $this->budget = Budget::with([
+            'summary',
+            'latestStatus',
+            'filters'
+        ])->findOrFail($budgetId);
+
 
         // Inicializa colunas conforme orçamento
-        $this->showService     = (bool) $this->budget->show_service;
-        $this->showDescription = (bool) $this->budget->show_description;
-        $this->showQtd         = (bool) $this->budget->show_qtd;
-        $this->showPrice       = (bool) $this->budget->show_price;
-        $this->showTax         = (bool) $this->budget->show_tax;
-        $this->showTaxValue    = (bool) $this->budget->show_tax_value;
-        $this->showSubTotal    = (bool) $this->budget->show_sub_total;
-        $this->showTotal       = (bool) $this->budget->show_total;
+        $this->showService     = (bool) $this->budget->filters->show_bi_service;
+        $this->showDescription = (bool) $this->budget->filters->show_bi_description;
+        $this->showQtd         = (bool) $this->budget->filters->show_bi_qtd;
+        $this->showPrice       = (bool) $this->budget->filters->show_bi_price;
+        $this->showTax         = (bool) $this->budget->filters->show_bi_tax;
+        $this->showTaxValue    = (bool) $this->budget->filters->show_bi_tax_value;
+        $this->showSubTotal    = (bool) $this->budget->filters->show_bi_sub_total;
+        $this->showTotal       = (bool) $this->budget->filters->show_bi_total;
 
         $this->colorStatus = $this->getStatusColor($this->budget->latestStatus->status ?? 'default');
     }
@@ -145,15 +150,15 @@ class Index extends Component
             return;
         }
 
-        $this->budget->update([
-            'show_service'     => $this->showService,
-            'show_description' => $this->showDescription,
-            'show_price'       => $this->showPrice,
-            'show_qtd'         => $this->showQtd,
-            'show_tax'         => $this->showTax,
-            'show_tax_value'   => $this->showTaxValue,
-            'show_sub_total'   => $this->showSubTotal,
-            'show_total'       => $this->showTotal,
+        $this->budget->filters->update([
+            'show_bi_service'     => $this->showService,
+            'show_bi_description' => $this->showDescription,
+            'show_bi_price'       => $this->showPrice,
+            'show_bi_qtd'         => $this->showQtd,
+            'show_bi_tax'         => $this->showTax,
+            'show_bi_tax_value'   => $this->showTaxValue,
+            'show_bi_sub_total'   => $this->showSubTotal,
+            'show_bi_total'       => $this->showTotal,
         ]);
 
         $this->budget->refresh();

@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\BudgetTotal;
 use App\Models\Entry;
 use App\Models\Expense;
 use App\Observers\BudgetItemObserver;
+use App\Observers\BudgetObserver;
 use App\Observers\BudgetTotalObserver;
 use App\Observers\EntryObserver;
 use App\Observers\ExpenseObserver;
@@ -47,5 +49,6 @@ class AppServiceProvider extends ServiceProvider
         BudgetItem::observe(BudgetItemObserver::class);
         Expense::observe(ExpenseObserver::class);
         Entry::observe(EntryObserver::class);
+        Budget::observe(BudgetObserver::class);
     }
 }

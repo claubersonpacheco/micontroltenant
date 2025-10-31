@@ -7,6 +7,7 @@ use App\Services\BudgetTotalService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Budget extends Model
 {
@@ -35,6 +36,11 @@ class Budget extends Model
     public function items(): HasMany
     {
         return $this->hasMany(BudgetItem::class);
+    }
+
+    public function filters():HasOne
+    {
+        return $this->hasOne(BudgetFilter::class);
     }
 
 //    public function budgetsendemail():HasMany
