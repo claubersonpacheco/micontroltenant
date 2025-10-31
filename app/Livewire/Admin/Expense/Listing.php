@@ -57,7 +57,6 @@ class Listing extends Component
 
         $this->totals = $this->budget->summary;
 
-
         $this->showCode = $this->budget->filters->show_ex_code;
         $this->showName = $this->budget->filters->show_ex_name;
         $this->showDescription = $this->budget->filters->show_ex_description;
@@ -88,7 +87,6 @@ class Listing extends Component
     {
         $this->itemIdToDelete = $id;
         $this->showModal = true;
-
     }
 
     #[On('closeModal')]
@@ -104,7 +102,6 @@ class Listing extends Component
     {
         $this->resetPage();
         $this->budget->refresh();
-
     }
 
     /** 🔢 Contar colunas ativas */
@@ -122,7 +119,6 @@ class Listing extends Component
             $this->showFilePath,
         ]));
     }
-
 
     /** 💾 Atualiza colunas de exibição no orçamento */
     public function atualizationColumns(): void
