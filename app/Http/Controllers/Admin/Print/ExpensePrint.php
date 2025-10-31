@@ -12,10 +12,15 @@ class ExpensePrint extends Controller
 {
 
     public function viewPrint($id)
-    {
 
-        $expense = Expense::with('budget')->where('budget_id', $id)
+    {
+        $budget = Budget::with([
+            'expenses',
+            'summary',
+            'filters'
+        ])->where('id', $id)
             ->first();
+
 
         $setting = Setting::first();
 
@@ -25,7 +30,12 @@ class ExpensePrint extends Controller
 
         }
 
-        return view('admin.print.expense-view', compact('expense', 'setting'))->render();
+        return view('admin.print.expense-view',[
+            'budget' => $budget,
+            'expenses' => $budget->expenses,
+            'filters' => $budget->filters,
+            'setting' => $setting
+        ])->render();
 
     }
 }

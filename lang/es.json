@@ -308,6 +308,7 @@
     "Money": "Efectivo",
     "Card": "Tarjeta",
     "Other": "Otro",
-    "File Invoice": "Archivo de factura"
+    "File Invoice": "Archivo de factura",
+    "Expenses" : "Gastos"
 
 }

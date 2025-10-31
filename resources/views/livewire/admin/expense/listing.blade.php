@@ -381,8 +381,9 @@
                                             @else
 
                                                 {{ $row->filename }}</td>
-                                    @endif
-                                    @endif
+                                          @endif
+                                        @endif
+
 
                                     @if($showFilePath)
                                         <td class="px-6 py-3  flex-1">
