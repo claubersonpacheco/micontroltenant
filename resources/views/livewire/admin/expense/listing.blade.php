@@ -103,8 +103,87 @@
                                             </span>
                                     </button>
 
-
                                     <div
+                                        class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-20 bg-white shadow-md rounded-lg mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700"
+                                        role="menu" aria-orientation="vertical"
+                                        aria-labelledby="hs-as-table-table-filter-dropdown">
+                                        <div class="divide-y divide-gray-200 dark:divide-neutral-700">
+
+                                            <label for="filter-showCode" class="flex py-2.5 px-3">
+                                                <input wire:model="showCode" wire:change="atualizationColumns"
+                                                       id="filter-showCode"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Code') }}</span>
+                                            </label>
+
+                                            <label for="filter-showDate" class="flex py-2.5 px-3">
+                                                <input wire:model="showDate" wire:change="atualizationColumns"
+                                                       id="filter-showDate"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Date') }}</span>
+                                            </label>
+
+                                            <label for="filter-showName" class="flex py-2.5 px-3">
+                                                <input wire:model="showName" wire:change="atualizationColumns"
+                                                       id="filter-showName"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Name') }}</span>
+                                            </label>
+
+                                            <label for="filter-showDescription" class="flex py-2.5 px-3">
+                                                <input wire:model="showDescription" wire:change="atualizationColumns"
+                                                       id="filter-showDescription"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Description') }}</span>
+                                            </label>
+
+                                            <label for="filter-showAmount" class="flex py-2.5 px-3">
+                                                <input wire:model="showAmount" wire:change="atualizationColumns"
+                                                       id="filter-showAmount"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Amount') }}</span>
+                                            </label>
+
+                                            <label for="filter-showMethod" class="flex py-2.5 px-3">
+                                                <input wire:model="showMethod" wire:change="atualizationColumns"
+                                                       id="filter-showMethod"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Method Pay') }}</span>
+                                            </label>
+
+                                            <label for="filter-showInvoiceNumber" class="flex py-2.5 px-3">
+                                                <input wire:model="showInvoiceNumber" wire:change="atualizationColumns"
+                                                       id="filter-showInvoiceNumber"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Invoice Number') }}</span>
+                                            </label>
+
+                                            <label for="filter-showFileName" class="flex py-2.5 px-3">
+                                                <input wire:model="showFileName" wire:change="atualizationColumns"
+                                                       id="filter-showFileName"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('File Name') }}</span>
+                                            </label>
+
+                                            <label for="filter-showFilePath" class="flex py-2.5 px-3">
+                                                <input wire:model="showFilePath" wire:change="atualizationColumns"
+                                                       id="filter-showFilePath"
+                                                       type="checkbox"
+                                                       class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                                                <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('File') }}</span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+<div
                                         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-20 bg-white shadow-md rounded-lg mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700"
                                         role="menu" aria-orientation="vertical"
                                         aria-labelledby="hs-as-table-table-filter-dropdown">
@@ -154,7 +233,7 @@
                                                     class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Amount') }}</span>
                                             </label>
 
-                                            <label for="hs-as-filters-dropdown-due-date" class="flex py-2.5 px-3">
+                                            <label for="showMethod" class="flex py-2.5 px-3">
                                                 <input wire:model="showMethod" wire:change="atualizationColumns"
                                                        id="showMethod"
                                                        type="checkbox"

@@ -228,51 +228,86 @@
                                             </span>
                                             </button>
 
-
-
                                             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-20 bg-white shadow-md rounded-lg mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" role="menu" aria-orientation="vertical" aria-labelledby="hs-as-table-table-filter-dropdown">
                                                 <div class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                                    <label for="hs-as-filters-dropdown-frequency" class="flex py-2.5 px-3">
-                                                        <input wire:model="showService" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+
+                                                    <label for="filter-showService" class="flex py-2.5 px-3">
+                                                        <input wire:model="showService"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showService"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Service') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-status" class="flex py-2.5 px-3">
-                                                        <input wire:model="showDescription" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-status">
+                                                    <label for="filter-showDescription" class="flex py-2.5 px-3">
+                                                        <input wire:model="showDescription"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showDescription"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Description') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-created" class="flex py-2.5 px-3">
-                                                        <input wire:model="showQtd" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-created">
+                                                    <label for="filter-showQtd" class="flex py-2.5 px-3">
+                                                        <input wire:model="showQtd"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showQtd"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Quantity') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-due-date" class="flex py-2.5 px-3">
-                                                        <input wire:model="showPrice" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-due-date">
+                                                    <label for="filter-showPrice" class="flex py-2.5 px-3">
+                                                        <input wire:model="showPrice"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showPrice"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Price Unit') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model="showTax" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                    <label for="filter-showTax" class="flex py-2.5 px-3">
+                                                        <input wire:model="showTax"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showTax"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model="showTaxValue" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                    <label for="filter-showTaxValue" class="flex py-2.5 px-3">
+                                                        <input wire:model="showTaxValue"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showTaxValue"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Tax Value') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model="showSubTotal" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                    <label for="filter-showSubTotal" class="flex py-2.5 px-3">
+                                                        <input wire:model="showSubTotal"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showSubTotal"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('SubTotal') }}</span>
                                                     </label>
 
-                                                    <label for="hs-as-filters-dropdown-amount" class="flex py-2.5 px-3">
-                                                        <input wire:model="showTotal" wire:change="atualizationColumns" type="checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-amount">
+                                                    <label for="filter-showTotal" class="flex py-2.5 px-3">
+                                                        <input wire:model="showTotal"
+                                                               wire:change="atualizationColumns"
+                                                               id="filter-showTotal"
+                                                               type="checkbox"
+                                                               class="shrink-0 mt-0.5 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <span class="ms-3 text-sm text-gray-800 dark:text-neutral-200">{{ __('Total') }}</span>
                                                     </label>
+
                                                 </div>
                                             </div>
+
+
+
                                         </div>
                                         <!-- end filter -->
 
