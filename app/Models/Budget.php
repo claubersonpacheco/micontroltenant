@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\BudgetService;
-use App\Services\BudgetTotalService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -85,7 +83,6 @@ class Budget extends Model
     {
         BudgetTotalService::updateTotals($this->id);
     }
-
 
     public function entries()
     {

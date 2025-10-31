@@ -1,6 +1,5 @@
 <div>
     <!--modal-->
-
     <div
         class="fixed inset-0 z-[99] flex items-center justify-center bg-gray-500 bg-opacity-10"
         style="background-color: rgba(107, 114, 128, 0.5);"
