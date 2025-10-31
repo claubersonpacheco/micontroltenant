@@ -58,7 +58,6 @@ class Budget extends Model
         });
     }
 
-
     public function status()
     {
         return $this->hasMany(BudgetStatus::class);
