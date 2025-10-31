@@ -349,7 +349,7 @@
                                         <td class="px-6 py-3  flex-1">{{ $row->name }}</td>
                                     @endif
                                     @if($showDescription)
-                                        <td class="px-6 py-3  flex-1">{!! $row->showDescription !!}</td>
+                                        <td class="px-6 py-3  flex-1">{!! $row->description !!}</td>
                                     @endif
 
                                     @if($showMethod)
