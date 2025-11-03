@@ -1,7 +1,6 @@
 <div class="w-full lg:ps-64">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
 
-
         <div class="mb-5 pb-5 border-b border-gray-200 dark:border-neutral-700">
             <div class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 ">
 
