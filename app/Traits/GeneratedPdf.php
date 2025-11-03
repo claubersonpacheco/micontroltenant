@@ -4,21 +4,23 @@ namespace App\Traits;
 use Spatie\Browsershot\Browsershot;
 trait GeneratedPdf
 {
-    public function PdfWithChrome(string  $template, string $storagePath, $budget)
+    public function PdfWithChrome(string $template, string $storagePath, $budget)
     {
-        $options = '/usr/bin/google-chrome';
-
-
-        if(env('APP_ENV') !== 'production') {
-            $options = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+        if(env('APP_ENV') === 'production') {
+            $nodeBinary = '/usr/bin/node';
+            $npmBinary  = '/usr/bin/npm';
+            $chromePath = '/usr/bin/google-chrome';
+        } else {
+            $nodeBinary = 'C:\\Program Files\\nodejs\\node.exe';
+            $npmBinary  = 'C:\\Program Files\\nodejs\\npm.cmd';
+            $chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
         }
 
-
         Browsershot::html($template)
-            ->setNodeBinary('C:\\Program Files\\nodejs\\node.exe') // '' /usr/bin/node
-            ->setNpmBinary('C:\\Program Files\\nodejs\\npm.cmd') //'' /usr/bin/npm
+            ->setNodeBinary($nodeBinary)
+            ->setNpmBinary($npmBinary)
             ->setOption('args', ['--no-sandbox'])
-            ->setOption('executablePath', $options ) //'' /usr/bin/google-chrome
+            ->setOption('executablePath', $chromePath)
             ->emulateMedia('screen')
             ->showBackground()
             ->showBrowserHeaderAndFooter()
@@ -30,8 +32,8 @@ trait GeneratedPdf
             ->waitUntilNetworkIdle()
             ->ignoreHttpsErrors()
             ->savePdf($storagePath);
-
     }
+
 
     function getFooterHtml($budget)
     {
