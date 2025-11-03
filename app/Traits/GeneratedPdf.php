@@ -6,11 +6,19 @@ trait GeneratedPdf
 {
     public function PdfWithChrome(string  $template, string $storagePath, $budget)
     {
+        $options = '/usr/bin/google-chrome';
+
+
+        if(env('APP_ENV') !== 'production') {
+            $options = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+        }
+
+
         Browsershot::html($template)
             ->setNodeBinary('C:\\Program Files\\nodejs\\node.exe') // '' /usr/bin/node
             ->setNpmBinary('C:\\Program Files\\nodejs\\npm.cmd') //'' /usr/bin/npm
             ->setOption('args', ['--no-sandbox'])
-            ->setOption('executablePath', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' ) //'' /usr/bin/google-chrome
+            ->setOption('executablePath', $options ) //'' /usr/bin/google-chrome
             ->emulateMedia('screen')
             ->showBackground()
             ->showBrowserHeaderAndFooter()
