@@ -64,7 +64,6 @@
             <p><b>Correo eletronico:</b> {{ $budget->customer->email }}</p>
         </div>
 
-
     </fieldset>
 
     <table class="min-w-full mt-8 border-collapse">
