@@ -30,7 +30,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/entry', App\Livewire\Admin\Entry\Index::class)->name('entry.index');
 
     // expense
-
     Route::get('/expense/budget/{id}/pdf', [\App\Http\Controllers\Admin\Print\ExpensePrint::class, 'generatePDF'])->name('expense.pdf');
     Route::get('/expense/budget/{id}/view', [\App\Http\Controllers\Admin\Print\ExpensePrint::class, 'viewPrint'])->name('expense.view');
     Route::get('/expense/budget/{id}/edit', App\Livewire\Admin\Expense\Edit::class)->name('expense.edit');
