@@ -22,7 +22,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="code" id="code" type="text" placeholder="Code"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="name" id="name" type="text" placeholder="{{ __('Name your freelancer') }}"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="sm:col-span-5">
                         <input wire:model.live="birth_date" id="date" type="date"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="document" id="document" type="text" placeholder="DNI/NIE/NIF"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('document') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="email" id="email" type="email" placeholder="email@example.com"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('email') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="phone" id="phone" type="text" placeholder="+34 612 345 678"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('phone') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="address" id="document" type="text" placeholder="Address"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('address') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="city" id="city" type="text" placeholder="City"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('city') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="state" id="state" type="text" placeholder="State"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('state') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -142,33 +142,35 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="zip" id="zip" type="text" placeholder="Zip Code"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('zip') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Account Bank -->
                     <div class="sm:col-span-3">
-                        <label for="account_bank" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="account_bank"
+                            class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Account Bank') }}
                         </label>
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="account_bank" id="account_bank" type="text" placeholder="Account Bank"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('account_bank') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Account Number -->
                     <div class="sm:col-span-3">
-                        <label for="account_number" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="account_number"
+                            class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Account Number') }}
                         </label>
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="account_number" id="account_bank" type="text" placeholder="Account Number"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('account_number') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -181,7 +183,7 @@
                     </div>
                     <div class="sm:col-span-9">
                         <input wire:model="role" id="role" type="text" placeholder="Role"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                       focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('role') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -193,7 +195,8 @@
                         </label>
                     </div>
                     <div class="sm:col-span-9 flex items-center space-x-3">
-                        <input type="checkbox" id="status" wire:model="status" {{ $status }} class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700">
+                        <input type="checkbox" id="status" wire:model="status" {{ $status }}
+                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700">
                         <label for="status" class="text-sm text-gray-800 dark:text-neutral-200">
 
                         </label>
@@ -204,12 +207,12 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('freelancer.index') }}"
-                       class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
+                    <a href="{{ route('tenant.freelancer.index') }}"
+                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>
                     <button type="submit" form="freelancer-create"
-                            class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
                         {{ __('Save') }}
                     </button>
                 </div>

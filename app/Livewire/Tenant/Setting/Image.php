@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Setting;
+namespace App\Livewire\Tenant\Setting;
 
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +26,7 @@ class Image extends Component
 
     public function render()
     {
-        return view('livewire.admin.setting.image');
+        return view('livewire.tenant.setting.image');
     }
 
     public function uploadLogo()

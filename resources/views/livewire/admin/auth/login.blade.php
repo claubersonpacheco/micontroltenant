@@ -2,9 +2,9 @@
 <div>
 <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
     <!-- Logo centralizada -->
-    <a href="{{ route('home') }}" class="flex justify-center">
+    <div class="flex justify-center">
         <x-logo width="200" height="40" />
-    </a>
+    </div>
 
     <!-- Título -->
     <h2 class="mt-6 text-3xl font-extrabold text-gray-900">

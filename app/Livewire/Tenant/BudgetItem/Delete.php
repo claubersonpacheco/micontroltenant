@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\BudgetItem;
+namespace App\Livewire\Tenant\BudgetItem;
 
 use App\Models\BudgetItem;
 use Livewire\Attributes\On;
@@ -35,7 +35,7 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget-item.delete');
+        return view('livewire.tenant.budget-item.delete');
     }
 
 }

@@ -23,7 +23,7 @@
                     </div>
                     <div class="sm:col-span-3">
                         <input wire:model="code" id="code" type="text" placeholder="Customer code"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="sm:col-span-3">
                         <input wire:model.live="date" id="date" type="date"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -49,23 +49,22 @@
                         </label>
                     </div>
                     <div class="sm:col-span-2">
-                        <input wire:model.live="expirate"
-                               id="expirate"
-                               type="date"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                        <input wire:model.live="expirate" id="expirate" type="date"
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('expirate') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!--calc date-->
                     <div class="sm:col-span-1">
-                        <label for="total_expirate" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="total_expirate"
+                            class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Days') }}
                         </label>
                     </div>
                     <div class="sm:col-span-2">
                         <input wire:model="total_expirate" id="total_expirate" readonly type="text"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                     </div>
 
@@ -76,7 +75,8 @@
                         </label>
                     </div>
                     <div class="sm:col-span-10 flex gap-2 items-center">
-                        <select wire:model="customer" id="customer" class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                        <select wire:model="customer" id="customer"
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                             <option selected="">{{ __('Select the customer') }}</option>
                             @foreach($customers as $customer)
@@ -86,12 +86,12 @@
                         @error('customer') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
 
                         <!-- Botão do modal -->
-                        <button
-                            type="button"
-                            wire:click="$dispatch('open-category-modal')"
+                        <button type="button" wire:click="$dispatch('open-category-modal')"
                             class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
                             {{ __("New") }}
@@ -105,21 +105,23 @@
                         </label>
                     </div>
                     <div class="sm:col-span-10">
-                        <input wire:model="name" id="name" type="text" placeholder="{{ __('Write the name of budget') }}"
-                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                        <input wire:model="name" id="name" type="text"
+                            placeholder="{{ __('Write the name of budget') }}"
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                           focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Description -->
                     <div class="sm:col-span-2">
-                        <label for="description" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                        <label for="description"
+                            class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Description') }}
                         </label>
                     </div>
                     <div class="sm:col-span-10">
-                            <textarea wire:model="description" id="description" placeholder="Budget description"
-                                      class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                        <textarea wire:model="description" id="description" placeholder="Budget description"
+                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                 focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"></textarea>
                         @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -128,12 +130,12 @@
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('budget.index') }}"
-                       class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
+                    <a href="{{ route('tenant.budget.index') }}"
+                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>
                     <button type="submit" form="customer-create"
-                            class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
                         {{ __('Save') }}
                     </button>
                 </div>

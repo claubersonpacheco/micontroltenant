@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Product;
+namespace App\Livewire\Tenant\Product;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -10,8 +10,10 @@ use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
-#[Title('Product')]
+#[Title('List Users')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -44,7 +46,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.product.index');
+        return view('livewire.tenant.product.index');
     }
 }
 

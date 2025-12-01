@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget;
+namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
 use App\Models\Category;
@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Create Budget')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -38,7 +40,7 @@ class Create extends Component
 
         $this->calculateTotalExpirate();
 
-        $this->code =  $this->generateCode(Customer::class);
+        $this->code = $this->generateCode(Customer::class);
         $this->loadCustomers();
     }
 
@@ -114,6 +116,6 @@ class Create extends Component
     {
         $this->code = $this->generateCode(Budget::class);
 
-        return view('livewire.admin.budget.create');
+        return view('livewire.tenant.budget.create');
     }
 }

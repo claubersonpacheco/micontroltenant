@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Livewire\Admin\Customer;
+namespace App\Livewire\Tenant\Customer;
 
 use App\Models\Customer;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Edit Customer')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public $customer;
@@ -56,6 +58,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.customer.edit');
+        return view('livewire.tenant.customer.edit');
     }
 }

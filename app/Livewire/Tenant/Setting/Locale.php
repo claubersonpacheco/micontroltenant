@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Setting;
+namespace App\Livewire\Tenant\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;

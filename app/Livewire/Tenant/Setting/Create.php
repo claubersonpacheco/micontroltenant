@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Setting;
+namespace App\Livewire\Tenant\Setting;
 
 use App\Models\Setting;
 use Illuminate\Support\Facades\Session;
@@ -11,6 +11,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 
 #[Title('Create Setting')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     public ?string $title = null;
@@ -70,7 +71,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.setting.create');
+        return view('livewire.tenant.setting.create');
     }
 }
 

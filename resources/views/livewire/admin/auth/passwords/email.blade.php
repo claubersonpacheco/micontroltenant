@@ -2,9 +2,9 @@
 
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="{{ route('home') }}">
+        <div class="flex justify-center">
             <x-logo width="200" height="40" />
-        </a>
+        </div>
 
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
             Reset password

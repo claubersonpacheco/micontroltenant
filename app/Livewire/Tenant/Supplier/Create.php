@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Supplier;
+namespace App\Livewire\Tenant\Supplier;
 
 use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
-#[Title('Create product supplier')]
+#[Title('Create Supplier')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -71,8 +73,8 @@ class Create extends Component
 
     public function render()
     {
-        $this->code =  $this->generateCode(Supplier::class);
+        $this->code = $this->generateCode(Supplier::class);
 
-        return view('livewire.admin.supplier.create');
+        return view('livewire.tenant.supplier.create');
     }
 }

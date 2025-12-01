@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Freelancer;
+namespace App\Livewire\Tenant\Freelancer;
 
 use App\Models\Freelancer;
 use Livewire\Component;
@@ -8,9 +8,11 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 
-#[Title('Freelancer')]
+#[Title('List Users')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -43,7 +45,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.freelancer.index');
+        return view('livewire.tenant.freelancer.index');
     }
 }
 

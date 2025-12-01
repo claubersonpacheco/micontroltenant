@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Livewire\Admin\Setting;
+namespace App\Livewire\Tenant\Setting;
 
 use App\Models\Setting;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Edit Setting')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public Setting $setting;  // Declare a propriedade para o model
@@ -61,7 +65,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.setting.edit');
+        return view('livewire.tenant.setting.edit');
     }
 }
 

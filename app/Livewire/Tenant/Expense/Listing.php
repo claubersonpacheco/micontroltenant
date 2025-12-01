@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Expense;
+namespace App\Livewire\Tenant\Expense;
 
 use App\Models\Budget;
 use App\Models\BudgetItem;
@@ -13,10 +13,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Listing Expense')]
+#[Title('List Users')]
+#[Layout('layouts.tenant.admin')]       
 class Listing extends Component
 {
     use WithPagination;
@@ -145,6 +147,6 @@ class Listing extends Component
 
     public function render()
     {
-        return view('livewire.admin.expense.listing');
+        return view('livewire.tenant.expense.listing');
     }
 }

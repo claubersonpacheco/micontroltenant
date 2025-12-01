@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Category;
+namespace App\Livewire\Tenant\Category;
 
 use App\Models\Category;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Title('Edit Category')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
 
@@ -43,7 +45,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.category.edit');
+        return view('livewire.tenant.category.edit');
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget;
+namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
 use App\Models\Customer;
@@ -9,11 +9,13 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Spatie\ArrayToXml\ArrayToXml;
 use Spatie\Browsershot\Browsershot;
 
-#[Title('Budgets')]
+#[Title('Invoice')]
+#[Layout('layouts.tenant.admin')]
 class Invoice extends Component
 {
     use WithPagination;
@@ -92,7 +94,7 @@ class Invoice extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget.invoice');
+        return view('livewire.tenant.budget.invoice');
     }
 }
 

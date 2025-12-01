@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Expense;
+namespace App\Livewire\Tenant\Expense;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.admin.expense.index');
+        return view('livewire.tenant.expense.index');
     }
 }

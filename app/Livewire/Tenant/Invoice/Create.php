@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Invoice;
+namespace App\Livewire\Tenant\Invoice;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class Create extends Component
 {
     public function render()
     {
-        return view('livewire.admin.invoice.create');
+        return view('livewire.tenant.invoice.create');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Expense;
+namespace App\Livewire\Tenant\Expense;
 
 use App\Models\Budget;
 use App\Models\Category;
@@ -15,8 +15,10 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
+use Livewire\Attributes\Layout;
 
 #[Title('Edit Expense')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     use GenerateAutomaticCode;
@@ -160,6 +162,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.expense.edit');
+        return view('livewire.tenant.expense.edit');
     }
 }

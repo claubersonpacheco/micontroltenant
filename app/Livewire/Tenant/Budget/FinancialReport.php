@@ -21,6 +21,6 @@ class FinancialReport extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget.financial-report');
+        return view('livewire.tenant.budget.financial-report');
     }
 }

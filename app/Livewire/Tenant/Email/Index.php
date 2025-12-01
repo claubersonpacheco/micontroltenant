@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Email;
+namespace App\Livewire\Tenant\Email;
 
 use App\Models\Budget;
 use App\Models\Email;
@@ -8,7 +8,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
+#[Title('List Email')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -17,7 +21,7 @@ class Index extends Component
     public ?string $search = null;
 
     public array $sort = [
-        'column'    => 'created_at',
+        'column' => 'created_at',
         'direction' => 'desc',
     ];
 
@@ -25,8 +29,10 @@ class Index extends Component
     public function rows(): LengthAwarePaginator
     {
         return Email::query()
-            ->when($this->search !== null, fn ($query) =>
-            $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
+            ->when(
+                $this->search !== null,
+                fn($query) =>
+                $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
             ->orderBy(...array_values($this->sort))
             ->paginate($this->quantity)
@@ -40,6 +46,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.admin.email.index');
+        return view('livewire.tenant.email.index');
     }
 }

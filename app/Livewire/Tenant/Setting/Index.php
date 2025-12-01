@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Livewire\Admin\Setting;
+namespace App\Livewire\Tenant\Setting;
 
 use App\Models\Setting;
 use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
-#[Title('Setting')]
+#[Title('List Users')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
 
-    public ?int $quantity = 5;
+    public ?int $quantity = 25;
     public ?string $search = null;
 
     public array $sort = [
@@ -44,6 +45,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.setting.index');
+        return view('livewire.tenant.setting.index');
     }
 }

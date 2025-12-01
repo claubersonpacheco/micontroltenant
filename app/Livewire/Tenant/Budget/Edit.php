@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Livewire\Admin\Budget;
+namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
 use App\Models\Category;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
-#[Title('Edit Budget')]
+#[Title('Edit Budgets')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public $budget;
@@ -57,7 +59,7 @@ class Edit extends Component
         }
     }
 
-// Atualiza quando mudar date ou expirate
+    // Atualiza quando mudar date ou expirate
     public function updatedDate()
     {
         $this->calculateTotalExpirate();
@@ -91,7 +93,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget.edit', [
+        return view('livewire.tenant.budget.edit', [
             'categories' => Budget::all(),
         ]);
     }

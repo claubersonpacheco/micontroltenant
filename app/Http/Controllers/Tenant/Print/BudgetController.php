@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Print;
+namespace App\Http\Controllers\Tenant\Print;
 
 use App\Http\Controllers\Controller;
 use App\Models\Budget;

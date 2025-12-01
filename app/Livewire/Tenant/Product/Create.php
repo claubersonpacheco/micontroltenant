@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Product;
+namespace App\Livewire\Tenant\Product;
 
 use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
@@ -8,7 +8,11 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Create Product')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -60,6 +64,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.product.create');
+        return view('livewire.tenant.product.create');
     }
 }

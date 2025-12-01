@@ -1,4 +1,4 @@
-@extends('layouts.tenant.base')
+@extends('layouts.front.base')
 
 @section('body')
     @yield('content')

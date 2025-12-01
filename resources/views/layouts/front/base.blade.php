@@ -26,6 +26,23 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        /* Fallback styles para garantir legibilidade mesmo sem Tailwind */
+        :root{--bg:#f7f7fb;--card:#ffffff;--accent:#0b74da;--text:#222}
+        body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); margin:0; padding:24px}
+        /* As classes Tailwind/Preline são preferíveis; estes estilos são fallback */
+        .pc-container{max-width:900px;margin:24px auto;padding:28px;background:var(--card);border-radius:12px;box-shadow:0 6px 22px rgba(20,20,50,0.06)}
+        h1{color:var(--accent);margin-top:0}
+        h2{margin-bottom:6px}
+        p, li{line-height:1.6}
+        code{background:#eef2ff;padding:2px 6px;border-radius:6px;font-size:0.95em}
+        pre{white-space:pre-wrap}
+        .muted{color:#666;font-size:0.95em}
+        footer{margin-top:28px;font-size:0.95em;color:#555}
+        .placeholder{background:linear-gradient(90deg,#f0f8ff,#fbfbff);padding:6px 8px;border-radius:6px;font-weight:600}
+        .btn-primary{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;margin-top:12px}
+    </style>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

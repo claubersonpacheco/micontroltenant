@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Product;
+namespace App\Livewire\Tenant\Product;
 
 use App\Models\Product;
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Edit Product')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public $product;
@@ -57,7 +59,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.product.edit', [
+        return view('livewire.tenant.product.edit', [
             'categories' => Category::all(),
         ]);
     }

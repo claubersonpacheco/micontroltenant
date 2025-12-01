@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Customer;
+namespace App\Livewire\Tenant\Customer;
 
 use App\Models\Customer;
 use Livewire\Component;
@@ -9,8 +9,10 @@ use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
-#[Title('Customer')]
+#[Title('List Customers')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -19,7 +21,7 @@ class Index extends Component
     public ?string $search = null;
 
     public array $sort = [
-        'column'    => 'created_at',
+        'column' => 'created_at',
         'direction' => 'desc',
     ];
 
@@ -27,8 +29,10 @@ class Index extends Component
     public function rows(): LengthAwarePaginator
     {
         return Customer::query()
-            ->when($this->search !== null, fn ($query) =>
-            $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
+            ->when(
+                $this->search !== null,
+                fn($query) =>
+                $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
             ->orderBy(...array_values($this->sort))
             ->paginate($this->quantity)
@@ -43,7 +47,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.customer.index');
+        return view('livewire.tenant.customer.index');
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget\Partial;
+namespace App\Livewire\Tenant\Budget\Partial;
 
 use App\Models\Category;
 use App\Models\Customer;
@@ -77,6 +77,6 @@ class CreateCustomerModal extends Component
     }
     public function render()
     {
-        return view('livewire.admin.budget.partial.create-customer-modal');
+        return view('livewire.tenant.budget.partial.create-customer-modal');
     }
 }

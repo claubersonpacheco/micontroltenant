@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Livewire\Admin\Freelancer;
+namespace App\Livewire\Tenant\Freelancer;
 
 use App\Models\Freelancer;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Edit Freelancer')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public $freelancer;
@@ -51,9 +53,9 @@ class Edit extends Component
         $this->validate([
             'name' => 'required|min:3',
             'birth_date' => 'required|min:3',
-            'email' => 'nullable|email|unique:freelancers,email,'. $this->freelancer->id,
+            'email' => 'nullable|email|unique:freelancers,email,' . $this->freelancer->id,
             'phone' => 'nullable|min:5',
-            'document' => 'nullable|min:5|unique:freelancers,document,'. $this->freelancer->id,
+            'document' => 'nullable|min:5|unique:freelancers,document,' . $this->freelancer->id,
             'address' => 'nullable|min:3',
             'city' => 'nullable|min:3',
             'state' => 'nullable|min:3',
@@ -73,7 +75,7 @@ class Edit extends Component
             'address' => $this->address,
             'city' => $this->city,
             'state' => $this->state,
-            'zip' =>$this->zip,
+            'zip' => $this->zip,
             'account_bank' => $this->account_bank,
             'account_number' => $this->account_number,
             'role' => $this->role,
@@ -87,6 +89,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.freelancer.edit');
+        return view('livewire.tenant.freelancer.edit');
     }
 }

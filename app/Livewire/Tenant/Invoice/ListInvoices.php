@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Invoice;
+namespace App\Livewire\Tenant\Invoice;
 
 use Livewire\Component;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('List Invoices')]
+#[Layout('layouts.tenant.admin')]
 class ListInvoices extends Component
 {
     public $invoices;

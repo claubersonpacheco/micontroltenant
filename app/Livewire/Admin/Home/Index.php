@@ -8,11 +8,11 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $budgets;
+
 
     public function mount()
     {
-        $this->budgets = Budget::limit(10)->orderBy('id', 'desc')->get();
+
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Invoice;
+namespace App\Livewire\Tenant\Invoice;
 
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Storage;
@@ -32,6 +32,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.admin.invoice.index');
+        return view('livewire.tenant.invoice.index');
     }
 }

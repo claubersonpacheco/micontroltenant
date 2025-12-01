@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\BudgetItem;
+namespace App\Livewire\Tenant\BudgetItem;
 
 use App\Models\Budget;
 use App\Models\BudgetItem;
@@ -181,7 +181,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget-item.index', [
+        return view('livewire.tenant.budget-item.index', [
             'budget' => $this->budget,
             'rows'   => $this->rows,
         ]);

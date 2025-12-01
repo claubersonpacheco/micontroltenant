@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Supplier\Partials;
+namespace App\Livewire\Tenant\Supplier\Partials;
 
 use App\Models\Supplier;
 use App\Traits\GenerateAutomaticCode;
@@ -97,6 +97,6 @@ class CreateSupplierModal extends Component
 
     public function render()
     {
-        return view('livewire.admin.supplier.partials.create-supplier-modal');
+        return view('livewire.tenant.supplier.partials.create-supplier-modal');
     }
 }

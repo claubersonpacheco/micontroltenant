@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Email;
+namespace App\Livewire\Tenant\Email;
 
 use App\Mail\SendMail;
 use App\Models\Budget;
@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Mews\Purifier\Facades\Purifier;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Send Email')]
+#[Layout('layouts.tenant.admin')]
 class Send extends Component
 {
     use GeneratedPdf;
@@ -145,7 +149,7 @@ class Send extends Component
 
     public function render()
     {
-        return view('livewire.admin.email.send');
+        return view('livewire.tenant.email.send');
     }
 
     private function getFooterHtml($budget)

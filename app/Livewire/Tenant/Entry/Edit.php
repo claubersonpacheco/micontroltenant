@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Entry;
+namespace App\Livewire\Tenant\Entry;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class Edit extends Component
 {
     public function render()
     {
-        return view('livewire.admin.entry.edit');
+        return view('livewire.tenant.entry.edit');
     }
 }

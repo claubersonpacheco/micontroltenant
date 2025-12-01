@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Livewire\Admin\Category;
+namespace App\Livewire\Tenant\Category;
 
 use App\Models\Category;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 
 #[Title('Create Category')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     #[Validate('required|min:3|unique:categories,name')]
@@ -22,7 +24,8 @@ class Create extends Component
     {
         $this->validate();
 
-            Category::create([
+        Category::create(
+            [
                 'name' => $this->name,
                 'description' => $this->description,
             ]

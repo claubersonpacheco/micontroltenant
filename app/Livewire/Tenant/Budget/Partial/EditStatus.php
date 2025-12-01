@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget\Partial;
+namespace App\Livewire\Tenant\Budget\Partial;
 
 use App\Models\BudgetStatus;
 use Livewire\Attributes\On;
@@ -58,7 +58,7 @@ class EditStatus extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget.partial.edit-status');
+        return view('livewire.tenant.budget.partial.edit-status');
     }
 
 }

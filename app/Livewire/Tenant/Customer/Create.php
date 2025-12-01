@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Customer;
+namespace App\Livewire\Tenant\Customer;
 
 use App\Models\Customer;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Create Customer')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -39,7 +41,7 @@ class Create extends Component
             'address' => $this->address,
         ]);
 
-        $this->dispatch('track-event', name: 'purchase', params: [
+        $this->dispatch('track-event', 'purchase', [
             'value' => 199.90,
             'currency' => 'BRL',
             'product_id' => 123,
@@ -51,8 +53,8 @@ class Create extends Component
 
     public function render()
     {
-        $this->code =  $this->generateCode(Customer::class);
+        $this->code = $this->generateCode(Customer::class);
 
-        return view('livewire.admin.customer.create');
+        return view('livewire.tenant.customer.create');
     }
 }

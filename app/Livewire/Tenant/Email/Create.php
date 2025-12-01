@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Livewire\Admin\Email;
+namespace App\Livewire\Tenant\Email;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Create Email')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     public function render()
     {
-        return view('livewire.admin.email.create');
+        return view('livewire.tenant.email.create');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Product\Partial;
+namespace App\Livewire\Tenant\Product\Partial;
 
 use Livewire\Component;
 use App\Models\Category;

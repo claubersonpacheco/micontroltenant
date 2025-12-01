@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Email;
+namespace App\Livewire\Tenant\Email;
 
 
 use App\Models\Email;
@@ -19,6 +19,6 @@ class View extends Component
     }
     public function render()
     {
-        return view('livewire.admin.email.view');
+        return view('livewire.tenant.email.view');
     }
 }

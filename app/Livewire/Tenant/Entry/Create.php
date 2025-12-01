@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Entry;
+namespace App\Livewire\Tenant\Entry;
 
 use App\Models\Budget;
 use App\Models\Category;
@@ -15,8 +15,10 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Layout;
 
-#[Title('Create Entry')]
+#[Title('List Users')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -49,7 +51,7 @@ class Create extends Component
             return redirect()->route('admin.budgets.index');
         }
 
-        $this->code =  $this->generateCode(Entry::class);
+        $this->code = $this->generateCode(Entry::class);
         $this->date = Carbon::now()->format('Y-m-d\TH:i');
 
         $this->loadCategories();
@@ -112,7 +114,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('entry.budget.listing', $this->budget->id );
+        return redirect()->route('entry.budget.listing', $this->budget->id);
     }
 
     protected function uploadToBunny($file)
@@ -123,7 +125,7 @@ class Create extends Component
 
         $nameslug = Str::slug($this->name, '-');
         $formattedDate = Carbon::parse($this->date)->format('dmyHis');
-        $this->fileName = $this->code.'-'.$formattedDate.'-'.Str::upper($nameslug).'.'.$file->getClientOriginalExtension();
+        $this->fileName = $this->code . '-' . $formattedDate . '-' . Str::upper($nameslug) . '.' . $file->getClientOriginalExtension();
 
 
         $path = "micontrol/receipt/{$this->fileName}";
@@ -153,6 +155,6 @@ class Create extends Component
     }
     public function render()
     {
-        return view('livewire.admin.entry.create');
+        return view('livewire.tenant.entry.create');
     }
 }

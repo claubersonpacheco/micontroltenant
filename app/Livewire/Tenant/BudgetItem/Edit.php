@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\BudgetItem;
+namespace App\Livewire\Tenant\BudgetItem;
 
 use App\Models\BudgetItem;
 use App\Models\Product;
@@ -172,6 +172,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.budget-item.edit');
+        return view('livewire.tenant.budget-item.edit');
     }
 }

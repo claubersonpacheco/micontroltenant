@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Livewire\Admin\Profile;
+namespace App\Livewire\Tenant\Profile;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Livewire\Attributes\Layout;
 
 #[Title('Profile')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     public $user;
@@ -69,6 +71,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.profile.index');
+        return view('livewire.tenant.profile.index');
     }
 }

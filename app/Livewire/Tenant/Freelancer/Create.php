@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Freelancer;
+namespace App\Livewire\Tenant\Freelancer;
 
 use App\Models\Freelancer;
 use App\Traits\GenerateAutomaticCode;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 #[Title('Create Freelancer')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use GenerateAutomaticCode;
@@ -71,6 +73,6 @@ class Create extends Component
     {
         $this->code =  $this->generateCode(Freelancer::class);
 
-        return view('livewire.admin.freelancer.create');
+        return view('livewire.tenant.freelancer.create');
     }
 }

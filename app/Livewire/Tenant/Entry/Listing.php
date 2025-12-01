@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Entry;
+namespace App\Livewire\Tenant\Entry;
 
 use App\Models\Budget;
 use App\Models\Entry;
@@ -12,6 +12,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Title('List Entry')]
+#[Layout('layouts.tenant.admin')]
 class Listing extends Component
 {
     use WithPagination;
@@ -25,7 +26,7 @@ class Listing extends Component
     public ?string $search = null;
 
     public array $sort = [
-        'column'    => 'created_at',
+        'column' => 'created_at',
         'direction' => 'desc',
     ];
 
@@ -42,8 +43,10 @@ class Listing extends Component
         return Entry::query()
             ->with('budget')
             ->where('budget_id', $this->budget->id)
-            ->when($this->search !== null, fn ($query) =>
-            $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
+            ->when(
+                $this->search !== null,
+                fn($query) =>
+                $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
             ->orderBy(...array_values($this->sort))
             ->paginate($this->quantity)
@@ -87,6 +90,6 @@ class Listing extends Component
 
     public function render()
     {
-        return view('livewire.admin.entry.listing');
+        return view('livewire.tenant.entry.listing');
     }
 }

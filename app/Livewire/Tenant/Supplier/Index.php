@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Supplier;
+namespace App\Livewire\Tenant\Supplier;
 
 use App\Models\Supplier;
 use Livewire\Component;
@@ -9,8 +9,10 @@ use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Title;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
-#[Title('Product Supplier')]
+#[Title('List Suppliers')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
@@ -43,7 +45,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.supplier.index');
+        return view('livewire.tenant.supplier.index');
     }
 }
 

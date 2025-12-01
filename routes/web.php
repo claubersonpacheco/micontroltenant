@@ -17,7 +17,8 @@ Route::get('/check', function () {
 
 
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', \App\Livewire\Front\Pages\Index::class)->name('index');
+Route::get('/privacy-policy', \App\Livewire\Front\Pages\Privacy::class)->name('privacy');
 
 // Painel admin protegido
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
