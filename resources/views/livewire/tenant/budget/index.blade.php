@@ -110,7 +110,7 @@
                                                                         <!-- Items -->
                                                                         <a title="{{ __('Financial') }}"
                                                                             class="inline-flex items-center justify-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
-                                                                            href="{{ route('budgets.financial-report', $row->id) }}">
+                                                                            href="{{ route('tenant.budgets.financial-report', $row->id) }}">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +122,7 @@
                                                                         <!-- Expense -->
                                                                         <a title="{{ __('Expense') }}"
                                                                             class="inline-flex items-center justify-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
-                                                                            href="{{ route('expense.budget.listing', $row->id) }}">
+                                                                            href="{{ route('tenant.expense.budget.listing', $row->id) }}">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                                                 <path stroke-linecap="round" stroke-linejoin="round"
