@@ -39,13 +39,15 @@ Route::middleware([
 ])->group(function () {
 
     //Auth::shouldUse('tenant');
-
     Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:tenant', 'verified']], function () {
 
         // entry
+        Route::get('/entry/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'generatePDF'])->name('tenant.entry.pdf');
+        Route::get('/entry/budget/{id}/view', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'viewPrint'])->name('tenant.entry.view');
+        Route::get('/entry/budget/{id}/edit', App\Livewire\Tenant\Expense\Edit::class)->name('tenant.entry.edit');
+        Route::get('/entry/budget/{id}/create', App\Livewire\Tenant\Expense\Create::class)->name('tenant.entry.create');
+        Route::get('/entry/budget/{id}/list', App\Livewire\Tenant\Entry\Listing::class)->name('tenant.entry.budget.listing');
         Route::get('/entry', App\Livewire\Tenant\Entry\Index::class)->name('tenant.entry.index');
-        Route::get('/entry/budget/{id}/list', App\Livewire\Tenant\Entry\Listing::class)->name('tenant.entry.budger.listing');
-
 
         // expense
         Route::get('/expense/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\ExpensePrint::class, 'generatePDF'])->name('tenant.expense.pdf');
