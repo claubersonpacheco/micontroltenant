@@ -5,7 +5,8 @@ namespace App\Livewire\Tenant\Invoice;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
-
+#[Title('Edit Invoice')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public function render()

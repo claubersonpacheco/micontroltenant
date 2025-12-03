@@ -13,29 +13,22 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
 
         using: function () {
-            $centralDomain = config('tenancy.central_domains');
-            foreach ($centralDomain as $domain) {
-                Route::group([
-                    'domain' => $domain,
-                    'middleware' => 'web'
-                ], base_path('routes/web.php'));
-            }
-            Route::group([
-                'middleware' => [
-                    'web',
-                    \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-                    \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
-                    \Stancl\Tenancy\Middleware\ScopeSessions::class
-                ]
-            ], base_path('routes/tenant.php'));
-        },
+            $centralDomains = config('tenancy.central_domains');
 
+            // Rotas do central app
+            foreach ($centralDomains as $domain) {
+                Route::middleware('web')
+                    ->domain($domain)
+                    ->group(base_path('routes/web.php'));
+            }
+
+            // 👉 Não precisa registrar tenant aqui, ele já está em routes/tenant.php
+        }
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->group('universal', [
-        ]);
+        $middleware->group('universal', []);
         $middleware->web(append: [
-            SetLocale::class
+            SetLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

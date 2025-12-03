@@ -14,6 +14,8 @@ class Create extends Component
 {
     use GenerateAutomaticCode;
 
+    public $route = 'tenant.customer.index';
+
     public $code;
     public $name;
     public $email;
@@ -48,7 +50,7 @@ class Create extends Component
         ]);
 
         toastr()->success('Cliente criado com sucesso!');
-        return redirect()->route('customer.index');
+        return redirect()->route($this->route);
     }
 
     public function render()

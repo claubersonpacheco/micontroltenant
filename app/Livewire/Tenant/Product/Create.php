@@ -59,7 +59,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('product.index');
+        return redirect()->route('tenant.product.index');
     }
 
     public function render()

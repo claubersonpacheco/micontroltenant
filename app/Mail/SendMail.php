@@ -45,7 +45,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'livewire.admin.email.template.email',
+            view: 'livewire.email.template.email',
             with: ['data' => $this->data],
         );
     }

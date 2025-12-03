@@ -49,7 +49,7 @@ class Create extends Component
         $this->budget = Budget::findOrFail($id);
 
         if (!$this->budget) {
-            return redirect()->route('admin.budgets.index');
+            return redirect()->route('tenant.budgets.index');
         }
 
         $this->code =  $this->generateCode(Expense::class);
@@ -121,7 +121,7 @@ class Create extends Component
 
         $this->reset();
 
-        return redirect()->route('expense.budget.listing', $id );
+        return redirect()->route('tenant.expense.budget.listing', $id );
     }
 
     protected function uploadToBunny($file)

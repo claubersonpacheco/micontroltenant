@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Tenant;
 
 use App\Models\Tenant;
+use App\Models\TenantUser;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
@@ -42,11 +43,10 @@ class Create extends Component
             'id' => (string) Str::uuid(),
             'name' => $this->name,
             'email' => $this->email,
-            'password' => Hash::make($this->password), // ou remova esse campo se não for usado no central
             'data' => [],
         ]);
 
-        $subdomainComplete =  $this->subdomain.'.'.env('CENTRAL_DOMAIN');
+        $subdomainComplete =  $this->subdomain.'.'.config('tenancy.central_domains')[0];
         // Cria domínio do tenant
         $tenant->domains()->create([
             'domain' => $subdomainComplete,
@@ -56,7 +56,7 @@ class Create extends Component
         tenancy()->initialize($tenant);
 
         // Cria o usuário administrador no banco do tenant
-        User::create([
+        TenantUser::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password), // este hash será único, mas correto
@@ -66,7 +66,6 @@ class Create extends Component
         tenancy()->end();
 
         $this->reset(['name', 'email', 'password', 'subdomain']);
-        $this->tenants = Tenant::all();
 
         toastr()->success('Criado com sucesso!');
         return redirect()->route('tenant.index');

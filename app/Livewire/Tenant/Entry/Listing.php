@@ -7,6 +7,7 @@ use App\Models\Entry;
 use App\Models\Expense;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -79,12 +80,12 @@ class Listing extends Component
             $file->delete();
 
             toastr()->success('Deleted successfully!');
-            return redirect()->route('entry.budget.listing', $this->budget->id);
+            return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
 
         } catch (\Exception $e) {
             // Captura qualquer exceção
             toastr()->error('Error while deleting file: ' . $e->getMessage());
-            return redirect()->route('entry.budget.listing', $this->budget->id);
+            return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
         }
     }
 

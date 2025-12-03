@@ -33,7 +33,7 @@ class Create extends Component
 
         toastr()->success('Criado com sucesso');
 
-        return redirect()->route('category.index');
+        return redirect()->route('tenant.category.index');
 
     }
 }

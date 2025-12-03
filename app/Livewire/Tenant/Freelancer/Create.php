@@ -66,7 +66,7 @@ class Create extends Component
         ]);
 
         toastr()->success('Criado com sucesso!');
-        return redirect()->route('freelancer.index');
+        return redirect()->route('tenant.freelancer.index');
     }
 
     public function render()

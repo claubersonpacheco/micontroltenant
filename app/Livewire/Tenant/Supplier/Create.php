@@ -67,7 +67,7 @@ class Create extends Component
         ]);
 
         toastr()->success('Create with success!');
-        return redirect()->route('supplier.index');
+        return redirect()->route('tenant.supplier.index');
     }
 
 

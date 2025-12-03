@@ -60,7 +60,7 @@ class Edit extends Component
 
         toastr()->success('Atualizado com sucesso!');
 
-        return redirect()->route('setting.index');
+        return redirect()->route('tenant.setting.index');
     }
 
     public function render()

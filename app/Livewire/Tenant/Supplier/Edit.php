@@ -87,7 +87,7 @@ class Edit extends Component
 
         toastr()->success('Updated with success!');
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('tenant.supplier.index');
     }
 
     public function render()

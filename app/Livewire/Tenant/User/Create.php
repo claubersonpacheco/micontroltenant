@@ -36,7 +36,7 @@ class Create extends Component
 
         toastr()->success('Criado com sucesso!');
 
-        return redirect()->route('user.index');
+        return redirect()->route('tenant.user.index');
 
 
     }

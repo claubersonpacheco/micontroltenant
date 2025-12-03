@@ -66,7 +66,7 @@ class Create extends Component
 
         toastr()->success('Criado com sucesso!');
 
-        return redirect()->route('setting.index');
+        return redirect()->route('tenant.setting.index');
     }
 
     public function render()

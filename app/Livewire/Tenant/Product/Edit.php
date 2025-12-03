@@ -54,7 +54,7 @@ class Edit extends Component
         ]);
 
         toastr()->success('Produto atualizado com sucesso!');
-        return redirect()->route('product.index');
+        return redirect()->route('tenant.product.index');
     }
 
     public function render()

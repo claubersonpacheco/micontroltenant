@@ -88,7 +88,7 @@ class Edit extends Component
         ]);
 
         toastr()->success('Updated with success!');
-        return redirect()->route('budget.index');
+        return redirect()->route('tenant.budget.index');
     }
 
     public function render()

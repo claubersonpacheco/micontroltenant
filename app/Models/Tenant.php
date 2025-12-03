@@ -17,14 +17,9 @@ class Tenant extends BaseTenant implements TenantWithDatabase
             'id',
             'name',
             'email',
-            'password',
         ];
     }
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     public function scopeSearch($query, $value)
     {

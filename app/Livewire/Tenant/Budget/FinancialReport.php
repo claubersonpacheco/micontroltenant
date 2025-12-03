@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Budget;
+namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
 use App\Models\BudgetTotal;

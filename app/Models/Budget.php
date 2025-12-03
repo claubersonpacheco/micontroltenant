@@ -19,7 +19,7 @@ class Budget extends Model
 
     public function user():BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(TenantUser::class, 'user_id');
     }
 
     public function customer():BelongsTo

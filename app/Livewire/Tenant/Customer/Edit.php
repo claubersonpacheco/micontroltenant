@@ -53,7 +53,7 @@ class Edit extends Component
         ]);
 
         toastr()->success('Cliente atualizado com sucesso!');
-        return redirect()->route('customer.index');
+        return redirect()->route('tenant.customer.index');
     }
 
     public function render()

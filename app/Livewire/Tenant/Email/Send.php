@@ -76,7 +76,7 @@ class Send extends Component
         ]);
 
         toastr()->success('Email enviado com sucesso!');
-        return redirect()->route('email.index');
+        return redirect()->route('tenant.email.index');
     }
 
     public function createEmail($id)

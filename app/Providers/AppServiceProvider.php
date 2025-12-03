@@ -2,35 +2,49 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
+
+use Livewire\Livewire;
+
 use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\BudgetTotal;
 use App\Models\Entry;
 use App\Models\Expense;
+
 use App\Observers\BudgetItemObserver;
 use App\Observers\BudgetObserver;
 use App\Observers\BudgetTotalObserver;
 use App\Observers\EntryObserver;
 use App\Observers\ExpenseObserver;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Auth\Middleware\Authenticate;
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
+        Authenticate::redirectUsing(function ($request) {
+            $host = $request->getHost();
+
+            // se o host contém .micontrol.test → é tenant
+            if (str_contains($host, '.micontrol.test')) {
+                return $request->getSchemeAndHttpHost() . '/login';
+            }
+
+            // fallback para central
+            return $request->getSchemeAndHttpHost() . '/admin/login';
+        });
+        /*
+        |--------------------------------------------------------------------------
+        | Compartilha settings com TODAS as views
+        |--------------------------------------------------------------------------
+        */
         View::composer('*', function ($view) {
             $view->with('tenantSettings', setting());
         });
@@ -39,16 +53,26 @@ class AppServiceProvider extends ServiceProvider
             'locale' => app()->getLocale(),
         ];
 
-        // Compartilha com TODAS as views
         View::share('tenantSettings', $settings);
 
-        // DEBUG
-        logger()->info('TenantSettings carregado', (array) $settings);
-
+        /*
+        |--------------------------------------------------------------------------
+        | Observers
+        |--------------------------------------------------------------------------
+        */
         BudgetTotal::observe(BudgetTotalObserver::class);
         BudgetItem::observe(BudgetItemObserver::class);
         Expense::observe(ExpenseObserver::class);
         Entry::observe(EntryObserver::class);
         Budget::observe(BudgetObserver::class);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Livewire Update Route para TENANTS
+        |--------------------------------------------------------------------------
+        | ESSENCIAL — só pode rodar DEPOIS da inicialização do tenant.
+        | Caso contrário, a rota causa "RouteNotFoundException".
+        */
+
     }
 }

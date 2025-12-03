@@ -56,6 +56,6 @@ class BudgetStatus extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'changed_by'); // Supondo que 'changed_by' seja o campo que armazena o ID do usuário
+        return $this->belongsTo(TenantUser::class, 'changed_by'); // Supondo que 'changed_by' seja o campo que armazena o ID do usuário
     }
 }

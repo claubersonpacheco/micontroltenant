@@ -4,8 +4,12 @@ namespace App\Livewire\Tenant\Invoice;
 
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Invoice')]
+#[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     public $invoices;

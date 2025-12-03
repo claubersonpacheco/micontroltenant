@@ -35,13 +35,7 @@ class Index extends Component
                 'string',
                 'max:255'
             ],
-            'email' => [
-                'required',
-                'email',
-                'string',
-                'max:255',
-                'unique:users,email,' . $this->user->id
-            ],
+
             'password' => [
                 'nullable',
                 'string',
@@ -55,8 +49,9 @@ class Index extends Component
     {
         $this->validate();
 
+        unset($this->email);
+
         $this->user->name = $this->name;
-        $this->user->email = $this->email;
 
         if ($this->password) {
             $this->user->password = Hash::make($this->password);
@@ -66,7 +61,7 @@ class Index extends Component
 
         toastr()->success('Usuário atualizado com sucesso!');
 
-        return redirect()->route('profile.index');
+        return redirect()->route('tenant.profile.index');
     }
 
     public function render()

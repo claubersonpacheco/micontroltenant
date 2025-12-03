@@ -3,46 +3,34 @@
 namespace App\Livewire\Tenant\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Login')]
+#[Layout('layouts.tenant.auth')]
 class Login extends Component
 {
-    /** @var string */
-    public $email = '';
-
-    /** @var string */
-    public $password = '';
-
-    /** @var bool */
-    public $remember = false;
-
-    protected $rules = [
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ];
+    public string $email = '';
+    public string $password = '';
 
     public function authenticate()
     {
-        $this->validate();
+        $credentials = $this->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $user = \App\Models\User::where('email', $this->email)->first();
-
-        if (!$user) {
-            $this->addError('email', 'Usuário não encontrado.');
-            return;
+        if (Auth::guard('tenant')->attempt($credentials)) {
+            session()->regenerate();
+            return redirect()->intended(route('tenant.dashboard'));
         }
 
-        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            $this->addError('email', trans('auth.failed'));
-
-            return;
-        }
-
-        return redirect()->intended(route('dashboard'));
+        $this->addError('email', 'Credenciais inválidas.');
     }
 
     public function render()
     {
-        return view('livewire.tenant.auth.login')->extends('layouts.tenant.auth');
+        return view('livewire.tenant.auth.login');
     }
 }

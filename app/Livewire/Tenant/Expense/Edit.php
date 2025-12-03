@@ -50,7 +50,7 @@ class Edit extends Component
         $this->budget = $this->expense->budget;
 
         if (!$this->budget) {
-            return redirect()->route('admin.budgets.index');
+            return redirect()->route('tenant.budgets.index');
         }
 
         $this->loadCategories();
@@ -126,7 +126,7 @@ class Edit extends Component
 
         toastr()->success('Expense updated successfully!');
 
-        return redirect()->route('expense.budget.listing', $this->budget->id);
+        return redirect()->route('tenant.expense.budget.listing', $this->budget->id);
     }
 
     protected function uploadToBunny($file)

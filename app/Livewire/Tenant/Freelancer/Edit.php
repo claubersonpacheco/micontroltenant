@@ -84,7 +84,7 @@ class Edit extends Component
 
         toastr()->success('Atualizado com sucesso!');
 
-        return redirect()->route('freelancer.index');
+        return redirect()->route('tenant.freelancer.index');
     }
 
     public function render()

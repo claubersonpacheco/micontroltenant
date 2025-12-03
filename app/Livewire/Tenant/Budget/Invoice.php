@@ -49,7 +49,7 @@ class Invoice extends Component
         $this->generateXml($invoice);
 
         session()->flash('success', 'Factura creada con PDF y XML.');
-        return redirect()->route('invoices.show', $invoice);
+        return redirect()->route('tenant.invoices.show', $invoice);
     }
 
     protected function generatePdf(Invoice $invoice)

@@ -58,7 +58,7 @@ class Edit extends Component
         // Mensagem de sucesso para o usuário
         toastr()->success('Usuário atualizado com sucesso!');
 
-        return redirect()->route('user.index');
+        return redirect()->route('tenant.user.index');
     }
 
     // Renderiza a view associada ao componente
