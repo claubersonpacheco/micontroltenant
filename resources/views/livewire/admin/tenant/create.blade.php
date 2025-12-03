@@ -75,7 +75,7 @@
                                placeholder="subdomain">
                         <span
                             class="inline-flex items-center px-3 text-gray-500 border border-l-0 border-gray-200 rounded-r-lg bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                                .micontrol.test
+                                .{{ config('tenancy.central_domains')[0] }}
                             </span>
                     </div>
                     @error('subdomain')

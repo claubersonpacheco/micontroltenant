@@ -9,8 +9,11 @@
     dark:bg-neutral-800 dark:border-neutral-700" role="dialog" tabindex="-1" aria-label="Sidebar">
     <div class="relative flex flex-col h-full max-h-full">
         <div class="px-6 pt-4 flex items-center">
-            <x-logo width="200" height="40" />
+            <a href="{{ route('tenant.dashboard') }}">
+                <x-logo width="200" height="40" />
+            </a>
         </div>
+
 
         <!-- Content -->
         <div
