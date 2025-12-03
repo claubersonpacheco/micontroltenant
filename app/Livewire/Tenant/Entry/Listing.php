@@ -72,7 +72,7 @@ class Listing extends Component
                 // Verifica se houve erro no delete remoto
                 if ($result !== null) {
                     toastr()->error('Fail to delete: ' . $result);
-                    return redirect()->route('entry.budget.listing', $this->budget->id);
+                    return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
                 }
             }
 

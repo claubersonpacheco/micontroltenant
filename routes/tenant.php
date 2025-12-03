@@ -44,6 +44,8 @@ Route::middleware([
 
         // entry
         Route::get('/entry', App\Livewire\Tenant\Entry\Index::class)->name('tenant.entry.index');
+        Route::get('/entry/budget/{id}/list', App\Livewire\Tenant\Entry\Listing::class)->name('tenant.entry.budger.listing');
+
 
         // expense
         Route::get('/expense/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\ExpensePrint::class, 'generatePDF'])->name('tenant.expense.pdf');
