@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             $host = $request->getHost();
 
             // se o host contém .micontrol.test → é tenant
-            if (str_contains($host, '.micontrol.test')) {
+            if (str_contains($host, config('tenancy.central_domains')[0])) {
                 return $request->getSchemeAndHttpHost() . '/login';
             }
 
@@ -65,14 +65,6 @@ class AppServiceProvider extends ServiceProvider
         Expense::observe(ExpenseObserver::class);
         Entry::observe(EntryObserver::class);
         Budget::observe(BudgetObserver::class);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Livewire Update Route para TENANTS
-        |--------------------------------------------------------------------------
-        | ESSENCIAL — só pode rodar DEPOIS da inicialização do tenant.
-        | Caso contrário, a rota causa "RouteNotFoundException".
-        */
 
     }
 }
