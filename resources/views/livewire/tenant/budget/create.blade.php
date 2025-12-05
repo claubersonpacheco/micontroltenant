@@ -144,5 +144,5 @@
         </div>
         <!-- End Card -->
     </div>
-    <livewire:admin.budget.partial.create-customer-modal />
+    <livewire:tenant.budget.partial.create-customer-modal />
 </div>

@@ -11,7 +11,7 @@
                     </p>
                 </div>
                 <div class="sm:col-span-3 mb-10">
-                    <livewire:admin.partials.photo-upload :userId="$user->id" />
+                    <livewire:tenant.partials.photo-upload :userId="$user->id" />
                 </div>
 
 
