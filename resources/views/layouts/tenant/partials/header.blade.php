@@ -104,7 +104,7 @@
                         class="size-9.5 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none dark:text-white"
                         aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                         <img class="inline-block w-[38px] h-[38px] rounded-full object-cover"
-                            src="{{ Auth::user()->photoUrl }}" alt="{{ Auth::user()->name }}">
+                            src="{{ Auth::user()->photoUrlTenant }}" alt="{{ Auth::user()->name }}">
 
                     </button>
 
