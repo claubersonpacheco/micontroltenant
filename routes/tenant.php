@@ -88,6 +88,7 @@ Route::middleware([
         Route::get('/budgets/{budgetId}/item', App\Livewire\Tenant\BudgetItem\Show::class)->name('tenant.budget.item.show');
 
         // budget
+        Route::get('/budgets/{id}/delete', App\Livewire\Tenant\Budget\Delete::class)->name('tenant.budget.delete');
         Route::get('/budgets/create', App\Livewire\Tenant\Budget\Create::class)->name('tenant.budget.create');
         Route::get('/budgets/{id}/edit', App\Livewire\Tenant\Budget\Edit::class)->name('tenant.budget.edit');
         Route::get('/budgets', App\Livewire\Tenant\Budget\Index::class)->name('tenant.budget.index');

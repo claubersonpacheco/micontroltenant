@@ -153,7 +153,7 @@
                                                                         </a>
 
                                                                         <!-- Delete -->
-                                                                        <livewire:admin.budget.delete :budget="$row" :key="uniqid('', true)"
+                                                                        <livewire:tenant.budget.delete :budget="$row" :key="uniqid('', true)"
                                                                             @deleted="$refresh" />
 
                                                                     </div>
