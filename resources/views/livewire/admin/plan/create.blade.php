@@ -27,6 +27,18 @@
                         @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
+                    <div class="sm:col-span-3">
+                        <label for="public_id" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            {{ __('Public Id') }}
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <input wire:model="public_id" id="public_id" type="text" placeholder="Id Public"
+                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                               focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                        @error('public_id') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    </div>
+
                     <!-- Name -->
                     <div class="sm:col-span-3">
                         <label for="name" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -34,7 +46,7 @@
                         </label>
                     </div>
                     <div class="sm:col-span-9">
-                        <input wire:model="name" id="name" type="text" placeholder="Plan name"
+                        <input wire:model.live="name" id="name" type="text" placeholder="Plan name"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('name') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -181,20 +193,6 @@
                         @error('order') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
-                    <!-- Public ID + Toggles -->
-                    <!-- Public ID + Toggles -->
-                    <div class="sm:col-span-12 flex flex-wrap gap-6 mt-4">
-
-                        <!-- Public ID -->
-                        <div class="flex-1 min-w-[200px]">
-                            <label for="public_id" class="block text-sm text-gray-800 dark:text-neutral-200">
-                                {{ __('Public ID') }}
-                            </label>
-                            <input wire:model="public_id" id="public_id" type="text" placeholder="(auto or optional)"
-                                   class="mt-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-               focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        </div>
-
                         <!-- Toggles -->
                         <div class="flex flex-wrap items-center gap-6">
                             <label class="flex items-center space-x-2">
@@ -212,14 +210,12 @@
                                 <span class="text-sm text-gray-800 dark:text-neutral-200">{{ __('Public') }}</span>
                             </label>
                         </div>
-                    </div>
-
 
                 </div>
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('plan.index') }}"
+                    <a href="{{ route('admin.plan.index') }}"
                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>

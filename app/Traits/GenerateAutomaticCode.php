@@ -35,4 +35,5 @@ trait GenerateAutomaticCode
 
         return $nextCode;
     }
+
 }

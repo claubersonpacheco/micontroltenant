@@ -21,10 +21,23 @@
                         </label>
                     </div>
                     <div class="sm:col-span-9">
-                        <input wire:model="code" id="code" type="text" placeholder="Plan code"
+                        <input wire:model="code" id="code" readonly type="text" placeholder="Plan code"
                                class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                         focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                        @error('code') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+
+                    </div>
+
+                    <!-- Code -->
+                    <div class="sm:col-span-3">
+                        <label for="code" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            {{ __('Public Id') }}
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <input wire:model="public_id" readonly id="public_id" type="text" placeholder="Public Id"
+                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                        focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+
                     </div>
 
                     <!-- Name -->
@@ -202,23 +215,12 @@
                         </label>
                     </div>
 
-                    <!-- Public ID -->
-                    <div class="sm:col-span-3">
-                        <label for="public_id" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                            {{ __('Public ID') }}
-                        </label>
-                    </div>
-                    <div class="sm:col-span-9">
-                        <input wire:model="public_id" id="public_id" type="text" readonly
-                               class="py-1.5 px-3 block w-full border-gray-200 bg-gray-50 shadow-2xs sm:text-sm rounded-lg
-                        dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                    </div>
 
                 </div>
 
                 <!-- Buttons -->
                 <div class="mt-5 flex justify-end gap-x-2">
-                    <a href="{{ route('product.index') }}"
+                    <a href="{{ route('admin.plan.index') }}"
                        class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
                         {{ __('Cancel') }}
                     </a>

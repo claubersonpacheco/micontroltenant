@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Admin\Print\BudgetController;
+use App\Http\Controllers\Tenant\Print\BudgetController;
 use App\Http\Controllers\Tenant\Auth\EmailVerificationController;
 use App\Http\Controllers\Tenant\Auth\LogoutController;
-use App\Livewire\Admin\Budget\FinancialReport;
+use App\Livewire\Tenant\Budget\FinancialReport;
 use App\Livewire\Tenant\Auth\Login;
 use App\Livewire\Tenant\Auth\Passwords\Email;
 use App\Livewire\Tenant\Auth\Passwords\Reset;

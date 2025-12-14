@@ -39,7 +39,7 @@
 <li>
     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg text-gray-800
                             {{ request()->routeIs('plan.index') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-400 hover:bg-gray-50' }}"
-       href="{{ route('plan.index') }}">
+       href="{{ route('admin.plan.index') }}">
 
         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />

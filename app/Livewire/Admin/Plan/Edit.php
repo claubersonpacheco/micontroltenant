@@ -63,7 +63,6 @@ class Edit extends Component
     public function update()
     {
         $this->validate([
-            'code' => 'required|min:3|unique:plans,code,' . $this->plan->id,
             'name' => 'required|min:3',
             'slug' => 'required|min:3|unique:plans,slug,' . $this->plan->id,
             'description' => 'nullable|min:3',
@@ -110,7 +109,7 @@ class Edit extends Component
         ]);
 
         toastr()->success('Plano atualizado com sucesso!');
-        return redirect()->route('plan.index');
+        return redirect()->route('admin.plan.index');
     }
 
     public function render()

@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Admin\Plan;
 
-use App\Models\Customer;
 use App\Models\Plan;
 use App\Traits\Alert;
 use App\Traits\GenerateAutomaticCode;
@@ -32,8 +31,14 @@ class Create extends Component
     public $is_active = true;
     public $order = 0;
     public $tax_percentage = 0;
-    public $public_id;
+    public ?string $public_id = null;
     public $is_public = false;
+
+    public function mount(): void
+    {
+        $this->code =  $this->generateCode(Plan::class);
+        $this->public_id = (string) Str::uuid();
+    }
 
     public function updatedName($value)
     {
@@ -44,6 +49,7 @@ class Create extends Component
     {
         $this->validate([
             'code' => 'required|min:3|unique:plans,code',
+            'public_id' => 'required|min:5|unique:plans,public_id',
             'name' => 'required|min:3',
             'slug' => 'required|min:3|unique:plans,slug',
             'description' => 'nullable|min:3',
@@ -91,13 +97,11 @@ class Create extends Component
         ]);
 
         toastr()->success('Plano criado com sucesso!');
-        return redirect()->route('plan.index');
+        return redirect()->route('admin.plan.index');
     }
 
     public function render()
     {
-        $this->code =  $this->generateCode(Plan::class);
-
         return view('livewire.admin.plan.create');
     }
 }

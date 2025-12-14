@@ -38,9 +38,9 @@ Route::prefix('admin')->middleware(['auth:web', 'verified'])->group(function () 
     Route::get('/tenants', App\Livewire\Admin\Tenant\Index::class)->name('tenant.index');
 
     // Plan
-    Route::get('/plans/create', App\Livewire\Admin\Plan\Create::class)->name('plan.create');
-    Route::get('/plans/{id}/edit', App\Livewire\Admin\Plan\Edit::class)->name('plan.edit');
-    Route::get('/plans', App\Livewire\Admin\Plan\Index::class)->name('plan.index');
+    Route::get('/plans/create', App\Livewire\Admin\Plan\Create::class)->name('admin.plan.create');
+    Route::get('/plans/{id}/edit', App\Livewire\Admin\Plan\Edit::class)->name('admin.plan.edit');
+    Route::get('/plans', App\Livewire\Admin\Plan\Index::class)->name('admin.plan.index');
 
     // profile
     Route::get('/profile', App\Livewire\Admin\Profile\Index::class)->name('profile.index');
