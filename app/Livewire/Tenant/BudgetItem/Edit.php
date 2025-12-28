@@ -4,9 +4,13 @@ namespace App\Livewire\Tenant\BudgetItem;
 
 use App\Models\BudgetItem;
 use App\Models\Product;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Budget Edit')]
+#[Layout('layouts.tenant.admin')]
 class Edit extends Component
 {
     public $budget_id;

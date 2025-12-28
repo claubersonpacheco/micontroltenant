@@ -27,7 +27,12 @@ class Create extends Component
     public ?string $keywords = null;
     public ?string $author = null;
 
-    public ?string $locale;
+    public ?string $locale = null;
+
+    public function mount()
+    {
+        $this->locale = session('locale', app()->getLocale());
+    }
 
     public function rules(): array
     {
@@ -55,10 +60,6 @@ class Create extends Component
         $validated = $this->validate();
 
         Setting::create($validated);
-
-//        if (!in_array($this->locale, ['en', 'es', 'pt_BR'])) {
-//            abort(400);
-//        }
 
         // salva na sessão
         Session::put('locale', $this->locale);

@@ -89,8 +89,9 @@
                                                                 </td>
                                                                 <td class="px-6 py-3">
                                                                     {{  $row->summary?->gross_total !== null
-                                    ? number_format($row->summary->gross_total, 2)
-                                    : '—' }}
+                                                                        ? number_format($row->summary->gross_total, 2)
+                                                                        : '—'
+                                                                        }}
                                                                 </td>
                                                                 <td class="px-6 py-3">{{ $row->created_at->diffForHumans() }}</td>
                                                                 <td class="px-6 py-3 text-right">

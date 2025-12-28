@@ -115,7 +115,7 @@ class Send extends Component
             ];
 
             // Gerar PDF
-            $template = view('admin.budget.print', compact('budget', 'setting'))->render();
+            $template = view('tenant.budget.print', compact('budget', 'setting'))->render();
             $this->PdfWithChrome($template, $storagePath, $budget);
 
             if (!file_exists($storagePath)) {

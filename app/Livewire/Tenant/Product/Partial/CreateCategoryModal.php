@@ -53,6 +53,6 @@ class CreateCategoryModal extends Component
 
     public function render()
     {
-        return view('livewire.admin.product.partial.create-category-modal');
+        return view('livewire.tenant.product.partial.create-category-modal');
     }
 }

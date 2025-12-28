@@ -28,8 +28,12 @@ class Create extends Component
     public ?string $keywords = null;
     public ?string $author = null;
 
-    public ?string $locale;
+    public ?string $locale = null;
 
+    public function mount()
+    {
+        $this->locale = session('locale', app()->getLocale());
+    }
     public function rules(): array
     {
         return [

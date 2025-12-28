@@ -5,8 +5,12 @@ namespace App\Livewire\Tenant\BudgetItem;
 use App\Models\BudgetItem;
 use App\Models\Product;
 use App\Traits\Alert;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Budget Items')]
+#[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
     use Alert;

@@ -137,5 +137,5 @@
         <!-- End Card -->
     </div>
     <!-- Componente modal separado do form -->
-    <livewire:admin.product.partial.create-category-modal />
+    <livewire:tenant.product.partial.create-category-modal />
 </div>

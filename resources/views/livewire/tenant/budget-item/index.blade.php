@@ -118,7 +118,7 @@
         <div class="px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
 
             <!--header-->
-            @include('livewire.admin.budget-item.partial.header')
+            @include('livewire.tenant.budget-item.partial.header')
             <!-- end header -->
 
             <div class="flex flex-col mt-6">
@@ -532,7 +532,7 @@
                 <!-- end Table Section -->
 
                 <!-- footer -->
-                @include('livewire.admin.budget-item.partial.footer')
+                @include('livewire.tenant.budget-item.partial.footer')
             </div>
         </div>
         <!-- End Invoice -->
