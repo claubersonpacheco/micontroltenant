@@ -30,8 +30,6 @@ return new class extends Migration
             $table->string('method')->nullable(); // transferência, cartão, etc.
             $table->text('description')->nullable();
             $table->string('received_by')->nullable();
-            $table->string('reference')->nullable(); // código interno ou recibo
-
             $table->boolean('receipt')->nullable();
             $table->string('receipt_number')->nullable();
             $table->string('filename')->nullable();

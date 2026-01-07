@@ -4,8 +4,12 @@ namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
 use App\Models\BudgetTotal;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Financial Report')]
+#[Layout('layouts.tenant.admin')]
 class FinancialReport extends Component
 {
     public Budget $budget;

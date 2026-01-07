@@ -29,7 +29,7 @@
             <!-- Conteúdo rolável -->
             <div class="p-6 space-y-6">
                 <!-- Aqui entra o teu formulário completo -->
-                @include('livewire.admin.supplier.partials.supplier-form')
+                @include('livewire.tenant.supplier.partials.supplier-form')
             </div>
 
             <div class="sticky bottom-0 border-t border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 flex justify-end gap-x-2 shadow-sm z-10">

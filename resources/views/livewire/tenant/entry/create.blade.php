@@ -7,7 +7,7 @@
                     {{ "#" . $budget->code . " - " . $budget->name }}
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    {{ __('Create entry.') }}
+                    {{ __('Create Entry') }}
                 </p>
             </div>
 
@@ -33,30 +33,32 @@
                             {{ __('Category') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
+                    <div class="sm:col-span-10">
                         <!-- Select da categoria -->
-                        <select wire:model="category" id="category"
-                            class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a category') }}</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
+                        <div class="flex gap-2 items-center">
+                            <select wire:model="category" id="category"
+                                class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                        focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                <option value="">{{ __('Select a category') }}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
 
-                        </select>
+                            </select>
+                            <!-- Botão do modal -->
+                            <button type="button" wire:click="$dispatch('open-category-modal')"
+                                    class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                     stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
 
+                                {{ __("New") }}
+                            </button>
+                        </div>
                         @error('category') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                        <!-- Botão do modal -->
-                        <button type="button" wire:click="$dispatch('open-category-modal')"
-                            class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
 
-                            {{ __("New") }}
-                        </button>
                     </div>
 
                     <!-- Name -->
@@ -93,7 +95,7 @@
                         </label>
                     </div>
                     <div class="sm:col-span-4">
-                        <input wire:model="date" id="date" type="datetime-local"
+                        <input wire:model="date" id="date" type="date"
                             class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -105,19 +107,24 @@
                             {{ __('Method Entry') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
-                        <!-- Select da categoria -->
-                        <select wire:model="method" id="method_pay"
-                            class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                    <div class="sm:col-span-10">
+                        <div class="flex gap-2 items-center">
+
+                            <!-- Select da categoria -->
+                            <select wire:model="method" id="method_pay"
+                                    class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a method') }}</option>
-                            <option value="money">{{ __('Money')}}</option>
-                            <option value="card">{{ __('Card') }}</option>
-                            <option value="transfer">{{ __('Transfer') }}</option>
-                            <option value="bizum">{{ __('Bizum') }}</option>
-                            <option value="other">{{ __('other') }}</option>
-                        </select>
-                        @error('method') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                                <option value="">{{ __('Select a method') }}</option>
+                                <option value="money">{{ __('Money')}}</option>
+                                <option value="card">{{ __('Card') }}</option>
+                                <option value="transfer">{{ __('Transfer') }}</option>
+                                <option value="bizum">{{ __('Bizum') }}</option>
+                                <option value="other">{{ __('other') }}</option>
+                            </select>
+                        </div>
+                        @error('method')
+                        <span class="text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Description -->
@@ -196,7 +203,7 @@
                             <div class="sm:col-span-2">
                                 <label for="file_path"
                                     class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('File Receipt') }}
+                                    {{ __('Send File') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-3">
@@ -234,6 +241,6 @@
         <!-- End Card -->
     </div>
     <!-- Componente modal separado do form -->
-    <livewire:admin.product.partial.create-category-modal />
-    <livewire:admin.supplier.partials.create-supplier-modal />
+    <livewire:tenant.product.partial.create-category-modal />
+    <livewire:tenant.supplier.partials.create-supplier-modal />
 </div>

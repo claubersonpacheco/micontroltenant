@@ -44,8 +44,8 @@ Route::middleware([
         // entry
         Route::get('/entry/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'generatePDF'])->name('tenant.entry.pdf');
         Route::get('/entry/budget/{id}/view', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'viewPrint'])->name('tenant.entry.view');
-        Route::get('/entry/budget/{id}/edit', App\Livewire\Tenant\Expense\Edit::class)->name('tenant.entry.edit');
-        Route::get('/entry/budget/{id}/create', App\Livewire\Tenant\Expense\Create::class)->name('tenant.entry.create');
+        Route::get('/entry/{id}/edit', App\Livewire\Tenant\Entry\Edit::class)->name('tenant.entry.edit');
+        Route::get('/entry/budget/{id}/create', App\Livewire\Tenant\Entry\Create::class)->name('tenant.entry.create');
         Route::get('/entry/budget/{id}/list', App\Livewire\Tenant\Entry\Listing::class)->name('tenant.entry.budget.listing');
         Route::get('/entry', App\Livewire\Tenant\Entry\Index::class)->name('tenant.entry.index');
 
@@ -133,7 +133,6 @@ Route::middleware([
     */
     Route::group(['middleware' => 'guest:tenant'], function () {
         Route::get('/login', Login::class)->name('tenant.login');
-        Route::get('/register', Register::class)->name('register');
     });
 
     /*

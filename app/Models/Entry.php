@@ -12,6 +12,7 @@ class Entry extends Model
     protected $casts = [
         'date' => 'date',
         'amount' => 'decimal:2',
+        'receipt' => 'integer',
     ];
 
     public function budget(): BelongsTo

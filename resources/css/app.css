@@ -23,9 +23,8 @@ input:invalid, textarea:invalid, select:invalid {
 }
 
 /* Hide elements with x-cloak attribute (used with Alpine.js) until JavaScript loads */
-[x-cloak] {
-    display: none;
-}
+
+[x-cloak] { display: none !important; }
 
 @theme {
     --color-red-50: oklch(0.971 0.013 17.38);

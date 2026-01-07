@@ -7,7 +7,7 @@
                     {{ "#" . $budget->code . " - " . $budget->name }}
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    {{ __('Create expense.') }}
+                    {{ __('Edit Expense') }}
                 </p>
             </div>
 
@@ -126,7 +126,7 @@
                     </div>
                     <div class="sm:col-span-4">
                         <input wire:model="date" id="date" type="date"
-                            class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                               class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
@@ -178,12 +178,10 @@
                         <select wire:model="invoice" id="invoice"
                             class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select') }}</option>
-                            <option value="1">{{ __('Yes') }}</option>
-                            <option value="0">{{ __('No') }}</option>
+                            <option value="1">{{ __('common.yes') }}</option>
+                            <option value="0">{{ __('common.no') }}</option>
 
                         </select>
-
                         @error('invoice') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
 
                     </div>
@@ -196,15 +194,14 @@
                             <!-- Invoice Number -->
                             <div class="sm:col-span-2">
                                 <label for="invoice_number"
-                                    class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                       class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                     {{ __('Invoice Number') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-2">
                                 <input wire:model="invoice_number" id="invoice_number" type="text"
-                                    placeholder="{{ __('Invoice Number') }}"
-                                    class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                   focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                       placeholder="{{ __('Invoice Number') }}"
+                                       class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                                 @error('invoice_number') <span class="text-sm text-red-600">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -212,8 +209,8 @@
                             <!-- File Invoice -->
                             <div class="sm:col-span-2">
                                 <label for="file_path"
-                                    class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('File Invoice') }}
+                                       class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    {{ __('Send File') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-5 flex items-center gap-2">
@@ -234,14 +231,14 @@
 
                             <div class="sm:col-span-2">
                                 <label for="file_path"
-                                    class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                       class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                     {{ __('View Invoice') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-5">
                                 @if($fileName)
                                     <a href="{{ $expense->file_path }}" target="_blank"
-                                        class="py-1 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-green-600 text-white hover:bg-green-700">
+                                       class="py-1 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-green-600 text-white hover:bg-green-700">
                                         {{ __('Invoice') }}
                                     </a>
                                 @endif
@@ -257,11 +254,11 @@
                 <div class="mt-5 flex justify-end gap-x-2">
                     <a href="{{ route('tenant.expense.budget.listing', $budget->id) }}"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700">
-                        {{ __('Cancel') }}
+                        {{ __('common.cancel') }}
                     </a>
                     <button type="submit"
                         class="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                        {{ __('Save') }}
+                        {{ __('common.save') }}
                     </button>
                 </div>
             </form>

@@ -302,13 +302,25 @@
     "Expense description": "Descripción del gasto",
     "Invoice": "Factura",
     "Select": "Seleccione",
-    "Invoice Number": "Número de factura",
+    "Invoice Number": "Número de la factura",
     "Method Pay": "Método de pago",
     "Select a method": "Seleccione un método",
     "Money": "Efectivo",
     "Card": "Tarjeta",
     "Other": "Otro",
     "File Invoice": "Archivo de factura",
-    "Expenses" : "Gastos"
+    "Expenses" : "Gastos",
+    "Create Entry": "Crear Entrada",
+    "Method Entry": "Método de Pago",
+    "Received By": "Recebido por",
+    "Receipt": "Justificante",
+    "Receipt Number": "Numero del justificante",
+    "File Receipt": "Archivo del justificante",
+    "Edit Expense": "Editar Gasto",
+    "View Invoice": "Ver Factura",
+    "Send File" : "Enviar Archivo",
+    "Manage your entries" : "Gestionar entradas",
+    "Total Entries" : "Total Entradas",
+    "Observation" : "Observación"
 
 }

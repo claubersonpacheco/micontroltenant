@@ -139,7 +139,8 @@ class Edit extends Component
         $formattedDate = Carbon::parse($this->date)->format('dmyHis');
         $this->fileName = $this->code . '-' . $formattedDate . '-' . Str::upper($nameslug) . '.' . $file->getClientOriginalExtension();
 
-        $path = "micontrol/invoices/{$this->fileName}";
+        $tenantId = tenant('id');
+        $path = "micontrol/{$tenantId}/invoice/{$this->fileName}";
 
         $client = new Client([
             'base_uri' => "https://storage.bunnycdn.com/{$storageZone}/",

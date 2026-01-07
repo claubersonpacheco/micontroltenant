@@ -3,12 +3,9 @@
 namespace App\Livewire\Tenant\Expense;
 
 use App\Models\Budget;
-use App\Models\BudgetItem;
+
 use App\Models\BudgetTotal;
 use App\Models\Expense;
-use App\Models\Product;
-use App\Services\BudgetTotalService;
-use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -18,7 +15,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Title('List Users')]
-#[Layout('layouts.tenant.admin')]       
+#[Layout('layouts.tenant.admin')]
 class Listing extends Component
 {
     use WithPagination;

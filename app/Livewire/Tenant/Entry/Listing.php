@@ -3,8 +3,9 @@
 namespace App\Livewire\Tenant\Entry;
 
 use App\Models\Budget;
+use App\Models\BudgetTotal;
 use App\Models\Entry;
-use App\Models\Expense;
+use App\Services\BunnyServices;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -18,7 +19,10 @@ class Listing extends Component
 {
     use WithPagination;
 
+    public ?BudgetTotal $totals = null;
+
     public $budget;
+    public $fileUrl;
 
     private $id;
 
@@ -34,6 +38,8 @@ class Listing extends Component
     public function mount(int $id): void
     {
         $this->budget = Budget::findOrFail($id);
+
+        $this->totals = $this->budget->summary;
 
     }
 
@@ -56,41 +62,31 @@ class Listing extends Component
 
     public function delete(int $id)
     {
-        $apiAccessKey = env('BUNNY_API_KEY_PASSWORD');
-        $storageZone = env('BUNNY_STORAGE_ZONE');
-        $storageRegion = env('BUNNY_STORAGE_REGION');
-
-        $client = new \Bunny\Storage\Client($apiAccessKey, $storageZone, $storageRegion);
-
-        $file = Entry::findOrFail($id);
+        $entry = Entry::findOrFail($id);
 
         try {
-            if ($file->invoice !== false) {
-                // Deleta do BunnyCDN
-                $result = $client->delete('micontrol/receipt/' . $file->filename);
-
-                // Verifica se houve erro no delete remoto
-                if ($result !== null) {
-                    toastr()->error('Fail to delete: ' . $result);
-                    return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
-                }
+            if ($entry->file_path) {
+                BunnyServices::delete($entry->file_path);
             }
 
-            // Deleta do banco (sempre que o registro existir)
-            $file->delete();
+            $entry->delete();
 
-            toastr()->success('Deleted successfully!');
-            return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
+            toastr()->success(__('Deleted successfully!'));
 
-        } catch (\Exception $e) {
-            // Captura qualquer exceção
-            toastr()->error('Error while deleting file: ' . $e->getMessage());
-            return redirect()->route('tenant.entry.budget.listing', $this->budget->id);
+        } catch (\Throwable $e) {
+            toastr()->error(__('Error while deleting: ') . $e->getMessage());
         }
+
+        return redirect()->route(
+            'tenant.entry.budget.listing',
+            $this->budget->id
+        );
     }
+
 
     public function render()
     {
+
         return view('livewire.tenant.entry.listing');
     }
 }
