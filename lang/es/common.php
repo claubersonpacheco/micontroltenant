@@ -21,9 +21,6 @@ return [
     'save_and_close' => 'Guardar y cerrar',
     'save_and_return' => 'Guardar y volver',
     'submit' => 'Enviar',
-
-
-    // Ações
     'add' => 'Añadir',
     'add_name' => 'Agregar :name',
     'edit' => 'Editar',
@@ -60,8 +57,6 @@ return [
     'send' => 'Enviar',
     'send_file' => 'Enviar Archivo',
     'send_email' => 'Enviar correo',
-
-    // Usuários e autenticação
     'user' => 'Usuario',
     'users' => 'Usuarios',
     'login' => 'Iniciar sesión',

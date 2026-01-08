@@ -39,12 +39,6 @@ class Index extends Component
             ->withQueryString();
     }
 
-    public function delete(int $id): void
-    {
-        Category::findOrFail($id)->delete();
-        $this->resetPage();
-    }
-
     public function render()
     {
         return view('livewire.tenant.category.index');

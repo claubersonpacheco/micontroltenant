@@ -2,8 +2,8 @@
     'title' => 'Confirm deletion',
     'message' => 'Are you sure you want to delete this item?',
     'action' => null,
-    'cancelText' => 'Cancel',
-    'confirmText' => 'Delete',
+    'cancelText' => __('common.cancel'),
+    'confirmText' => __('common.confirm'),
 ])
 
 <div x-data="{ open: false }">
@@ -19,7 +19,7 @@
         x-show="open"
         x-cloak
         x-transition.opacity
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+        class="fixed inset-0 z-99 flex items-center justify-center bg-black/50"
         @click.self="open = false"
     >
         <div

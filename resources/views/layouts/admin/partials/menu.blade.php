@@ -63,7 +63,7 @@
         </svg>
 
 
-        {{ __('Invoices') }}
+        {{ __('Invoice') }}
     </a>
 </li>
 

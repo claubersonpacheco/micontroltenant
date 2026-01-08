@@ -39,12 +39,6 @@ class Index extends Component
             ->withQueryString();
     }
 
-    public function delete(int $id): void
-    {
-        Customer::findOrFail($id)->delete();
-        $this->resetPage();
-    }
-
     public function render()
     {
         return view('livewire.tenant.customer.index');

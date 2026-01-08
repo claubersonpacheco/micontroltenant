@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Models\Supplier;
+use App\Services\BunnyServices;
 use App\Traits\GenerateAutomaticCode;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
@@ -41,22 +43,17 @@ class Edit extends Component
     public $method;
     public $invoice;
     public $invoice_number;
-    public $file_path;
+
+    public $fileUrl = null;
+
+    /** @var TemporaryUploadedFile|null */
+    public $file_path = null;
     public $fileName;
 
     public function mount($id)
     {
-        $this->expense = Expense::findOrFail($id);
-        $this->budget = $this->expense->budget;
+        $this->expense = Expense::with('budget')->findOrFail($id);
 
-        if (!$this->budget) {
-            return redirect()->route('tenant.budgets.index');
-        }
-
-        $this->loadCategories();
-        $this->loadSuppliers();
-
-        // Preenche os campos com os dados existentes
         $this->category = $this->expense->category_id;
         $this->supplier = $this->expense->supplier_id;
         $this->name = $this->expense->name;
@@ -68,6 +65,15 @@ class Edit extends Component
         $this->invoice = $this->expense->invoice;
         $this->invoice_number = $this->expense->invoice_number;
         $this->fileName = $this->expense->filename;
+
+        if(!empty($this->file_path)){
+            $this->fileUrl = BunnyServices::url($this->file_path);
+        }else{
+            $this->fileUrl = "";
+        }
+
+        $this->loadCategories();
+        $this->loadSuppliers();
     }
 
     #[On('loadCategories')]
@@ -87,32 +93,53 @@ class Edit extends Component
         $this->validate([
             'category' => 'required',
             'supplier' => 'required',
-            'name' => 'required|string|max:50',
-            'code' => 'required|string|max:30|unique:expenses,code,' . $this->expense->id,
+            'name' => 'required|string|min:3|max:50',
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'method' => 'required',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string|min:3|max:255',
             'invoice' => 'required|in:0,1',
-            'invoice_number' => 'nullable|string|max:15',
-            'file_path' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:1024',
         ]);
 
-        $filePath = $this->expense->file_path; // mantém o antigo se não enviar novo
+        $filePath = $this->expense->file_path;
+        $fileName = $this->expense->filename;
 
-        if ($this->file_path) {
-            try {
-                $filePath = $this->uploadToBunny($this->file_path);
-            } catch (\Exception $e) {
-                toastr()->error($e->getMessage());
-                return;
+        if ($this->invoice == 1) {
+
+            $this->validate([
+                'invoice_number' => 'nullable|string|min:3|max:15',
+            ]);
+
+            if (!empty($this->file_path)) {
+                $this->validate([
+                    'file_path' => 'file|mimes:pdf,jpg,png,jpeg|max:1024',
+                ]);
+
+                // 🔁 substitui o arquivo antigo
+                $filePath = BunnyServices::update(
+                    $this->expense->file_path,
+                    $this->file_path,
+                    'invoice'
+                );
+
+                $fileName = basename($filePath);
             }
+
+        } else {
+
+            if ($this->expense->file_path) {
+                BunnyServices::delete($this->expense->file_path);
+            }
+
+            $filePath = null;
+            $fileName = null;
+            $this->invoice_number = null;
+            $this->invoice = 0;
         }
 
         $this->expense->update([
             'category_id' => $this->category,
             'supplier_id' => $this->supplier,
-            'code' => $this->code,
             'name' => $this->name,
             'amount' => $this->amount,
             'date' => $this->date,
@@ -121,46 +148,13 @@ class Edit extends Component
             'invoice' => $this->invoice,
             'invoice_number' => $this->invoice_number,
             'file_path' => $filePath,
-            'filename' => $this->fileName,
+            'filename' => $fileName,
         ]);
 
-        toastr()->success('Expense updated successfully!');
+        toastr()->success('Edit with success!');
 
-        return redirect()->route('tenant.expense.budget.listing', $this->budget->id);
+        return redirect()->route('tenant.expense.budget.listing', $this->expense->budget_id);
     }
-
-    protected function uploadToBunny($file)
-    {
-        $storageZone = env('BUNNY_STORAGE_ZONE');
-        $AccessKey = env('BUNNY_API_KEY_PASSWORD');
-        $urlPublic = env('BUNNY_URL_PUBLIC');
-
-        $nameslug = Str::slug($this->name, '-');
-        $formattedDate = Carbon::parse($this->date)->format('dmyHis');
-        $this->fileName = $this->code . '-' . $formattedDate . '-' . Str::upper($nameslug) . '.' . $file->getClientOriginalExtension();
-
-        $tenantId = tenant('id');
-        $path = "micontrol/{$tenantId}/invoice/{$this->fileName}";
-
-        $client = new Client([
-            'base_uri' => "https://storage.bunnycdn.com/{$storageZone}/",
-            'timeout' => 30,
-        ]);
-
-        $response = $client->request('PUT', $path, [
-            'headers' => [
-                'AccessKey' => $AccessKey,
-            ],
-            'body' => fopen($file->getRealPath(), 'r'),
-        ]);
-
-        if ($response->getStatusCode() !== 201) {
-            throw new \Exception('Failed to send to Bunny. Please check the error code: ' . $response->getStatusCode());
-        }
-
-        return "{$urlPublic}/{$path}";
-    }
-
     public function render()
     {
         return view('livewire.tenant.expense.edit');

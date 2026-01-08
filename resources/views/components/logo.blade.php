@@ -1,6 +1,6 @@
 @if(isset($tenantSettings) && $tenantSettings->logo !== null)
-    <img src="{{ Storage::url($tenantSettings->logo) }}" {{ $attributes }} />
+    <img alt="logo" src="{{ \App\Services\BunnyServices::url($tenantSettings->logo) }}" {{ $attributes }} />
 @else
-    <img src="{{ asset('images/logo-micontrol.png') }}" {{ $attributes }} />
+    <img alt="logo" src="{{ asset('images/logo-micontrol.png') }}" {{ $attributes }} />
 @endif
 

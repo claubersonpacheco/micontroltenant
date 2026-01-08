@@ -11,7 +11,7 @@
                 </p>
             </div>
 
-            <form wire:submit.prevent="store">
+            <form wire:submit.prevent="update">
                 <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
 
                     <!-- Code -->
@@ -192,7 +192,7 @@
                             </div>
                             <div class="sm:col-span-2">
                                 <input wire:model="receipt_number" id="receipt_number" type="text"
-                                       placeholder="{{ __('Invoice Number') }}"
+                                       placeholder="{{ __('Receipt Number') }}"
                                        class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                                 @error('receipt_number') <span class="text-sm text-red-600">{{ $message }}</span>
                                 @enderror
@@ -224,7 +224,7 @@
                             <div class="sm:col-span-2">
                                 <label for="file_path"
                                        class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                    {{ __('View Invoice') }}
+                                    {{ __('View Receipt') }}
                                 </label>
                             </div>
                             <div class="sm:col-span-5">

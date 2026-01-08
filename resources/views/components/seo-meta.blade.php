@@ -2,8 +2,8 @@
     'title' => config('app.name'),
     'description' => 'Descrição padrão do site',
     'keywords' => '',
-    'author' => 'Nome da Empresa',
-    'image' => asset('images/og-default.jpg'),
+    'author' => $tenantSettings->title,
+    'image' => \App\Services\BunnyServices::url($tenantSettings->logo),
     'url' => url()->current(),
     'locale' => str_replace('_', '-', app()->getLocale())
 ])

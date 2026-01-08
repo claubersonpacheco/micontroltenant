@@ -12,7 +12,7 @@
             </div>
 
             <div class="mb-8">
-                <livewire:admin.setting.image :id="$setting?->id" />
+                <livewire:tenant.setting.image :id="$setting?->id" />
             </div>
 
             <form wire:submit.prevent="update">

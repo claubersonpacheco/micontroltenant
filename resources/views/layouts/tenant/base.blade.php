@@ -14,7 +14,7 @@
 
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset( setting()->favicon ?? 'images/favicon.ico' ) }}">
+    <link rel="shortcut icon" href="{{ \App\Services\BunnyServices::url($tenantSettings->favicon) }}">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -52,6 +52,7 @@
             'security_storage': 'granted' // recomendado manter segurança sempre ativo
         });
     </script>
+    <title></title>
 </head>
 
 <body>

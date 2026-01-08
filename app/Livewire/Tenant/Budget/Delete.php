@@ -5,7 +5,6 @@ namespace App\Livewire\Tenant\Budget;
 use App\Models\Budget;
 use Livewire\Component;
 use App\Traits\Alert;
-use App\Models\User;
 use Livewire\Attributes\Renderless;
 
 class Delete extends Component

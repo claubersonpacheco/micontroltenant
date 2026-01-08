@@ -3,39 +3,38 @@
 namespace App\Livewire\Tenant\BudgetItem;
 
 use App\Models\BudgetItem;
-use Livewire\Attributes\On;
 use Livewire\Component;
-
+use App\Traits\Alert;
+use Livewire\Attributes\Renderless;
 
 class Delete extends Component
 {
-    public $itemId;
 
-    #[On('delete-item')]
-    public function setItem($id)
+    use Alert;
+
+    public BudgetItem $budgetItem;
+
+    public bool $confirming = false;
+
+
+    #[Renderless]
+    public function confirm(): void
     {
-        $this->itemId = $id;
+        $this->confirming = true;
     }
 
-    public function delete()
+    public function delete(): void
     {
-        if ($this->itemId) {
-            BudgetItem::find($this->itemId)?->delete();
+        $this->budgetItem->delete();
 
-            $this->closeModal();
-            $this->dispatch('refreshList');
-        }
+        $this->dispatch('deleted');
+        $this->success();
+
+        $this->confirming = false;
     }
-
-    public function closeModal()
-    {
-        $this->dispatch('close-modal', name: 'delete-item');
-    }
-
 
     public function render()
     {
         return view('livewire.tenant.budget-item.delete');
     }
-
 }

@@ -10,7 +10,7 @@ class Expense extends Model
 
     protected $casts = [
         'date' => 'date',
-        'receipt' => 'boolean',
+        'invoice' => 'integer',
     ];
 
     // Relacionamento com Budget

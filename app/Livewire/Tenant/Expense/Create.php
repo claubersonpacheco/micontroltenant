@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Models\Supplier;
+use App\Services\BunnyServices;
 use App\Traits\GenerateAutomaticCode;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
@@ -73,9 +74,6 @@ class Create extends Component
 
     public function store()
     {
-
-        $id = $this->budget->id;
-
         $this->validate([
             'category' => 'required',
             'supplier' => 'required',
@@ -90,15 +88,15 @@ class Create extends Component
             'file_path' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:1024',
         ]);
 
-        $filePath = null;
+        $storedPath = null;
 
         if ($this->file_path) {
-            try {
-                $filePath = $this->uploadToBunny($this->file_path);
-            } catch (\Exception $e) {
-                toastr()->error($e->getMessage());
-                return;
-            }
+            $storedPath = BunnyServices::upload(
+                $this->file_path,
+                'expense'
+            );
+
+            $this->fileName = basename($storedPath);
         }
 
         $res = Expense::create([
@@ -112,54 +110,15 @@ class Create extends Component
             'description' => $this->description,
             'method' => $this->method,
             'invoice' => $this->invoice,
-            'file_path' => $filePath,
+            'invoice_number' => $this->invoice_number,
+            'file_path' => $storedPath,
             'filename' => $this->fileName,
 
         ]);
 
         toastr()->success('Create with success!');
 
-        $this->reset();
-
-        return redirect()->route('tenant.expense.budget.listing', $id );
-    }
-
-    protected function uploadToBunny($file)
-    {
-        $storageZone = env('BUNNY_STORAGE_ZONE');
-        $AccessKey = env('BUNNY_API_KEY_PASSWORD');
-        $urlPublic = env('BUNNY_URL_PUBLIC');
-
-        $nameslug = Str::slug($this->name, '-');
-        $formattedDate = Carbon::parse($this->date)->format('dmyHis');
-        $this->fileName = $this->code.'-'.$formattedDate.'-'.Str::upper($nameslug).'.'.$file->getClientOriginalExtension();
-
-
-        $tenantId = tenant('id');
-        $path = "micontrol/{$tenantId}/invoice/{$this->fileName}";
-
-
-
-        // Cria o cliente Guzzle
-        $client = new Client([
-            'base_uri' => "https://storage.bunnycdn.com/{$storageZone}/",
-            'timeout' => 30,
-        ]);
-
-        // Faz o upload via HTTP PUT
-        $response = $client->request('PUT', $path, [
-            'headers' => [
-                'AccessKey' => $AccessKey,
-            ],
-            'body' => fopen($file->getRealPath(), 'r'),
-        ]);
-
-        if ($response->getStatusCode() !== 201) {
-            throw new \Exception('Failed to send to Bunny. Please check the error code: ' . $response->getStatusCode());
-        }
-
-        // Retorna a URL pública do arquivo
-        return "{$urlPublic}/{$path}";
+        return redirect()->route('tenant.expense.budget.listing', $res->budget_id );
     }
 
     public function render()

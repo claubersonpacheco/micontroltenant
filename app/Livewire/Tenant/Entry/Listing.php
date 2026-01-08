@@ -5,10 +5,10 @@ namespace App\Livewire\Tenant\Entry;
 use App\Models\Budget;
 use App\Models\BudgetTotal;
 use App\Models\Entry;
-use App\Services\BunnyServices;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -24,6 +24,8 @@ class Listing extends Component
     public $budget;
     public $fileUrl;
 
+//    public $showModal = false;
+//    public $itemIdToDelete;
     private $id;
 
 
@@ -60,28 +62,24 @@ class Listing extends Component
             ->withQueryString();
     }
 
-    public function delete(int $id)
-    {
-        $entry = Entry::findOrFail($id);
+//    public function openModal(int $id): void
+//    {
+//        $this->itemIdToDelete = $id;
+//        $this->showModal = true;
+//    }
 
-        try {
-            if ($entry->file_path) {
-                BunnyServices::delete($entry->file_path);
-            }
-
-            $entry->delete();
-
-            toastr()->success(__('Deleted successfully!'));
-
-        } catch (\Throwable $e) {
-            toastr()->error(__('Error while deleting: ') . $e->getMessage());
-        }
-
-        return redirect()->route(
-            'tenant.entry.budget.listing',
-            $this->budget->id
-        );
-    }
+//    #[On('close-modal')]
+//    public function closeModal(): void
+//    {
+//        $this->showModal = false;
+//    }
+//    #[On('refresh-list')]
+//    public function refreshList(): void
+//    {
+//        $this->resetPage();
+//        $this->budget->refresh();
+//        $this->closeModal();
+//    }
 
 
     public function render()

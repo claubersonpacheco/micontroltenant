@@ -102,7 +102,7 @@ class Index extends Component
 
         $this->selectedItems = [];
         BudgetTotalService::updateTotals($this->budget->id);
-        $this->dispatch('refreshList');
+        $this->refreshList();
     }
 
     /** 🔁 Selecionar / desmarcar tudo */
@@ -139,7 +139,7 @@ class Index extends Component
                 ->update(['position' => $index + 1]);
         }
 
-        $this->dispatch('refreshList');
+        $this->refreshList();
     }
 
     /** 💾 Atualiza colunas de exibição no orçamento */

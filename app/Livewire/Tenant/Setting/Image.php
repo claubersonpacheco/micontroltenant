@@ -3,7 +3,7 @@
 namespace App\Livewire\Tenant\Setting;
 
 use App\Models\Setting;
-use Illuminate\Support\Facades\Storage;
+use App\Services\BunnyServices;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -11,13 +11,15 @@ class Image extends Component
 {
     use WithFileUploads;
 
-    public $setting;
+    public Setting $setting;
 
-    public $logo, $logo_impress, $favicon;
+    public $logo;
+    public $logo_impress;
+    public $favicon;
 
-    public $showLogoModal = false;
-    public $showLogoImpressModal = false;
-    public $showFaviconModal = false;
+    public bool $showLogoModal = false;
+    public bool $showLogoImpressModal = false;
+    public bool $showFaviconModal = false;
 
     public function mount($id): void
     {
@@ -29,36 +31,49 @@ class Image extends Component
         return view('livewire.tenant.setting.image');
     }
 
-    public function uploadLogo()
+    /* =========================
+     * LOGO
+     * ========================= */
+    public function uploadLogo(): void
     {
         $this->validate([
-            'logo' => 'required|image|max:2048|mimes:jpg,jpeg,png,gif,webp',
+            'logo' => 'required|image|max:2048|mimes:jpg,jpeg,png,webp',
         ]);
 
+        // Apaga antigo se existir
         if ($this->setting->logo) {
-            Storage::disk('public')->delete($this->setting->logo);
+            BunnyServices::delete($this->setting->logo);
         }
 
-        $logoPath = $this->logo->store('images/logo', 'public');
+        $path = BunnyServices::upload(
+            $this->logo,
+            'settings/logo'
+        );
 
         $this->setting->update([
-            'logo' => $logoPath,
+            'logo' => $path,
         ]);
 
         $this->reset('logo', 'showLogoModal');
     }
 
-    public function uploadLogoImpress()
+    /* =========================
+     * LOGO IMPRESSÃO
+     * ========================= */
+    public function uploadLogoImpress(): void
     {
         $this->validate([
-            'logo_impress' => 'required|image|max:2048|mimes:jpg,jpeg,png,gif,webp',
+            'logo_impress' => 'required|image|max:2048|mimes:jpg,jpeg,png,webp',
         ]);
 
         if ($this->setting->logo_impress) {
-            Storage::disk('public')->delete($this->setting->logo_impress);
+            BunnyServices::delete($this->setting->logo_impress);
         }
 
-        $path = $this->logo_impress->store('images/logo', 'public');
+        $path = BunnyServices::upload(
+            $this->logo_impress,
+            'settings/logo'
+        );
 
         $this->setting->update([
             'logo_impress' => $path,
@@ -67,17 +82,23 @@ class Image extends Component
         $this->reset('logo_impress', 'showLogoImpressModal');
     }
 
-    public function uploadFavicon()
+    /* =========================
+     * FAVICON
+     * ========================= */
+    public function uploadFavicon(): void
     {
         $this->validate([
-            'favicon' => 'required|image|max:2048|mimes:jpg,jpeg,png,gif,webp',
+            'favicon' => 'required|image|max:1024|mimes:png,ico,webp',
         ]);
 
         if ($this->setting->favicon) {
-            Storage::disk('public')->delete($this->setting->favicon);
+            BunnyServices::delete($this->setting->favicon);
         }
 
-        $path = $this->favicon->store('images/logo', 'public');
+        $path = BunnyServices::upload(
+            $this->favicon,
+            'settings/favicon'
+        );
 
         $this->setting->update([
             'favicon' => $path,
@@ -86,18 +107,23 @@ class Image extends Component
         $this->reset('favicon', 'showFaviconModal');
     }
 
-    public function resetUploads()
+    /* =========================
+     * DELETE
+     * ========================= */
+    public function deleteImage(string $type): void
     {
-        $this->reset('logo', 'logo_impress', 'favicon');
-    }
-
-    public function deleteImage($type)
-    {
-        if (! in_array($type, ['logo', 'logo_impress', 'favicon'])) return;
+        if (!in_array($type, ['logo', 'logo_impress', 'favicon'])) {
+            return;
+        }
 
         if ($this->setting->{$type}) {
-            Storage::disk('public')->delete($this->setting->{$type});
+            BunnyServices::delete($this->setting->{$type});
             $this->setting->update([$type => null]);
         }
+    }
+
+    public function resetUploads(): void
+    {
+        $this->reset('logo', 'logo_impress', 'favicon');
     }
 }

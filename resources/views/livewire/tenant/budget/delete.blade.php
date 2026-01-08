@@ -1,15 +1,15 @@
 <x-confirm-delete-modal
     wire:model="confirming"
     title="{{ __('Confirm deletion') }}"
-    message="{{ __('Are you sure you want to delete this budget? This action cannot be undone.') }}"
+    message="{{ __('Are you sure you want to delete? This action cannot be undone') }}"
     action="delete"
-    cancel-text="{{ __('Cancel') }}"
-    confirm-text="{{ __('Delete') }}"
+    cancel-text="{{ __('common.cancel') }}"
+    confirm-text="{{ __('common.delete') }}"
 >
     <x-slot name="trigger">
-        <button title="{{ __('Delete') }}"
+        <button title="{{ __('common.delete') }}"
                 class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 z-50"
-                wire:click="confirm">
+                wire:click="confirm" style="cursor: pointer">
             <!-- Icon -->
             <span class="m-1 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-4 border-gray-50 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

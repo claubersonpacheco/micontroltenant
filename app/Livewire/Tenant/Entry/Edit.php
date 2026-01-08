@@ -10,6 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 #[Title('Edit Entry')]
@@ -34,12 +35,12 @@ class Edit extends Component
     public $receipt_number;
     public $fileUrl = null;
 
-    /** @var \Livewire\Features\SupportFileUploads\TemporaryUploadedFile|null */
-    public $file_path;
+    /** @var TemporaryUploadedFile|null */
+    public $file_path = null;
 
     public $fileName;
 
-    public function mount($id)
+    public function mount($id):void
     {
         $this->entry = Entry::with('budget')->findOrFail($id);
 
@@ -63,16 +64,16 @@ class Edit extends Component
             $this->fileUrl = "";
         }
 
-
+        $this->loadCategories();
     }
 
     #[On('loadCategories')]
-    public function loadCategories()
+    public function loadCategories():void
     {
         $this->categories = Category::all();
     }
 
-    public function store()
+    public function update()
     {
         // 🔹 Validação base
         $this->validate([
@@ -92,9 +93,9 @@ class Edit extends Component
 
         if ($this->receipt == 1) {
 
+
             $this->validate([
                 'receipt_number' => 'nullable|string|min:3|max:15',
-                'file_path' => 'file|mimes:pdf,jpg,png,jpeg|max:1024',
             ]);
 
             if (!empty($this->file_path)) {
@@ -113,7 +114,7 @@ class Edit extends Component
             }
 
         } else {
-            // 🧹 receipt = false → apaga arquivo
+
             if ($this->entry->file_path) {
                 BunnyServices::delete($this->entry->file_path);
             }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Livewire\Tenant\Setting;
+namespace App\Livewire\Tenant\Invoice;
 
-use App\Models\Setting;
+use App\Livewire\Tenant\Budget\Invoice;
+use App\Models\Budget;
 use Livewire\Component;
 use App\Traits\Alert;
 use Livewire\Attributes\Renderless;
@@ -12,7 +13,7 @@ class Delete extends Component
 
     use Alert;
 
-    public Setting $setting;
+    public Invoice $invoice;
 
     public bool $confirming = false;
 
@@ -25,7 +26,7 @@ class Delete extends Component
 
     public function delete(): void
     {
-        $this->setting->delete();
+        $this->invoice->delete();
 
         $this->dispatch('deleted');
         $this->success();
@@ -35,6 +36,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.tenant.setting.delete');
+        return view('livewire.tenant.invoice.delete');
     }
 }

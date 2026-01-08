@@ -14,7 +14,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('List Users')]
+#[Title('List Expenses')]
 #[Layout('layouts.tenant.admin')]
 class Listing extends Component
 {
@@ -88,20 +88,20 @@ class Listing extends Component
         $this->showModal = true;
     }
 
-    #[On('closeModal')]
+    #[On('close-modal')]
     public function closeModal()
     {
         $this->showModal = false;
     }
 
-    // filtros
-    /** 🔁 Atualiza lista de itens */
-    #[On('refreshList')]
+    #[On('refresh-list')]
     public function refreshList(): void
     {
         $this->resetPage();
         $this->budget->refresh();
+        $this->closeModal();
     }
+
 
     /** 🔢 Contar colunas ativas */
     public function countFiltered(): int

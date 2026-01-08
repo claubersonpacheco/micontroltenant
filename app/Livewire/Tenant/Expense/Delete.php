@@ -2,63 +2,38 @@
 
 namespace App\Livewire\Tenant\Expense;
 
-use App\Models\BudgetItem;
 use App\Models\Expense;
-use Livewire\Attributes\On;
 use Livewire\Component;
-
+use App\Traits\Alert;
+use Livewire\Attributes\Renderless;
 
 class Delete extends Component
 {
-    public $itemId;
 
+    use Alert;
 
-    public function mount($itemId)
+    public Expense $expense;
+
+    public bool $confirming = false;
+
+    #[Renderless]
+    public function confirm(): void
     {
-        $this->itemId = $itemId; // recebe o ID do item a ser deletado
+        $this->confirming = true;
     }
 
-
-    public function delete()
+    public function delete(): void
     {
-        $apiAccessKey = env('BUNNY_API_KEY_PASSWORD');
-        $storageZone = env('BUNNY_STORAGE_ZONE');
-        $storageRegion = env('BUNNY_STORAGE_REGION');
+        $this->expense->delete();
 
-        $client = new \Bunny\Storage\Client($apiAccessKey, $storageZone, $storageRegion);
+        $this->dispatch('deleted');
+        $this->success();
 
-        $file = Expense::findOrFail($this->itemId);
-
-        try {
-            if ($file->invoice !== false) {
-                // Deleta do BunnyCDN
-                $result = $client->delete('micontrol/invoices/' . $file->filename);
-
-                // Verifica se houve erro no delete remoto
-                if ($result !== null) {
-                    toastr()->error('Fail to delete: ' . $result);
-
-                }
-            }
-
-            // Deleta do banco (sempre que o registro existir)
-            $file->delete();
-            $this->dispatch('closeModal');
-            toastr()->success('Deleted successfully!');
-
-
-        } catch (\Exception $e) {
-            // Captura qualquer exceção
-            toastr()->error('Error while deleting file: ' . $e->getMessage());
-
-        }
-
+        $this->confirming = false;
     }
-
 
     public function render()
     {
         return view('livewire.tenant.expense.delete');
     }
-
 }
