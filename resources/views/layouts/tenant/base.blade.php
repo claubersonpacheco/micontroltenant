@@ -14,7 +14,7 @@
 
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ $tenantSettings->favicon ? \App\Services\BunnyServices::url($tenantSettings->favicon): ""  }}">
+    <link rel="shortcut icon" href="{{ !empty($tenantSettings->favicon) ? \App\Services\BunnyServices::url($tenantSettings->favicon): ""  }}">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
