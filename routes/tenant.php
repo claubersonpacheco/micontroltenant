@@ -133,6 +133,7 @@ Route::middleware([
     */
     Route::group(['middleware' => 'guest:tenant'], function () {
         Route::get('/login', Login::class)->name('tenant.login');
+        Route::get('/', App\Livewire\Tenant\Index::class)->name('tenant.index');
     });
 
     /*

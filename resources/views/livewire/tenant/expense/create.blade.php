@@ -33,30 +33,35 @@
                             {{ __('Category') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
-                        <!-- Select da categoria -->
-                        <select wire:model="category" id="category"
-                            class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
-                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a category') }}</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
+                    <div class="sm:col-span-10">
 
-                        </select>
+                        <div class=" flex gap-2 items-center">
+                            <!-- Select da categoria -->
+                            <select wire:model="category" id="category"
+                                    class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                                <option value="">{{ __('Select a category') }}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                            <!-- Botão do modal -->
+                            <button type="button" wire:click="$dispatch('open-category-modal')"
+                                    class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                     stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                                {{ __("New") }}
+                            </button>
+
+                        </div>
 
                         @error('category') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                        <!-- Botão do modal -->
-                        <button type="button" wire:click="$dispatch('open-category-modal')"
-                            class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-
-                            {{ __("New") }}
-                        </button>
                     </div>
 
                     <!-- Supplier -->
@@ -65,30 +70,33 @@
                             {{ __('Supplier') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
-                        <!-- Select da categoria -->
-                        <select wire:model="supplier" id="supplier"
-                            class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                    <div class="sm:col-span-10">
+                        <div class="flex gap-2 items-center">
+                            <!-- Select da categoria -->
+                            <select wire:model="supplier" id="supplier"
+                                    class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a supplier') }}</option>
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                            @endforeach
-                        </select>
+                                <option value="">{{ __('Select a supplier') }}</option>
+                                @foreach ($suppliers as $supplier)
+                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                @endforeach
+                            </select>
+
+                            <!-- Botão do modal -->
+                            <button type="button" wire:click="$dispatch('open-supplier-modal')"
+                                    class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                     stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                                {{ __("New") }}
+                            </button>
+                        </div>
+
 
                         @error('supplier') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-
-                        <!-- Botão do modal -->
-                        <button type="button" wire:click="$dispatch('open-supplier-modal')"
-                            class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-
-                            {{ __("New") }}
-                        </button>
                     </div>
 
                     <!-- Name -->
@@ -118,17 +126,25 @@
                         @error('amount') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     </div>
 
+                    <div class="sm:col-span-2">
+
+                    </div>
+
                     <!-- Date  -->
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-1">
                         <label for="edate" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             {{ __('Date') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-4">
+                    <div class="sm:col-span-2">
                         <input wire:model="date" id="date" type="date"
                             class="py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                    focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                         @error('date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="sm:col-span-1">
+
                     </div>
 
                     <!-- Methodo Pay -->
@@ -137,19 +153,25 @@
                             {{ __('Method Pay') }}
                         </label>
                     </div>
-                    <div class="sm:col-span-10 flex gap-2 items-center">
-                        <!-- Select da categoria -->
-                        <select wire:model="method" id="method"
-                            class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
+                    <div class="sm:col-span-2">
+                        <div class="flex gap-2 items-center">
+                            <!-- Select da categoria -->
+                            <select wire:model="method" id="method"
+                                    class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
-                            <option value="">{{ __('Select a method') }}</option>
-                            <option value="money">{{ __('Money')}}</option>
-                            <option value="card">{{ __('Card') }}</option>
-                            <option value="transfer">{{ __('Transfer') }}</option>
-                            <option value="bizum">{{ __('Bizum') }}</option>
-                            <option value="other">{{ __('other') }}</option>
-                        </select>
+                                <option value="">{{ __('Select a method') }}</option>
+                                <option value="money">{{ __('Money')}}</option>
+                                <option value="card">{{ __('Card') }}</option>
+                                <option value="transfer">{{ __('Transfer') }}</option>
+                                <option value="bizum">{{ __('Bizum') }}</option>
+                                <option value="other">{{ __('other') }}</option>
+                            </select>
+                        </div>
+
                         @error('method') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="sm:col-span-8">
+
                     </div>
 
                     <!-- Description -->
@@ -174,13 +196,13 @@
                         </label>
                     </div>
                     <div class="sm:col-span-2">
-                        <!-- Select da categoria -->
+                        <!-- Select invoice -->
                         <select wire:model="invoice" id="invoice"
                             class="flex-1 py-1.5 px-3 block w-full border-gray-200 shadow-2xs sm:text-sm rounded-lg
                                     focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
                             <option value="">{{ __('Select') }}</option>
-                            <option value="1">{{ __('Yes') }}</option>
-                            <option value="0">{{ __('No') }}</option>
+                            <option value="1">{{ __('common.yes') }}</option>
+                            <option value="0">{{__('common.no') }}</option>
 
                         </select>
 
@@ -189,6 +211,7 @@
                     </div>
 
                     <div class="sm:col-span-8">
+
                     </div>
 
                     <template x-if="$wire.invoice == 1">
