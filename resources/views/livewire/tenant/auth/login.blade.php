@@ -7,16 +7,8 @@
     </div>
 
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
-            Welcome, sign into your account
+            Bienvenido, accede a tu cuenta
         </h2>
-{{--        @if (Route::has('register'))--}}
-{{--            <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">--}}
-{{--                Or--}}
-{{--                <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">--}}
-{{--                    create a new account--}}
-{{--                </a>--}}
-{{--            </p>--}}
-{{--        @endif--}}
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -24,7 +16,7 @@
             <form wire:submit.prevent="authenticate">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 leading-5">
-                        Email address
+                        {{ __('Email address') }}
                     </label>
 
                     <div class="mt-1 rounded-md shadow-sm">
@@ -38,7 +30,7 @@
 
                 <div class="mt-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 leading-5">
-                        Password
+                        {{ __('Password') }}
                     </label>
 
                     <div class="mt-1 rounded-md shadow-sm relative">
