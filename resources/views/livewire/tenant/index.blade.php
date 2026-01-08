@@ -7,7 +7,10 @@
         </div>
 
         <div class="mt-10 relative max-w-5xl mx-auto">
-            <div class="w-full object-cover h-96 sm:h-120 bg-[url('https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1020&q=80')] bg-no-repeat bg-center bg-cover rounded-xl"></div>
+            <div
+                class="w-full h-96 sm:h-120 bg-no-repeat bg-center bg-cover rounded-xl"
+                style="background-image: url('{{ asset('images/photo-home-micontrol.jpg') }}');">
+            </div>
 
             <div class="absolute inset-0 size-full">
                 <div class="flex flex-col justify-center items-center size-full">
