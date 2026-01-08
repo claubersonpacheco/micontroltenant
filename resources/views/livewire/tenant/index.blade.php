@@ -2,7 +2,7 @@
 <div class="relative overflow-hidden">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="max-w-2xl text-center mx-auto">
-            <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl dark:text-white">Mi Control <span class="text-blue-600">una forma fácil</span></h1>
+            <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl dark:text-white">MiControl, <span class="text-blue-600">la forma más fácil</span></h1>
             <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">de gestionar tus presupuestos.</p>
         </div>
 
