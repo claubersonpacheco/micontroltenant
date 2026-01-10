@@ -9,7 +9,6 @@ use App\Livewire\Tenant\Budget\FinancialReport;
 use App\Livewire\Tenant\Auth\Login;
 use App\Livewire\Tenant\Auth\Passwords\Email;
 use App\Livewire\Tenant\Auth\Passwords\Reset;
-use App\Livewire\Tenant\Auth\Register;
 use Illuminate\Support\Facades\Route;
 
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;

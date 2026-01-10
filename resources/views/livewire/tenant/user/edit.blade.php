@@ -11,13 +11,6 @@
 
             </p>
         </div>
-        <div class="sm:col-span-3 mb-10">
-
-            <livewire:tenant.partials.photo-upload :userId="$user->id" />
-
-
-        </div>
-
 
 
         <form wire:submit.prevent="update">

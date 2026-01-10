@@ -47,7 +47,7 @@ class Image extends Component
 
         $path = BunnyServices::upload(
             $this->logo,
-            'settings/logo'
+            'images/logo'
         );
 
         $this->setting->update([
@@ -72,7 +72,7 @@ class Image extends Component
 
         $path = BunnyServices::upload(
             $this->logo_impress,
-            'settings/logo'
+            'images/logo'
         );
 
         $this->setting->update([
@@ -97,7 +97,7 @@ class Image extends Component
 
         $path = BunnyServices::upload(
             $this->favicon,
-            'settings/favicon'
+            'images/logo'
         );
 
         $this->setting->update([

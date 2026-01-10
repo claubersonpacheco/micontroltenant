@@ -215,8 +215,8 @@
                                         <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
                                             <div class="flex items-center gap-x-3">
                                                 <img class="inline-block w-[46px] h-[46px] rounded-full object-cover"
-                                                     src="{{ Auth::user()->photoUrlTenant }}"
-                                                     alt="{{ Auth::user()->name }}">
+                                                     src="{{ $data->photoUrlTenant }}"
+                                                     alt="{{ $data->name }}">
                                                 <div class="grow">
                                                     <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->name }}</span>
                                                     <span class="block text-sm text-gray-500 dark:text-neutral-500">{{ $data->email }}</span>

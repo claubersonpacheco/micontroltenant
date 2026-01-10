@@ -2,45 +2,47 @@
 
 namespace App\Livewire\Tenant\User;
 
-use App\Livewire\Forms\UserForm;
-use App\Models\User;
+use App\Models\TenantUser;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Illuminate\Support\Facades\Hash;
 
 #[Title('Create Users')]
 #[Layout('layouts.tenant.admin')]
 class Create extends Component
 {
+    public string $name = '';
+    public string $email = '';
+    public ?string $password = null;
+    public ?string $password_confirmation = null;
 
-    public $name;
-    public $email;
-    public $password;
-    public $password_confirmation;
-
-    public function store()
+    /**
+     * Cria um novo usuário do tenant
+     */
+    public function store(): void
     {
-        // Aqui vai sua lógica de validação e criação do usuário, por exemplo:
         $this->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        User::create([
+        TenantUser::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
 
-        toastr()->success('Criado com sucesso!');
+        toastr()->success('Usuário criado com sucesso!');
 
-        return redirect()->route('tenant.user.index');
-
-
+        redirect()->route('tenant.user.index');
     }
 
+    /**
+     * Renderiza a view do componente
+     */
     public function render()
     {
         return view('livewire.tenant.user.create');

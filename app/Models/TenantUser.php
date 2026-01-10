@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Services\BunnyServices;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class TenantUser extends Authenticatable
@@ -24,7 +24,6 @@ class TenantUser extends Authenticatable
         'email',
         'password',
         'photo_path',
-        'photo_original_name',
     ];
 
 
@@ -68,22 +67,6 @@ class TenantUser extends Authenticatable
     }
 
 
-    public function getPhotoUrlAttribute(): ?string
-    {
-        if ($this->photo_path && Storage::disk('public')->exists($this->photo_path)) {
-            return Storage::disk('public')->url($this->photo_path);
-        }
-
-        return $this->getDefaultAvatarUrl();
-    }
-
-    public function getHasPhotoAttribute(): bool
-    {
-        return !empty($this->photo_path) && Storage::disk('public')->exists($this->photo_path);
-    }
-
-
-
     public function getDefaultAvatarUrl(): string
     {
         $initials = $this->initials(); // agora usa o melhor método
@@ -100,9 +83,8 @@ class TenantUser extends Authenticatable
     public function getPhotoUrlTenantAttribute(): ?string
     {
 
-        if ($this->photo_path && Storage::disk('public')->exists($this->photo_path)) {
-
-            return Storage::disk('tenant')->url('tenant_'.tenant('id').'/'.$this->photo_path);
+        if ($this->photo_path) {
+            return BunnyServices::url($this->photo_path);
         }
 
         return $this->getDefaultAvatarUrl();

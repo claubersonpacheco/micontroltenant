@@ -62,7 +62,7 @@ class Index extends Component
 
         $this->user->save();
 
-        toastr()->success('Usuário atualizado com sucesso!');
+        toastr()->success('Edit with success!');
 
         return redirect()->route('profile.index');
     }
