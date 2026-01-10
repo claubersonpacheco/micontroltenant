@@ -46,6 +46,7 @@
                 >
                 @error('photo') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
 
+
                 <div class=" flex justify-end gap-2">
                     <button @click="showModal = false; $wire.resetUploads()" class="btn btn-secondary">Cancelar</button>
                     <button wire:click="uploadPhoto" class="btn btn-primary">Salvar</button>

@@ -14,8 +14,6 @@
                     <livewire:tenant.profile.image :userId="$user->id" />
                 </div>
 
-
-
                 <form wire:submit.prevent="save">
                     <!-- Grid -->
                     <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
