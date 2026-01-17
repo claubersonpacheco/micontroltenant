@@ -32,19 +32,6 @@ class Index extends Component
     public $users;
 
 
-    public function delete($id)
-    {
-
-        $user = Tenant::findOrFail($id);
-        $user->delete();
-
-        toastr()->success('Excluído com sucesso!');
-
-        return redirect()->route('tenant.index');
-
-
-    }
-
     #[On('searchData')]
     public function search($searchTerm)
     {

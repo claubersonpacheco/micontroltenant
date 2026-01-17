@@ -6,7 +6,11 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
+#[Title('Edit Setting')]
+#[Layout('layouts.admin.admin')]
 class Edit extends Component
 {
     public Setting $setting;  // Declare a propriedade para o model

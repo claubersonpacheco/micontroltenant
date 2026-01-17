@@ -66,7 +66,7 @@
         </div>
 
         {{-- Modal --}}
-        <div x-show="showModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div x-show="showModal" x-cloak class="fixed inset-0 z-99 flex items-center justify-center bg-black/50">
             <div class="bg-white p-6 rounded-lg w-full max-w-md">
                 <h3 class="font-semibold mb-4">Upload Logo Impress</h3>
 
@@ -112,7 +112,7 @@
         </div>
 
         {{-- Modal --}}
-        <div x-show="showModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div x-show="showModal" x-cloak class="fixed inset-0 z-99 flex items-center justify-center bg-black/50">
             <div class="bg-white p-6 rounded-lg w-full max-w-md">
                 <h3 class="font-semibold mb-4">Upload Favicon</h3>
 

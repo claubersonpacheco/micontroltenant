@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admin\Plan;
+namespace App\Livewire\Admin\Tenant;
 
-use App\Models\Plan;
+use App\Models\Tenant;
 use Livewire\Component;
 use App\Traits\Alert;
 use Livewire\Attributes\Renderless;
@@ -12,7 +12,7 @@ class Delete extends Component
 
     use Alert;
 
-    public Plan $plan;
+    public Tenant $model;
 
     public bool $confirming = false;
 
@@ -25,7 +25,7 @@ class Delete extends Component
 
     public function delete(): void
     {
-        $this->plan->delete();
+        $this->model->delete();
 
         $this->dispatch('deleted');
         $this->success();
@@ -35,6 +35,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.admin.plan.delete');
+        return view('livewire.admin.tenant.delete');
     }
 }
