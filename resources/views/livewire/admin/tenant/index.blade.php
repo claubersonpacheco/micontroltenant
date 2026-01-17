@@ -201,7 +201,7 @@
 
                             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
 
-                            @forelse($rows as $data)
+                            @forelse($this->rows as $data)
                                 <tr>
                                     <td class="size-px whitespace-nowrap">
                                         <div class="ps-6 py-3">

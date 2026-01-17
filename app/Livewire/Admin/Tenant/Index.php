@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Tenant;
 
 use App\Models\Tenant;
-use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -51,7 +50,7 @@ class Index extends Component
 
     public function render()
     {
-        $this->count = User::count();
+        $this->count = Tenant::count();
 
         return view('livewire.admin.tenant.index');
     }
