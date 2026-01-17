@@ -37,18 +37,6 @@ class Index extends Component
     public $users;
 
 
-    public function delete($id)
-    {
-
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        toastr()->success('Usuário excluído com sucesso!');
-
-        return redirect()->route('user.index');
-
-    }
-
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
