@@ -5,9 +5,8 @@
     <div x-data="{ showModal: @entangle('showLogoModal') }" class="bg-white p-4 rounded-lg border border-gray-300">
         <h2 class="font-bold text-center mb-2">Logo</h2>
 
-        @if($setting->logo)
-            <img alt="logo" src="{{ BunnyServices::url($setting->logo) }}" class="h-20 mx-auto object-cover rounded">
-        @endif
+
+            <img alt="logo" src="{{ $setting->logoDefault }}" class="h-20 mx-auto object-cover rounded">
 
         <div class="mt-3 flex justify-center gap-2">
             <button @click="showModal = true" class="btn btn-primary text-xs">
@@ -51,10 +50,9 @@
          class="bg-white p-4 rounded-lg border border-gray-300">
         <h2 class="font-bold text-center mb-2">Logo Impress</h2>
 
-        @if($setting->logo_impress)
-            <img alt="logo_impress" src="{{ BunnyServices::url($setting->logo_impress) }}"
+
+            <img alt="logo_impress" src="{{ $setting->logoImpressDefault }}"
                  class="h-20 mx-auto object-cover rounded">
-        @endif
 
         <div class="mt-3 flex justify-center gap-2">
             <button @click="showModal = true" class="btn btn-primary text-xs">
@@ -97,10 +95,9 @@
     <div x-data="{ showModal: @entangle('showFaviconModal') }" class="bg-white p-4 rounded-lg border border-gray-300">
         <h2 class="font-bold text-center mb-2">Favicon</h2>
 
-        @if($setting->favicon)
-            <img alt="favicon" src="{{ BunnyServices::url($setting->favicon) }}"
+
+            <img alt="favicon" src="{{ $setting->faviconDefault }}"
                  class="h-16 mx-auto object-cover rounded">
-        @endif
 
         <div class="mt-3 flex justify-center gap-2">
             <button @click="showModal = true" class="btn btn-primary text-xs">

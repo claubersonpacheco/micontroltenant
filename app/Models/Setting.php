@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\BunnyServices;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Setting extends Model
@@ -45,31 +45,31 @@ class Setting extends Model
                 'bold' => true,
             ]);
     }
-    public function getlogoTenantAttribute(): ?string
+    public function getlogoDefaultAttribute(): ?string
     {
 
-        if ($this->logo && Storage::disk('public')->exists($this->logo)) {
-            return tenant_asset($this->logo);
+        if ($this->logo) {
+            return  BunnyServices::url($this->logo);
         }
 
         return $this->getDefaultAvatarUrl();
     }
 
-    public function getlogoImpressTenantAttribute(): ?string
+    public function getlogoImpressDefaultAttribute(): ?string
     {
 
-        if ($this->logo_impress && Storage::disk('public')->exists($this->logo_impress)) {
-            return tenant_asset($this->logo_impress);
+        if ($this->logo_impress) {
+            return  BunnyServices::url($this->logo_impress);
         }
 
         return $this->getDefaultAvatarUrl();
     }
 
-    public function getfaviconTenantAttribute(): ?string
+    public function getfaviconDefaultAttribute(): ?string
     {
 
-        if ($this->favicon && Storage::disk('public')->exists($this->favicon)) {
-            return tenant_asset($this->favicon);
+        if ($this->favicon) {
+            return  BunnyServices::url($this->favicon);
         }
 
         return $this->getDefaultAvatarUrl();
