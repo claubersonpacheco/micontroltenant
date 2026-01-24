@@ -22,7 +22,7 @@ return [
     'save_and_close' => 'Salvar e fechar',
     'save_and_return' => 'Salvar e voltar',
     'submit' => 'Enviar',
-
+    'not-found' => 'Nenhum registro encontrado',
     // Ações
     'add' => 'Adicionar',
     'add_name' => 'Adicionar :name',

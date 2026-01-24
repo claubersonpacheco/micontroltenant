@@ -13,10 +13,13 @@ return [
     // Sim/Não e confirmações
     'yes' => 'Sí',
     'no' => 'No',
+    'new' => 'Nuevo',
     'confirm' => 'Confirmar',
     'cancel' => 'Cancelar',
     'accept' => 'Aceptar',
     'agree' => 'Aceptar',
+    'action' => 'Acciones',
+    'not-found' => 'No hay datos',
     'save' => 'Guardar',
     'save_and_close' => 'Guardar y cerrar',
     'save_and_return' => 'Guardar y volver',

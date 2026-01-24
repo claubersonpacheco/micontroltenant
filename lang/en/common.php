@@ -7,5 +7,6 @@ return [
     'save'   => 'Save',
     'cancel' => 'Cancel',
 
-    'new' => 'New'
+    'new' => 'New',
+    'not-found' => 'Not found',
 ];

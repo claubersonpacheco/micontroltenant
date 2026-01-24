@@ -50,7 +50,7 @@ class Index extends Component
 
     public function render()
     {
-        $this->count = User::count();
+        $this->count = User::query()->whereNotIn('id', [Auth::id()])->count();
 
         return view('livewire.admin.user.index');
     }
