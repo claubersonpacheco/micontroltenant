@@ -3,6 +3,7 @@
 namespace App\Livewire\Tenant\Customer;
 
 use App\Models\Customer;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 use Livewire\Attributes\Computed;
@@ -24,6 +25,12 @@ class Index extends Component
         'column' => 'created_at',
         'direction' => 'desc',
     ];
+
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
 
     #[Computed]
     public function rows(): LengthAwarePaginator

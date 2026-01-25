@@ -2,91 +2,64 @@
 
 namespace App\Livewire\Tenant\User;
 
-use App\Models\TenantUser;
+use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use Illuminate\Database\Eloquent\Builder;
 #[Title('List Users')]
 #[Layout('layouts.tenant.admin')]
 class Index extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'tailwind';
+    public ?int $quantity = 5;
 
-    public int $perPage = 25;
-    public string $search = '';
+    public ?string $search = null;
 
-    public string $sortField = 'name';
-    public string $sortDirection = 'asc';
+    public array $sort = [
+        'column'    => 'created_at',
+        'direction' => 'desc',
+    ];
+    public $sortField = 'name';
+    public $sortDirection = 'asc';
+    public $sortBy = 'name';
+    public $sortByDesc = true;
 
-    public int $count = 0;
+    public $status;
 
-    /**
-     * Reset pagination when search changes
-     */
-    public function updatedSearch(): void
-    {
-        $this->resetPage();
-    }
+    public $count;
 
-    /**
-     * Listen search event (ex: from input component)
-     */
+    public $users;
+
     #[On('searchData')]
-    public function search(string $searchTerm): void
+    public function search($searchTerm)
     {
         $this->search = $searchTerm;
     }
 
-    /**
-     * Change ordering
-     */
-    public function sortBy(string $field): void
+    #[Computed]
+    public function rows(): LengthAwarePaginator
     {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'asc';
-        }
+        return User::query()
+            ->whereNotIn('id', [Auth::id()])
+            ->when($this->search !== null, fn (Builder $query) => $query->whereAny(['name', 'email'], 'like', '%'.trim($this->search).'%'))
+            ->orderBy(...array_values($this->sort))
+            ->paginate($this->quantity)
+            ->withQueryString();
     }
 
-    /**
-     * Delete tenant user
-     */
-    public function delete(int $id): void
-    {
-        TenantUser::findOrFail($id)->delete();
 
-        toastr()->success('Usuário excluído com sucesso!');
-
-        $this->resetPage();
-        $this->count = TenantUser::count();
-    }
-
-    /**
-     * Initial load
-     */
-    public function mount(): void
-    {
-        $this->count = TenantUser::count();
-    }
 
     public function render()
     {
-        $users = TenantUser::query()
-            ->search($this->search)
-            ->whereNotIn('id', [Auth::id()])
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate($this->perPage);
+        $this->count = User::query()->whereNotIn('id', [Auth::id()])->count();
 
-        return view('livewire.tenant.user.index', [
-            'datas' => $users,
-        ]);
+        return view('livewire.tenant.user.index');
     }
 }

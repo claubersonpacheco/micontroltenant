@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Tenant\Print;
+namespace App\Http\Controllers\Print;
 
 use App\Http\Controllers\Controller;
 use App\Models\Budget;
 use App\Models\Setting;
 use App\Traits\GeneratedPdf;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Mews\Purifier\Facades\Purifier;
-use Spatie\Browsershot\Browsershot;
 
 class BudgetController extends Controller
 {
     use GeneratedPdf;
+
     public function generatePDF($id)
     {
 
@@ -27,13 +23,18 @@ class BudgetController extends Controller
 
         $pdfName = $budget->code . '.pdf';
 
-        Storage::makeDirectory('app/public/reports/');
+        $tenantId = tenant('id');
 
-        $storagePath = storage_path('app/public/reports/' . $pdfName);
+        if(!empty($tenantId)){
+            $tenantPath = 'public/reports/budgets/';
+        }
+        Storage::makeDirectory($tenantPath);
+
+        $storagePath = storage_path($tenantPath . $pdfName);
 
         $setting = Setting::first();
 
-        $template = view('admin.budget.print', compact('budget', 'setting'))->render();
+        $template = view('print.budget', compact('budget', 'setting'))->render();
 
        // llamo la trait Browsershot
         $this->PdfWithChrome($template, $storagePath, $budget);
@@ -68,7 +69,7 @@ class BudgetController extends Controller
 
         }
 
-        return view('admin.budget.print', compact('budget', 'setting'))->render();
+        return view('print.budget', compact('budget', 'setting'))->render();
 
     }
 

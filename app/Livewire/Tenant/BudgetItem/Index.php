@@ -65,6 +65,12 @@ class Index extends Component
         $this->colorStatus = $this->getStatusColor($this->budget->latestStatus->status ?? 'default');
     }
 
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
+
     /** 🔁 Computed property para listar itens */
     #[Computed]
     public function rows(): LengthAwarePaginator

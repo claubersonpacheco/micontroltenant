@@ -324,6 +324,14 @@
     "Observation" : "Observación",
     "Email address" : "Correo eletrónico",
     "Confirm deletion": "Confirme la exclusión",
-    "Are you sure you want to delete? This action cannot be undone" : "¿Está seguro de que desea eliminar? Esta acción no se puede deshacer"
+    "Are you sure you want to delete? This action cannot be undone" : "¿Está seguro de que desea eliminar? Esta acción no se puede deshacer",
+    "Birth Date" : "Nascimento",
+    "Phone": "Teléfono",
+    "State": "Provincia",
+    "Zip Code": "Código Postal",
+    "Bank Account": "Cuenta Bancaria",
+    "Account Number" : "IBAN",
+    "Role": "Función",
+    "Active": "Activo"
 
 }

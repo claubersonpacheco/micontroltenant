@@ -5,30 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presupuesto - {{ $budget->customer->name }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        h3, th {
-            font-size: 14px;
+        @media print {
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 210mm;
+                height: 297mm;
+            }
+
+            h3, th {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 13px;
+            }
+
+            p, td {
+                font-size: 12px;
+            }
         }
 
-        h2 {
-            font-size: 13px;
+        .print-only {
+            display: none;
         }
-
-        p, td {
-            font-size: 12px;
-        }
-
-        @page {
-            margin: 10mm 0mm 10mm 0mm; /* margens: cima, direita, baixo, esquerda */
-        }
-
     </style>
-
-
 </head>
 <body>
 
-<div class="max-w-4xl mx-auto bg-white p-8">
+<div class="max-w-4xl mx-auto bg-white p-8 border rounded-lg">
+    <div class="no-print">
+        <div class="w-full flex gap-2 mb-3 items-center justify-end">
+
+            <button
+                class="no-print bg-green-600 hover:bg-green-500 text-white px-8 py-2.5 rounded-lg font-bold  transition-all flex items-center gap-2"
+                onclick="window.print()">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+
+                Gerar PDF / Imprimir
+            </button>
+            <button
+                class="no-print bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-lg font-bold transition-all flex items-center gap-2"
+                onclick="history.back()">Voltar
+            </button>
+        </div>
+    </div>
     <div class="flex justify-between items-center">
         <div>
             <h1 class="text-3xl font-bold">Presupuesto</h1>
@@ -68,7 +110,8 @@
             <div class="flex justify-start space-x-8">
                 <div>
                     <p><b>{{ __('Date Budget') }}:</b> {{ \Carbon\Carbon::parse($budget->date)->format('d/m/Y') }}</p>
-                    <p><b>{{ __('Date Expirate') }}:</b> {{ \Carbon\Carbon::parse($budget->expirate)->format('d/m/Y') }}</p>
+                    <p><b>{{ __('Date Expirate') }}:</b> {{ \Carbon\Carbon::parse($budget->expirate)->format('d/m/Y') }}
+                    </p>
                     <p><b>{{ __('Validate') }}:</b> {{ $budget->total_expirate }}</p>
                 </div>
 
@@ -79,32 +122,32 @@
 
     <table class="min-w-full mt-8 border-collapse">
         <thead>
-            <tr class="bg-gray-200">
-                @if($budget->show_service)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Service') }}</th>
-                @endif
-                @if($budget->show_description)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 max-w-[420px] ">{{ __('Description') }}</th>
-                @endif
-                @if($budget->show_qtd)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Quantity') }}</th>
-                @endif
-                @if($budget->show_price)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Unit Price') }}</th>
-                @endif
-                @if($budget->show_tax)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax') }}</th>
-                @endif
-                @if($budget->show_sub_total)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Sub Total') }}</th>
-                @endif
-                @if($budget->show_tax_value)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax Value') }}</th>
-                @endif
-                @if($budget->show_total)
-                    <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Total') }}</th>
-                @endif
-            </tr>
+        <tr class="bg-gray-200">
+            @if($budget->show_service)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Service') }}</th>
+            @endif
+            @if($budget->show_description)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 max-w-[420px] ">{{ __('Description') }}</th>
+            @endif
+            @if($budget->show_qtd)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Quantity') }}</th>
+            @endif
+            @if($budget->show_price)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Unit Price') }}</th>
+            @endif
+            @if($budget->show_tax)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax') }}</th>
+            @endif
+            @if($budget->show_sub_total)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Sub Total') }}</th>
+            @endif
+            @if($budget->show_tax_value)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax Value') }}</th>
+            @endif
+            @if($budget->show_total)
+                <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Total') }}</th>
+            @endif
+        </tr>
         </thead>
         <tbody>
         @foreach($budget->items as $item)
@@ -168,24 +211,30 @@
                     <!-- Grid -->
                     <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
                         @if($budget->show_sub_total)
-                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
-                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }} €</dd>
-                        </dl>
+                            <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->subtotal, 2, ',', '.') }}
+                                    €
+                                </dd>
+                            </dl>
                         @endif
 
                         @if($budget->show_tax_value)
-                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
-                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }} €</dd>
-                        </dl>
+                            <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->tax_value, 2, ',', '.') }}
+                                    €
+                                </dd>
+                            </dl>
                         @endif
 
                         @if($budget->show_total)
-                        <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
-                            <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
-                            <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }} €</dd>
-                        </dl>
+                            <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                                <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->total, 2, ',', '.') }}
+                                    €
+                                </dd>
+                            </dl>
                         @endif
 
                     </div>
@@ -196,12 +245,6 @@
 
         </div>
     </div>
-
-
-
-
 </div>
-
-
 </body>
 </html>

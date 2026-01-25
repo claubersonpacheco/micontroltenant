@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Tenant\Print;
+namespace App\Http\Controllers\Print;
 
 use App\Http\Controllers\Controller;
 use App\Models\Budget;
-use App\Models\Expense;
 use App\Models\Setting;
 use App\Traits\GeneratedPdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ExpensePrint extends Controller
+class EntryPrint extends Controller
 {
     use GeneratedPdf;
     public function generatePDF($id)

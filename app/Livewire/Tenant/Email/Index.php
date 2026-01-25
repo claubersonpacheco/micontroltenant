@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Email;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
@@ -24,6 +25,12 @@ class Index extends Component
         'column' => 'created_at',
         'direction' => 'desc',
     ];
+
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
 
     #[Computed]
     public function rows(): LengthAwarePaginator

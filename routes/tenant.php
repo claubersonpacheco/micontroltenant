@@ -2,34 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Tenant\Print\BudgetController;
+use App\Http\Controllers\Print\BudgetController;
 use App\Http\Controllers\Tenant\Auth\EmailVerificationController;
 use App\Http\Controllers\Tenant\Auth\LogoutController;
-use App\Livewire\Tenant\Budget\FinancialReport;
 use App\Livewire\Tenant\Auth\Login;
 use App\Livewire\Tenant\Auth\Passwords\Email;
 use App\Livewire\Tenant\Auth\Passwords\Reset;
+use App\Livewire\Tenant\Budget\FinancialReport;
 use Illuminate\Support\Facades\Route;
-
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Stancl\Tenancy\Middleware\ScopeSessions;
 
-/*
-|--------------------------------------------------------------------------
-| Tenant Routes
-|--------------------------------------------------------------------------
-|
-| Todas as rotas dos tenants, incluindo as rotas Livewire, devem estar
-| dentro de middleware 'web' + tenancy middlewares.
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Rotas protegidas (auth)
-|--------------------------------------------------------------------------
-*/
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
@@ -41,16 +25,16 @@ Route::middleware([
     Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:tenant', 'verified']], function () {
 
         // entry
-        Route::get('/entry/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'generatePDF'])->name('tenant.entry.pdf');
-        Route::get('/entry/budget/{id}/view', [\App\Http\Controllers\Tenant\Print\EntryPrint::class, 'viewPrint'])->name('tenant.entry.view');
+        Route::get('/entry/budget/{id}/pdf', [\App\Http\Controllers\Print\EntryPrint::class, 'generatePDF'])->name('tenant.entry.pdf');
+        Route::get('/entry/budget/{id}/view', [\App\Http\Controllers\Print\EntryPrint::class, 'viewPrint'])->name('tenant.entry.view');
         Route::get('/entry/{id}/edit', App\Livewire\Tenant\Entry\Edit::class)->name('tenant.entry.edit');
         Route::get('/entry/budget/{id}/create', App\Livewire\Tenant\Entry\Create::class)->name('tenant.entry.create');
         Route::get('/entry/budget/{id}/list', App\Livewire\Tenant\Entry\Listing::class)->name('tenant.entry.budget.listing');
         Route::get('/entry', App\Livewire\Tenant\Entry\Index::class)->name('tenant.entry.index');
 
         // expense
-        Route::get('/expense/budget/{id}/pdf', [\App\Http\Controllers\Tenant\Print\ExpensePrint::class, 'generatePDF'])->name('tenant.expense.pdf');
-        Route::get('/expense/budget/{id}/view', [\App\Http\Controllers\Tenant\Print\ExpensePrint::class, 'viewPrint'])->name('tenant.expense.view');
+        Route::get('/expense/budget/{id}/pdf', [\App\Http\Controllers\Print\ExpensePrint::class, 'generatePDF'])->name('tenant.expense.pdf');
+        Route::get('/expense/budget/{id}/view', [\App\Http\Controllers\Print\ExpensePrint::class, 'viewPrint'])->name('tenant.expense.view');
         Route::get('/expense/budget/{id}/edit', App\Livewire\Tenant\Expense\Edit::class)->name('tenant.expense.edit');
         Route::get('/expense/budget/{id}/create', App\Livewire\Tenant\Expense\Create::class)->name('tenant.expense.create');
         Route::get('/expense/budget/{id}/list', App\Livewire\Tenant\Expense\Listing::class)->name('tenant.expense.budget.listing');
@@ -79,7 +63,7 @@ Route::middleware([
         // budget
         Route::get('/budgets/{id}/invoice', App\Livewire\Tenant\Budget\Invoice::class)->name('tenant.budget.invoice');
         Route::get('/budgets/{id}/print', [BudgetController::class, 'print'])->name('tenant.budget.print');
-        Route::get('/budgets/{id}/generate-pdf', [BudgetController::class, 'tenant.generatePDF'])->name('tenant.budget.pdf');
+        Route::get('/budgets/{id}/generate-pdf', [BudgetController::class, 'generatePDF'])->name('tenant.budget.pdf');
 
         Route::get('/budgets/{budget}/financial-report', FinancialReport::class)->name('tenant.budgets.financial-report');
 

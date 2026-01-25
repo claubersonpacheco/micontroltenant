@@ -3,6 +3,7 @@
 namespace App\Livewire\Tenant\Budget;
 
 use App\Models\Budget;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 use Livewire\Attributes\Computed;
@@ -25,6 +26,12 @@ class Index extends Component
         'direction' => 'desc',
     ];
 
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
+
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
@@ -37,11 +44,7 @@ class Index extends Component
             ->when(
                 $this->search !== null,
                 fn($query) =>
-                $query->whereHas(
-                    'customer',
-                    fn($q) =>
-                    $q->where('name', 'like', '%' . trim($this->search) . '%')
-                )
+                $query->whereAny(['name'], 'like', '%' . trim($this->search) . '%')
             )
             ->select(['id', 'name', 'customer_id', 'date', 'created_at'])
             ->orderBy(...array_values($this->sort))

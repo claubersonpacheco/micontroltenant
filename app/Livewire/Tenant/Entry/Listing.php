@@ -46,6 +46,12 @@ class Listing extends Component
     }
 
 
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
+
     #[Computed]
     public function rows(): LengthAwarePaginator
     {

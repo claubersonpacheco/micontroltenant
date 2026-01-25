@@ -47,6 +47,12 @@ class Listing extends Component
         'direction' => 'desc',
     ];
 
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
+
     public function mount(int $id): void
     {
         $this->budget = Budget::with([

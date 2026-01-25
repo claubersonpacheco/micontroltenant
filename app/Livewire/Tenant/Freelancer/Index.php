@@ -3,6 +3,7 @@
 namespace App\Livewire\Tenant\Freelancer;
 
 use App\Models\Freelancer;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 use Livewire\Attributes\Computed;
@@ -25,6 +26,11 @@ class Index extends Component
         'direction' => 'desc',
     ];
 
+    #[On('searchData')]
+    public function search($searchTerm)
+    {
+        $this->search = $searchTerm;
+    }
     #[Computed]
     public function rows(): LengthAwarePaginator
     {
