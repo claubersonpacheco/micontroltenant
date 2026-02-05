@@ -6,7 +6,7 @@ trait GeneratedPdf
 {
     public function PdfWithChrome(string $template, string $storagePath, $budget)
     {
-        if(env('APP_ENV') === 'production') {
+        if( config('services.generate_pdf') === 'production') {
             $nodeBinary = '/usr/bin/node';
             $npmBinary  = '/usr/bin/npm';
             $chromePath = '/usr/bin/google-chrome';

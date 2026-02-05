@@ -115,6 +115,7 @@ class Image extends Component
         if (!in_array($type, ['logo', 'logo_impress', 'favicon'])) {
             return;
         }
+        dd($type);
 
         if ($this->setting->{$type}) {
             BunnyServices::delete($this->setting->{$type});

@@ -14,5 +14,7 @@ return [
         'storage_password' => env('BUNNY_STORAGE_PASSWORD'),
         'cdn_url'          => env('BUNNY_URL_PUBLIC'),
     ],
+    'generate_pdf'=> env('APP_ENV', 'production'),
+
 
 ];

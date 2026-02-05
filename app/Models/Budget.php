@@ -79,6 +79,11 @@ class Budget extends Model
         return $this->hasOne(BudgetTotal::class);
     }
 
+    public function filter()
+    {
+        return $this->hasOne(BudgetFilter::class);
+    }
+
     public function updateSummary()
     {
         BudgetTotalService::updateTotals($this->id);

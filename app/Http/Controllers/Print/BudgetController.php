@@ -26,7 +26,7 @@ class BudgetController extends Controller
         $tenantId = tenant('id');
 
         if(!empty($tenantId)){
-            $tenantPath = 'public/reports/budgets/';
+            $tenantPath = 'app/public/reports/budgets/';
         }
         Storage::makeDirectory($tenantPath);
 
@@ -34,7 +34,7 @@ class BudgetController extends Controller
 
         $setting = Setting::first();
 
-        $template = view('print.budget', compact('budget', 'setting'))->render();
+        $template = view('print.budget_pdf', compact('budget', 'setting'))->render();
 
        // llamo la trait Browsershot
         $this->PdfWithChrome($template, $storagePath, $budget);
@@ -59,6 +59,8 @@ class BudgetController extends Controller
             ->with(['items' => function ($query) {
                 $query->orderBy('sort_order', 'asc');
             }])
+            ->with('summary')
+            ->with('filters')
             ->first();
 
         $setting = Setting::first();
@@ -69,7 +71,7 @@ class BudgetController extends Controller
 
         }
 
-        return view('print.budget', compact('budget', 'setting'))->render();
+        return view('print.budget_print', compact('budget', 'setting'))->render();
 
     }
 
