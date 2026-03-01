@@ -56,7 +56,7 @@
 <body>
 @php use App\Services\BunnyServices; @endphp
 
-<div class="max-w-4xl mx-auto bg-white p-8 border rounded-lg">
+<div class="max-w-4xl mx-auto bg-white p-8 ">
     <div class="no-print mb-6">
         <div class="flex items-center gap-3">
             <!-- Botão Imprimir -->
@@ -116,6 +116,7 @@
         <legend class="fieldset-legend">Cliente</legend>
         <div>
             <p><b>Nombre:</b> {{ $budget->customer->name }}</p>
+            <p><b>Teléfono:</b> {{ $budget->customer->phone }}</p>
             <p><b>Dni/Nif:</b> {{ $budget->customer->document }}</p>
             <p><b>Direccíon:</b> {{ $budget->customer->address }}</p>
             <p><b>Correo eletronico:</b> {{ $budget->customer->email }}</p>
@@ -138,28 +139,28 @@
     <table class="min-w-full mt-8 border-collapse">
         <thead>
         <tr class="bg-gray-200">
-            @if($budget->filter->show_service)
+            @if($budget->filter->show_bi_service)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Service') }}</th>
             @endif
-            @if($budget->filter->show_description)
+            @if($budget->filter->show_bi_description)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 max-w-[420px] ">{{ __('Description') }}</th>
             @endif
-            @if($budget->filter->show_qtd)
+            @if($budget->filter->show_bi_qtd)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Quantity') }}</th>
             @endif
-            @if($budget->filter->show_price)
+            @if($budget->filter->show_bi_price)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Unit Price') }}</th>
             @endif
-            @if($budget->filter->show_tax)
+            @if($budget->filter->show_bi_tax)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax') }}</th>
             @endif
-            @if($budget->filter->show_sub_total)
+            @if($budget->filter->show_bi_sub_total)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Sub Total') }}</th>
             @endif
-            @if($budget->filter->show_tax_value)
+            @if($budget->filter->show_bi_tax_value)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Tax Value') }}</th>
             @endif
-            @if($budget->filter->show_total)
+            @if($budget->filter->show_bi_total)
                 <th class="py-2 px-2 text-left sm:sm:text-xs text-[12px] font-medium text-gray-500 uppercase dark:text-neutral-500 ">{{ __('Total') }}</th>
             @endif
         </tr>
@@ -167,43 +168,43 @@
         <tbody>
         @foreach($budget->items as $item)
             <tr class="border-t">
-                @if($budget->filter->show_service)
+                @if($budget->filter->show_bi_service)
                     <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {!! ($item->total == 0)? '<b>'.$item->product->name.'</b>':$item->product->name !!}
                     </td>
                 @endif
-                @if($budget->filter->show_description)
+                @if($budget->filter->show_bi_description)
                     <td class="py-2 px-2 max-w-[420px]  {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {!! $item->description !!}
                     </td>
                 @endif
-                @if($budget->filter->show_qtd)
+                @if($budget->filter->show_bi_qtd)
                     <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': $item->quantity }}
                     </td>
                 @endif
-                @if($budget->filter->show_price)
+                @if($budget->filter->show_bi_price)
                     <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': number_format($item->price, 2, ',', '.') }}
                     </td>
                 @endif
-                @if($budget->filter->show_tax)
+                @if($budget->filter->show_bi_tax)
                     <td class="py-2 px-2 {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': $item->tax .' %' }}
                     </td>
                 @endif
-                @if($budget->filter->show_sub_total)
+                @if($budget->filter->show_bi_sub_total)
                     <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '':  number_format($item->subtotal, 2, ',', '.').' €' }}
                     </td>
                 @endif
 
-                @if($budget->filter->show_tax_value)
+                @if($budget->filter->show_bi_tax_value)
                     <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': number_format($item->tax_value, 2, ',', '.').' €' }}
                     </td>
                 @endif
-                @if($budget->filter->show_total)
+                @if($budget->filter->show_bi_total)
                     <td class="py-2 px-2 text-end {{ ($item->total == 0)? 'bg-gray-300' : '' }}">
                         {{ ($item->total == 0)? '': number_format($item->total, 2, ',', '.').' €' }}
                     </td>
@@ -225,27 +226,28 @@
                 <div class="w-full max-w-2xl sm:text-end space-y-2">
                     <!-- Grid -->
                     <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
-                        @if($budget->filter->show_sub_total)
+                        @if($budget->show_sub_total)
                             <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                 <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Subotal:</dt>
-                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">
-                                    {{ number_format($budget->summary?->items_subtotal ?? 0, 2, ',', '.') }} €
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200"> {{ number_format($budget->summary?->items_subtotal ?? 0, 2, ',', '.') }}
+                                    €
                                 </dd>
                             </dl>
                         @endif
 
-                        @if($budget->filter->show_tax_value)
+                        @if($budget->filter->show_bi_tax_value)
                             <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                 <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Tax:</dt>
-                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200"> {{ number_format($budget->summary?->items_tax_total ?? 0, 2, ',', '.') }} €
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->summary?->items_tax_total ?? 0, 2, ',', '.') }}
+                                    €
                                 </dd>
                             </dl>
                         @endif
 
-                        @if($budget->filter->show_total)
+                        @if($budget->filter->show_bi_total)
                             <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                                 <dt class="col-span-3 text-gray-500 dark:text-neutral-500">Total:</dt>
-                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200"> {{ number_format($budget->summary?->gross_total ?? 0, 2, ',', '.') }}
+                                <dd class="col-span-2 font-medium text-gray-800 dark:text-neutral-200">{{ number_format($budget->summary?->gross_total ?? 0, 2, ',', '.') }}
                                     €
                                 </dd>
                             </dl>

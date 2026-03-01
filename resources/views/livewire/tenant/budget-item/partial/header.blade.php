@@ -3,7 +3,7 @@
     <div class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <!-- Título -->
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200">
-            {{ __("Budget") }} #{{ $budget->code }}
+            {{ __("Budget") }} <a class="text-blue-600 hover:text-blue-800" href="{{ route('tenant.budget.edit', $budget->id) }}">#{{ $budget->code }} - {{ $budget->name }}</a>
         </h2>
 
         <!-- Links -->
@@ -54,7 +54,10 @@
                     {{__('Codigo cliente')}}:
                 </dt>
                 <dd class="font-medium text-gray-800 dark:text-neutral-200">
-                    {{ $budget->customer->code }}
+                    <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
+                       href="{{ route('tenant.customer.edit', $budget->customer->id) }}">
+                        {{ $budget->customer->code }}
+                    </a>
                 </dd>
             </dl>
 
